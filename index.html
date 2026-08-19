@@ -112,15 +112,17 @@
 
   /* CSS-only view switching */
   #r-overview:checked ~ .main #v-overview,
-  #r-porter:checked   ~ .main #v-porter,
-  #r-tpl:checked      ~ .main #v-tpl,
+  #r-ncr:checked      ~ .main #v-ncr,
+  #r-mumbai:checked   ~ .main #v-mumbai,
+  #r-bharat:checked   ~ .main #v-bharat,
   #r-devices:checked  ~ .main #v-devices,
   #r-tat:checked      ~ .main #v-tat,
   #r-disc:checked     ~ .main #v-disc,
   #r-refuse:checked   ~ .main #v-refuse{display:flex}
   #r-overview:checked ~ .side label[for="r-overview"],
-  #r-porter:checked   ~ .side label[for="r-porter"],
-  #r-tpl:checked      ~ .side label[for="r-tpl"],
+  #r-ncr:checked      ~ .side label[for="r-ncr"],
+  #r-mumbai:checked   ~ .side label[for="r-mumbai"],
+  #r-bharat:checked   ~ .side label[for="r-bharat"],
   #r-devices:checked  ~ .side label[for="r-devices"],
   #r-tat:checked      ~ .side label[for="r-tat"],
   #r-disc:checked     ~ .side label[for="r-disc"],
@@ -129,8 +131,9 @@
 
 <div class="app">
   <input class="vradio" type="radio" name="view" id="r-overview" checked>
-  <input class="vradio" type="radio" name="view" id="r-porter">
-  <input class="vradio" type="radio" name="view" id="r-tpl">
+  <input class="vradio" type="radio" name="view" id="r-ncr">
+  <input class="vradio" type="radio" name="view" id="r-mumbai">
+  <input class="vradio" type="radio" name="view" id="r-bharat">
   <input class="vradio" type="radio" name="view" id="r-devices">
   <input class="vradio" type="radio" name="view" id="r-tat">
   <input class="vradio" type="radio" name="view" id="r-disc">
@@ -140,14 +143,15 @@
     <div class="brand"><div class="logo">W</div><div><b>Return Tracker</b><span>NetBox device journey</span></div></div>
     <nav class="nav">
       <label class="navitem" for="r-overview"><span class="ic">&#9638;</span> Overview</label>
-      <label class="navitem" for="r-porter"><span class="ic">&#128666;</span> Porter</label>
-      <label class="navitem" for="r-tpl"><span class="ic">&#128230;</span> 3PL</label>
+      <label class="navitem" for="r-ncr"><span class="ic">&#128205;</span> NCR</label>
+      <label class="navitem" for="r-mumbai"><span class="ic">&#128205;</span> Mumbai</label>
+      <label class="navitem" for="r-bharat"><span class="ic">&#128205;</span> Bharat</label>
       <label class="navitem" for="r-devices"><span class="ic">&#128269;</span> Device Data</label>
       <label class="navitem" for="r-tat"><span class="ic">&#9201;</span> TAT Breaches <span class="badge">470</span></label>
       <label class="navitem" for="r-disc"><span class="ic">&#9888;</span> Discrepancies <span class="badge">170</span></label>
       <label class="navitem" for="r-refuse"><span class="ic">&#10006;</span> CSP Refusals</label>
     </nav>
-    <div class="sfoot">Live tracker &#183; running since 15 Aug 2026<br>Source: Google Sheets (to be linked)</div>
+    <div class="sfoot">Live tracker &#183; running since 15 Aug 2026<br>NCR &amp; Mumbai &rarr; Porter &#183; Bharat &rarr; 3PL</div>
   </aside>
 
   <div class="main">
@@ -166,15 +170,15 @@
 
       <!-- ============ OVERVIEW ============ -->
       <section class="view" id="v-overview">
-        <div class="vh"><h2>&#9638; Overview</h2><span class="sub">is the recovery process working? &#8212; pipeline, speed & leakage</span></div>
+        <div class="vh"><h2>&#9638; Overview</h2><span class="sub">is the recovery process working? &#8212; pipeline, speed &amp; leakage</span></div>
 
         <p class="seclab">Pipeline &#8212; marked &#8594; accepted &#8594; booked &#8594; received</p>
         <div class="kgrid">
           <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">6,415</div><p class="sub">In-app 5,427 &#183; Forms 988</p></div>
           <div class="kc" style="--c:var(--brand)"><p class="lab">CSP accepted</p><div class="num">4,540</div><p class="sub"><span class="g">87%</span> of contacted</p></div>
-          <div class="kc" style="--c:var(--porter)"><p class="lab">Booked for pickup</p><div class="num">4,180</div><p class="sub"><span class="b">Porter 3,150</span> &#183; <span class="t">3PL 1,030</span></p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Booked for pickup</p><div class="num">4,180</div><p class="sub">NCR+Mum 3,150 &#183; Bharat 1,030</p></div>
           <div class="kc" style="--c:var(--good)"><p class="lab">Received at Wiom</p><div class="num">3,260</div><p class="sub"><span class="g">51%</span> recovery rate</p></div>
-          <div class="kc" style="--c:var(--bad)"><p class="lab">Overdue backlog</p><div class="num">470</div><p class="sub"><span class="r">Porter 380</span> &#183; 3PL 90</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Overdue backlog</p><div class="num">470</div><p class="sub"><span class="r">NCR+Mum 380</span> &#183; Bharat 90</p></div>
           <div class="kc" style="--c:var(--warn)"><p class="lab">Discrepancies</p><div class="num">170</div><p class="sub">received &#8800; marked</p></div>
         </div>
 
@@ -201,19 +205,20 @@
           </div>
 
           <div class="panel">
-            <h3>TAT performance &#8212; Porter vs 3PL</h3>
-            <p class="cap">Booking &#8594; received. Are pickups happening within SLA?</p>
+            <h3>TAT performance &#8212; by region</h3>
+            <p class="cap">Booking &#8594; received. NCR &amp; Mumbai via Porter (24h) &#183; Bharat via 3PL (72h).</p>
             <div class="scroller">
               <table style="min-width:auto">
-                <thead><tr><th>Partner</th><th>Target</th><th>Avg TAT</th><th>On-time</th><th>Overdue</th></tr></thead>
+                <thead><tr><th>Region</th><th>Carrier</th><th>Target</th><th>Avg</th><th>On-time</th><th>Overdue</th></tr></thead>
                 <tbody>
-                  <tr><td><span class="pill p-porter">PORTER</span></td><td>24 h</td><td><span class="pill p-ok">19 h</span></td><td><span class="g">90%</span></td><td><span class="pill p-bad">380</span></td></tr>
-                  <tr><td><span class="pill p-tpl">3PL</span></td><td>72 h</td><td><span class="pill p-ok">58 h</span></td><td><span class="g">88%</span></td><td><span class="pill p-bad">90</span></td></tr>
+                  <tr><td>NCR</td><td><span class="pill p-porter">Porter</span></td><td>24 h</td><td><span class="pill p-ok">19 h</span></td><td><span class="g">90%</span></td><td><span class="pill p-bad">350</span></td></tr>
+                  <tr><td>Mumbai</td><td><span class="pill p-porter">Porter</span></td><td>24 h</td><td><span class="pill p-ok">17 h</span></td><td><span class="g">92%</span></td><td><span class="pill p-bad">30</span></td></tr>
+                  <tr><td>Bharat</td><td><span class="pill p-tpl">3PL</span></td><td>72 h</td><td><span class="pill p-ok">58 h</span></td><td><span class="g">88%</span></td><td><span class="pill p-bad">90</span></td></tr>
                 </tbody>
-                <tfoot><tr><td>Combined</td><td>&#8212;</td><td>&#8212;</td><td>89%</td><td class="r">470</td></tr></tfoot>
+                <tfoot><tr><td>All</td><td>&#8212;</td><td>&#8212;</td><td>&#8212;</td><td>89%</td><td class="r">470</td></tr></tfoot>
               </table>
             </div>
-            <p class="note" style="margin-top:14px">Avg TAT is inside target for both, but <b>470 pickups are overdue and still not received</b> &#8212; the real leak. Recovery rate (51%) is the number to watch: <b>nearly half of marked devices haven't reached Wiom yet.</b></p>
+            <p class="note" style="margin-top:14px">Avg TAT is inside target everywhere, but <b>470 pickups are overdue and still not received</b>. Recovery rate (51%) is the number to watch &#8212; <b>nearly half of marked devices haven't reached Wiom yet.</b></p>
           </div>
         </div>
 
@@ -222,12 +227,13 @@
           <p class="cap">Of devices booked but not yet received, how long have they been waiting?</p>
           <div class="scroller">
             <table style="min-width:auto">
-              <thead><tr><th>Partner</th><th>Fresh (within TAT)</th><th>Nearing TAT</th><th>Overdue</th><th>Total pending</th></tr></thead>
+              <thead><tr><th>Region</th><th>Fresh (within TAT)</th><th>Nearing TAT</th><th>Overdue</th><th>Total pending</th></tr></thead>
               <tbody>
-                <tr><td><span class="pill p-porter">PORTER</span></td><td>130</td><td>100</td><td><span class="pill p-bad">380</span></td><td>610</td></tr>
-                <tr><td><span class="pill p-tpl">3PL</span></td><td>120</td><td>100</td><td><span class="pill p-bad">90</span></td><td>310</td></tr>
+                <tr><td>NCR</td><td>210</td><td>90</td><td><span class="pill p-bad">350</span></td><td>560</td></tr>
+                <tr><td>Mumbai</td><td>10</td><td>10</td><td><span class="pill p-bad">30</span></td><td>50</td></tr>
+                <tr><td>Bharat</td><td>120</td><td>100</td><td><span class="pill p-bad">90</span></td><td>310</td></tr>
               </tbody>
-              <tfoot><tr><td>Total</td><td>250</td><td>200</td><td class="r">470</td><td>920</td></tr></tfoot>
+              <tfoot><tr><td>Total</td><td>340</td><td>200</td><td class="r">470</td><td>920</td></tr></tfoot>
             </table>
           </div>
         </div>
@@ -271,82 +277,118 @@
         </div>
       </section>
 
-      <!-- ============ PORTER ============ -->
-      <section class="view" id="v-porter">
-        <div class="vh"><h2>&#128666; Porter pickups</h2><span class="sub">NCR + Mumbai &#183; SLA 24 h &#183; live</span></div>
-
+      <!-- ============ NCR ============ -->
+      <section class="view" id="v-ncr">
+        <div class="vh"><h2>&#128205; NCR</h2><span class="sub">Delhi / Gurgaon / Noida / Ghaziabad &#183; carrier Porter &#183; SLA 24 h</span></div>
         <p class="seclab">Throughput</p>
         <div class="kgrid k4">
-          <div class="kc" style="--c:var(--porter)"><p class="lab">Booked via Porter</p><div class="num">3,150</div><p class="sub">of 4,732 allocated</p></div>
-          <div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">2,540</div><p class="sub"><span class="g">81%</span> recovery of booked</p></div>
-          <div class="kc" style="--c:var(--porter)"><p class="lab">Pending pickup</p><div class="num">610</div><p class="sub">booked, not yet received</p></div>
-          <div class="kc" style="--c:var(--bad)"><p class="lab">Overdue (&gt;24h)</p><div class="num">380</div><p class="sub"><span class="r">62%</span> of pending is overdue</p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Booked</p><div class="num">2,850</div><p class="sub">carrier <span class="b">Porter</span></p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">2,290</div><p class="sub"><span class="g">80%</span> of booked</p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Pending pickup</p><div class="num">560</div><p class="sub">booked, not yet received</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Overdue (&gt;24h)</p><div class="num">350</div><p class="sub"><span class="r">63%</span> of pending is overdue</p></div>
         </div>
-
         <div class="two">
           <div class="panel">
             <h3>SLA / TAT &#8212; 24 h target</h3>
-            <p class="cap">Speed of Porter pickups, booking &#8594; received.</p>
-            <div class="scroller"><table style="min-width:auto">
-              <tbody>
-                <tr><td>Avg TAT</td><td class="mono"><span class="pill p-ok">19 h</span></td></tr>
-                <tr><td>On-time (within 24h)</td><td class="g">90%</td></tr>
-                <tr><td>Fastest / slowest received</td><td class="mono">6 h / 41 h</td></tr>
-                <tr><td>Currently overdue</td><td><span class="pill p-bad">380</span></td></tr>
-              </tbody>
-            </table></div>
+            <div class="scroller"><table style="min-width:auto"><tbody>
+              <tr><td>Avg TAT</td><td><span class="pill p-ok">19 h</span></td></tr>
+              <tr><td>On-time (within 24h)</td><td class="g">90%</td></tr>
+              <tr><td>Fastest / slowest received</td><td class="mono">6 h / 41 h</td></tr>
+              <tr><td>Currently overdue</td><td><span class="pill p-bad">350</span></td></tr>
+            </tbody></table></div>
           </div>
           <div class="panel">
             <h3>Pending pickup &#8212; ageing</h3>
-            <p class="cap">How long the 610 booked-but-not-received have waited.</p>
             <div class="scroller"><table style="min-width:auto">
               <thead><tr><th>Age since booking</th><th>Devices</th><th>Status</th></tr></thead>
               <tbody>
-                <tr><td>0&#8211;12 h</td><td>130</td><td><span class="pill p-ok">On track</span></td></tr>
-                <tr><td>12&#8211;24 h</td><td>100</td><td><span class="pill p-warn">Nearing SLA</span></td></tr>
-                <tr><td>24&#8211;48 h</td><td>250</td><td><span class="pill p-bad">Overdue</span></td></tr>
-                <tr><td>&gt; 48 h</td><td>130</td><td><span class="pill p-bad">Critical</span></td></tr>
+                <tr><td>0&#8211;12 h</td><td>120</td><td><span class="pill p-ok">On track</span></td></tr>
+                <tr><td>12&#8211;24 h</td><td>90</td><td><span class="pill p-warn">Nearing SLA</span></td></tr>
+                <tr><td>24&#8211;48 h</td><td>230</td><td><span class="pill p-bad">Overdue</span></td></tr>
+                <tr><td>&gt; 48 h</td><td>120</td><td><span class="pill p-bad">Critical</span></td></tr>
               </tbody>
             </table></div>
           </div>
         </div>
-
         <div class="panel">
-          <h3>Porter shipments</h3><p class="cap">Sample rows &#8212; full list pulls live from the Porter booking sheet.</p>
+          <h3>NCR shipments</h3><p class="cap">Sample rows &#8212; full list pulls live from the Porter booking sheet.</p>
           <div class="scroller"><table>
-            <thead><tr><th>Device ID</th><th>Type</th><th>CSP</th><th>Region</th><th>Booked</th><th>Received</th><th>TAT</th><th>Verify</th><th>Stage</th></tr></thead>
+            <thead><tr><th>Device ID</th><th>Type</th><th>CSP</th><th>Booked</th><th>Received</th><th>TAT</th><th>Verify</th><th>Stage</th></tr></thead>
             <tbody>
-              <tr><td class="mono">NB-5560098</td><td>Router</td><td>Skyline Internet</td><td>NCR</td><td>16 Aug 14:30</td><td>17 Aug 09:15</td><td><span class="pill p-ok">19h</span></td><td><span class="pill p-bad">Mismatch</span></td><td><span class="pill p-warn">Discrepancy</span></td></tr>
-              <tr><td class="mono">NB-4471203</td><td>ONT</td><td>Star Digital Net</td><td>NCR</td><td>16 Aug 15:10</td><td>17 Aug 10:40</td><td><span class="pill p-ok">19h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
-              <tr><td class="mono">NB-9982001</td><td>ONT</td><td>Apex Cable Network</td><td>NCR</td><td>17 Aug 09:00</td><td class="dash">&#8212;</td><td><span class="pill p-bad">31h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-porter">In transit</span></td></tr>
-              <tr><td class="mono">NB-3320876</td><td>ONT</td><td>Greenline Broadband</td><td>NCR</td><td>17 Aug 12:20</td><td>18 Aug 08:05</td><td><span class="pill p-ok">20h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
-              <tr><td class="mono">NB-7788345</td><td>ONT</td><td>Omega Broadband</td><td>Mumbai</td><td>17 Aug 16:40</td><td class="dash">&#8212;</td><td><span class="pill p-bad">26h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-porter">In transit</span></td></tr>
+              <tr><td class="mono">NB-5560098</td><td>Router</td><td>Skyline Internet</td><td>16 Aug 14:30</td><td>17 Aug 09:15</td><td><span class="pill p-ok">19h</span></td><td><span class="pill p-bad">Mismatch</span></td><td><span class="pill p-warn">Discrepancy</span></td></tr>
+              <tr><td class="mono">NB-4471203</td><td>ONT</td><td>Star Digital Net</td><td>16 Aug 15:10</td><td>17 Aug 10:40</td><td><span class="pill p-ok">19h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
+              <tr><td class="mono">NB-9982001</td><td>ONT</td><td>Apex Cable Network</td><td>17 Aug 09:00</td><td class="dash">&#8212;</td><td><span class="pill p-bad">31h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-porter">In transit</span></td></tr>
+              <tr><td class="mono">NB-3320876</td><td>ONT</td><td>Greenline Broadband</td><td>17 Aug 12:20</td><td>18 Aug 08:05</td><td><span class="pill p-ok">20h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
             </tbody>
           </table></div>
         </div>
       </section>
 
-      <!-- ============ 3PL ============ -->
-      <section class="view" id="v-tpl">
-        <div class="vh"><h2>&#128230; 3PL pickups</h2><span class="sub">Other UP &#183; SLA 72 h &#183; live</span></div>
+      <!-- ============ MUMBAI ============ -->
+      <section class="view" id="v-mumbai">
+        <div class="vh"><h2>&#128205; Mumbai</h2><span class="sub">Mumbai metro &#183; carrier Porter &#183; SLA 24 h</span></div>
         <p class="seclab">Throughput</p>
         <div class="kgrid k4">
-          <div class="kc" style="--c:var(--tpl)"><p class="lab">Booked via 3PL</p><div class="num">1,030</div><p class="sub">of 1,449 allocated</p></div>
-          <div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">720</div><p class="sub"><span class="g">70%</span> recovery of booked</p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Booked</p><div class="num">300</div><p class="sub">carrier <span class="b">Porter</span></p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">250</div><p class="sub"><span class="g">83%</span> of booked</p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Pending pickup</p><div class="num">50</div><p class="sub">booked, not yet received</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Overdue (&gt;24h)</p><div class="num">30</div><p class="sub"><span class="r">60%</span> of pending is overdue</p></div>
+        </div>
+        <div class="two">
+          <div class="panel">
+            <h3>SLA / TAT &#8212; 24 h target</h3>
+            <div class="scroller"><table style="min-width:auto"><tbody>
+              <tr><td>Avg TAT</td><td><span class="pill p-ok">17 h</span></td></tr>
+              <tr><td>On-time (within 24h)</td><td class="g">92%</td></tr>
+              <tr><td>Fastest / slowest received</td><td class="mono">5 h / 38 h</td></tr>
+              <tr><td>Currently overdue</td><td><span class="pill p-bad">30</span></td></tr>
+            </tbody></table></div>
+          </div>
+          <div class="panel">
+            <h3>Pending pickup &#8212; ageing</h3>
+            <div class="scroller"><table style="min-width:auto">
+              <thead><tr><th>Age since booking</th><th>Devices</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>0&#8211;12 h</td><td>10</td><td><span class="pill p-ok">On track</span></td></tr>
+                <tr><td>12&#8211;24 h</td><td>10</td><td><span class="pill p-warn">Nearing SLA</span></td></tr>
+                <tr><td>24&#8211;48 h</td><td>20</td><td><span class="pill p-bad">Overdue</span></td></tr>
+                <tr><td>&gt; 48 h</td><td>10</td><td><span class="pill p-bad">Critical</span></td></tr>
+              </tbody>
+            </table></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Mumbai shipments</h3><p class="cap">Sample rows &#8212; full list pulls live from the Porter booking sheet.</p>
+          <div class="scroller"><table>
+            <thead><tr><th>Device ID</th><th>Type</th><th>CSP</th><th>Booked</th><th>Received</th><th>TAT</th><th>Verify</th><th>Stage</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">NB-7788345</td><td>ONT</td><td>Omega Broadband</td><td>17 Aug 16:40</td><td class="dash">&#8212;</td><td><span class="pill p-bad">26h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-porter">In transit</span></td></tr>
+              <tr><td class="mono">NB-7788901</td><td>ONT</td><td>Pinnacle Net</td><td>17 Aug 10:00</td><td>17 Aug 22:10</td><td><span class="pill p-ok">12h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
+              <tr><td class="mono">NB-7789102</td><td>Router</td><td>Omega Broadband</td><td>16 Aug 09:00</td><td>16 Aug 21:20</td><td><span class="pill p-ok">12h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- ============ BHARAT ============ -->
+      <section class="view" id="v-bharat">
+        <div class="vh"><h2>&#128205; Bharat</h2><span class="sub">rest of India (ex-NCR / ex-Mumbai) &#183; carrier 3PL &#183; SLA 72 h</span></div>
+        <p class="seclab">Throughput</p>
+        <div class="kgrid k4">
+          <div class="kc" style="--c:var(--tpl)"><p class="lab">Booked</p><div class="num">1,030</div><p class="sub">carrier <span class="t">3PL</span></p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">720</div><p class="sub"><span class="g">70%</span> of booked</p></div>
           <div class="kc" style="--c:var(--tpl)"><p class="lab">Pending pickup</p><div class="num">310</div><p class="sub">booked, not yet received</p></div>
           <div class="kc" style="--c:var(--bad)"><p class="lab">Overdue (&gt;72h)</p><div class="num">90</div><p class="sub"><span class="r">29%</span> of pending is overdue</p></div>
         </div>
         <div class="two">
           <div class="panel">
             <h3>SLA / TAT &#8212; 72 h target</h3>
-            <div class="scroller"><table style="min-width:auto">
-              <tbody>
-                <tr><td>Avg TAT</td><td><span class="pill p-ok">58 h</span></td></tr>
-                <tr><td>On-time (within 72h)</td><td class="g">88%</td></tr>
-                <tr><td>Fastest / slowest received</td><td class="mono">36 h / 86 h</td></tr>
-                <tr><td>Currently overdue</td><td><span class="pill p-bad">90</span></td></tr>
-              </tbody>
-            </table></div>
+            <div class="scroller"><table style="min-width:auto"><tbody>
+              <tr><td>Avg TAT</td><td><span class="pill p-ok">58 h</span></td></tr>
+              <tr><td>On-time (within 72h)</td><td class="g">88%</td></tr>
+              <tr><td>Fastest / slowest received</td><td class="mono">36 h / 86 h</td></tr>
+              <tr><td>Currently overdue</td><td><span class="pill p-bad">90</span></td></tr>
+            </tbody></table></div>
           </div>
           <div class="panel">
             <h3>Pending pickup &#8212; ageing</h3>
@@ -361,14 +403,14 @@
           </div>
         </div>
         <div class="panel">
-          <h3>3PL shipments</h3><p class="cap">Sample rows &#8212; full list pulls live from the 3PL booking sheet.</p>
+          <h3>Bharat shipments</h3><p class="cap">Sample rows &#8212; full list pulls live from the 3PL booking sheet.</p>
           <div class="scroller"><table>
-            <thead><tr><th>Device ID</th><th>Type</th><th>CSP</th><th>Region</th><th>Booked</th><th>Received</th><th>TAT</th><th>Verify</th><th>Stage</th></tr></thead>
+            <thead><tr><th>Device ID</th><th>Type</th><th>CSP</th><th>Booked</th><th>Received</th><th>TAT</th><th>Verify</th><th>Stage</th></tr></thead>
             <tbody>
-              <tr><td class="mono">NB-8842011</td><td>ONT</td><td>Sunrise Cable Net</td><td>Other UP</td><td>15 Aug 18:10</td><td>17 Aug 14:20</td><td><span class="pill p-ok">68h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
-              <tr><td class="mono">NB-7741220</td><td>ONT</td><td>Metro Fibernet</td><td>Other UP</td><td>16 Aug 12:00</td><td class="dash">&#8212;</td><td><span class="pill p-bad">78h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-tpl">In transit</span></td></tr>
-              <tr><td class="mono">NB-6610455</td><td>Router</td><td>Sunrise Cable Net</td><td>Other UP</td><td>15 Aug 18:12</td><td>18 Aug 11:30</td><td><span class="pill p-ok">65h</span></td><td><span class="pill p-bad">Mismatch</span></td><td><span class="pill p-warn">Discrepancy</span></td></tr>
-              <tr><td class="mono">NB-5523901</td><td>ONT</td><td>Nova Broadband</td><td>Other UP</td><td>17 Aug 11:00</td><td class="dash">&#8212;</td><td><span class="pill p-warn">44h</span></td><td class="dash">&#8212;</td><td><span class="pill p-tpl">In transit</span></td></tr>
+              <tr><td class="mono">NB-8842011</td><td>ONT</td><td>Sunrise Cable Net</td><td>15 Aug 18:10</td><td>17 Aug 14:20</td><td><span class="pill p-ok">68h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
+              <tr><td class="mono">NB-7741220</td><td>ONT</td><td>Metro Fibernet</td><td>16 Aug 12:00</td><td class="dash">&#8212;</td><td><span class="pill p-bad">78h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-tpl">In transit</span></td></tr>
+              <tr><td class="mono">NB-6610455</td><td>Router</td><td>Sunrise Cable Net</td><td>15 Aug 18:12</td><td>18 Aug 11:30</td><td><span class="pill p-ok">65h</span></td><td><span class="pill p-bad">Mismatch</span></td><td><span class="pill p-warn">Discrepancy</span></td></tr>
+              <tr><td class="mono">NB-5523901</td><td>ONT</td><td>Nova Broadband</td><td>17 Aug 11:00</td><td class="dash">&#8212;</td><td><span class="pill p-warn">44h</span></td><td class="dash">&#8212;</td><td><span class="pill p-tpl">In transit</span></td></tr>
             </tbody>
           </table></div>
         </div>
@@ -385,19 +427,19 @@
           <div class="scroller"><table id="devtable">
             <thead><tr>
               <th>Device ID</th><th>Type</th><th>CSP</th><th>Mobile</th><th>Region</th>
-              <th>Request raised</th><th>Channel</th><th>CSP confirmed?</th><th>Booked on</th><th>Partner</th>
+              <th>Request raised</th><th>Channel</th><th>CSP confirmed?</th><th>Booked on</th><th>Carrier</th>
               <th>Picked up</th><th>Received</th><th>TAT</th><th>Verify</th><th>Status</th>
             </tr></thead>
             <tbody>
-              <tr><td class="mono">NB-8842011</td><td>ONT</td><td>Sunrise Cable Net</td><td>9000000011</td><td>Other UP</td><td>15 Aug 17:39</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 15 Aug 19:02</span></td><td>15 Aug 18:10</td><td><span class="pill p-tpl">3PL</span></td><td>16 Aug 10:00</td><td>17 Aug 14:20</td><td><span class="pill p-ok">68h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
-              <tr><td class="mono">NB-7741220</td><td>ONT</td><td>Metro Fibernet</td><td>9000000012</td><td>Other UP</td><td>16 Aug 11:20</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 16 Aug 11:48</span></td><td>16 Aug 12:00</td><td><span class="pill p-tpl">3PL</span></td><td>17 Aug 09:30</td><td class="dash">&#8212;</td><td><span class="pill p-bad">78h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-tpl">In transit</span></td></tr>
+              <tr><td class="mono">NB-8842011</td><td>ONT</td><td>Sunrise Cable Net</td><td>9000000011</td><td>Bharat</td><td>15 Aug 17:39</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 15 Aug 19:02</span></td><td>15 Aug 18:10</td><td><span class="pill p-tpl">3PL</span></td><td>16 Aug 10:00</td><td>17 Aug 14:20</td><td><span class="pill p-ok">68h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
+              <tr><td class="mono">NB-7741220</td><td>ONT</td><td>Metro Fibernet</td><td>9000000012</td><td>Bharat</td><td>16 Aug 11:20</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 16 Aug 11:48</span></td><td>16 Aug 12:00</td><td><span class="pill p-tpl">3PL</span></td><td>17 Aug 09:30</td><td class="dash">&#8212;</td><td><span class="pill p-bad">78h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-tpl">In transit</span></td></tr>
               <tr><td class="mono">NB-5560098</td><td>Router</td><td>Skyline Internet</td><td>9000000013</td><td>NCR</td><td>16 Aug 13:05</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 16 Aug 14:05</span></td><td>16 Aug 14:30</td><td><span class="pill p-porter">Porter</span></td><td>16 Aug 20:10</td><td>17 Aug 09:15</td><td><span class="pill p-ok">19h</span></td><td><span class="pill p-bad">Mismatch</span></td><td><span class="pill p-warn">Discrepancy</span></td></tr>
               <tr><td class="mono">NB-3320450</td><td>ONT</td><td>Apex Cable Network</td><td>9000000014</td><td>NCR</td><td>17 Aug 10:48</td><td><span class="pill p-marked">Form</span></td><td><span class="pill p-bad">No &#183; refused 17 Aug 15:30</span></td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td><span class="pill p-bad">Refused</span></td></tr>
               <tr><td class="mono">NB-9910233</td><td>ONT</td><td>Star Digital Net</td><td>9000000015</td><td>NCR</td><td>16 Aug 09:30</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-warn">Pending call</span></td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td><span class="pill p-warn">Awaiting call</span></td></tr>
               <tr><td class="mono">NB-4471203</td><td>ONT</td><td>Star Digital Net</td><td>9000000015</td><td>NCR</td><td>16 Aug 10:05</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 16 Aug 14:20</span></td><td>16 Aug 15:10</td><td><span class="pill p-porter">Porter</span></td><td>16 Aug 22:00</td><td>17 Aug 10:40</td><td><span class="pill p-ok">19h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
               <tr><td class="mono">NB-9982001</td><td>ONT</td><td>Apex Cable Network</td><td>9000000014</td><td>NCR</td><td>17 Aug 08:20</td><td><span class="pill p-marked">Form</span></td><td><span class="pill p-ok">Yes &#183; 17 Aug 08:50</span></td><td>17 Aug 09:00</td><td><span class="pill p-porter">Porter</span></td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td><span class="pill p-bad">31h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-porter">In transit</span></td></tr>
-              <tr><td class="mono">NB-3320876</td><td>ONT</td><td>Greenline Broadband</td><td>9000000016</td><td>NCR</td><td>17 Aug 11:40</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 17 Aug 12:05</span></td><td>17 Aug 12:20</td><td><span class="pill p-porter">Porter</span></td><td>17 Aug 19:30</td><td>18 Aug 08:05</td><td><span class="pill p-ok">20h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
-              <tr><td class="mono">NB-6610455</td><td>Router</td><td>Sunrise Cable Net</td><td>9000000011</td><td>Other UP</td><td>15 Aug 17:44</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 15 Aug 19:02</span></td><td>15 Aug 18:12</td><td><span class="pill p-tpl">3PL</span></td><td>16 Aug 09:00</td><td>18 Aug 11:30</td><td><span class="pill p-ok">65h</span></td><td><span class="pill p-bad">Mismatch</span></td><td><span class="pill p-warn">Discrepancy</span></td></tr>
+              <tr><td class="mono">NB-7788345</td><td>ONT</td><td>Omega Broadband</td><td>9000000019</td><td>Mumbai</td><td>17 Aug 15:50</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 17 Aug 16:20</span></td><td>17 Aug 16:40</td><td><span class="pill p-porter">Porter</span></td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td><span class="pill p-bad">26h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-porter">In transit</span></td></tr>
+              <tr><td class="mono">NB-6610455</td><td>Router</td><td>Sunrise Cable Net</td><td>9000000011</td><td>Bharat</td><td>15 Aug 17:44</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 15 Aug 19:02</span></td><td>15 Aug 18:12</td><td><span class="pill p-tpl">3PL</span></td><td>16 Aug 09:00</td><td>18 Aug 11:30</td><td><span class="pill p-ok">65h</span></td><td><span class="pill p-bad">Mismatch</span></td><td><span class="pill p-warn">Discrepancy</span></td></tr>
               <tr><td class="mono">NB-1122980</td><td>ONT</td><td>Bharat Net Services</td><td>9000000017</td><td>NCR</td><td>16 Aug 16:00</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-bad">No &#183; refused 17 Aug 11:10</span></td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td><span class="pill p-bad">Refused</span></td></tr>
             </tbody>
           </table></div>
@@ -407,15 +449,15 @@
       <!-- ============ TAT BREACHES ============ -->
       <section class="view" id="v-tat">
         <div class="vh"><h2>&#9201; TAT breaches</h2><span class="sub">booked but not received within SLA &#183; Porter 24h &#183; 3PL 72h</span></div>
-        <p class="note"><b>470 shipments</b> have crossed their SLA without being received &#8212; <b>380 Porter</b> (&gt;24h) and <b>90 3PL</b> (&gt;72h). Chase oldest first.</p>
+        <p class="note"><b>470 shipments</b> have crossed their SLA without being received &#8212; <b>380 Porter</b> (NCR + Mumbai) and <b>90 3PL</b> (Bharat). Chase oldest first.</p>
         <div class="panel">
           <div class="scroller"><table>
-            <thead><tr><th>Device ID</th><th>CSP</th><th>Partner</th><th>Region</th><th>Booked</th><th>Elapsed</th><th>Over by</th><th>Status</th></tr></thead>
+            <thead><tr><th>Device ID</th><th>CSP</th><th>Region</th><th>Carrier</th><th>Booked</th><th>Elapsed</th><th>Over by</th><th>Status</th></tr></thead>
             <tbody>
-              <tr><td class="mono">NB-2201567</td><td>Pinnacle Net</td><td><span class="pill p-tpl">3PL</span></td><td>Other UP</td><td>16 Aug 09:15</td><td><span class="pill p-bad">80h</span></td><td>+8h</td><td><span class="pill p-tpl">In transit</span></td></tr>
-              <tr><td class="mono">NB-7741220</td><td>Metro Fibernet</td><td><span class="pill p-tpl">3PL</span></td><td>Other UP</td><td>16 Aug 12:00</td><td><span class="pill p-bad">78h</span></td><td>+6h</td><td><span class="pill p-tpl">In transit</span></td></tr>
-              <tr><td class="mono">NB-9982001</td><td>Apex Cable Network</td><td><span class="pill p-porter">Porter</span></td><td>NCR</td><td>17 Aug 09:00</td><td><span class="pill p-bad">31h</span></td><td>+7h</td><td><span class="pill p-porter">In transit</span></td></tr>
-              <tr><td class="mono">NB-7788345</td><td>Omega Broadband</td><td><span class="pill p-porter">Porter</span></td><td>Mumbai</td><td>17 Aug 16:40</td><td><span class="pill p-bad">26h</span></td><td>+2h</td><td><span class="pill p-porter">In transit</span></td></tr>
+              <tr><td class="mono">NB-2201567</td><td>Pinnacle Net</td><td>Bharat</td><td><span class="pill p-tpl">3PL</span></td><td>16 Aug 09:15</td><td><span class="pill p-bad">80h</span></td><td>+8h</td><td><span class="pill p-tpl">In transit</span></td></tr>
+              <tr><td class="mono">NB-7741220</td><td>Metro Fibernet</td><td>Bharat</td><td><span class="pill p-tpl">3PL</span></td><td>16 Aug 12:00</td><td><span class="pill p-bad">78h</span></td><td>+6h</td><td><span class="pill p-tpl">In transit</span></td></tr>
+              <tr><td class="mono">NB-9982001</td><td>Apex Cable Network</td><td>NCR</td><td><span class="pill p-porter">Porter</span></td><td>17 Aug 09:00</td><td><span class="pill p-bad">31h</span></td><td>+7h</td><td><span class="pill p-porter">In transit</span></td></tr>
+              <tr><td class="mono">NB-7788345</td><td>Omega Broadband</td><td>Mumbai</td><td><span class="pill p-porter">Porter</span></td><td>17 Aug 16:40</td><td><span class="pill p-bad">26h</span></td><td>+2h</td><td><span class="pill p-porter">In transit</span></td></tr>
             </tbody>
           </table></div>
         </div>
@@ -427,12 +469,12 @@
         <p class="note"><b>170 devices</b> received don't match what the CSP marked &#8212; wrong serial, wrong type, or extra/short units. Need agent reconciliation before closure.</p>
         <div class="panel">
           <div class="scroller"><table>
-            <thead><tr><th>Received Device ID</th><th>Marked Device ID</th><th>CSP</th><th>Partner</th><th>Issue</th><th>Received</th></tr></thead>
+            <thead><tr><th>Received Device ID</th><th>Marked Device ID</th><th>CSP</th><th>Region</th><th>Issue</th><th>Received</th></tr></thead>
             <tbody>
-              <tr><td class="mono">NB-5560098</td><td class="mono">NB-5560***</td><td>Skyline Internet</td><td><span class="pill p-porter">Porter</span></td><td><span class="pill p-warn">Serial mismatch</span></td><td>17 Aug 09:15</td></tr>
-              <tr><td class="mono">NB-6610455</td><td class="mono">NB-6610455</td><td>Sunrise Cable Net</td><td><span class="pill p-tpl">3PL</span></td><td><span class="pill p-warn">Type: got Router, marked ONT</span></td><td>18 Aug 11:30</td></tr>
-              <tr><td class="mono">NB-4490231</td><td class="dash">&#8212;</td><td>Horizon Fibernet</td><td><span class="pill p-porter">Porter</span></td><td><span class="pill p-bad">Extra unit (not marked)</span></td><td>18 Aug 10:10</td></tr>
-              <tr><td class="dash">&#8212; (short)</td><td class="mono">NB-3312090</td><td>Crystal Cable Net</td><td><span class="pill p-tpl">3PL</span></td><td><span class="pill p-bad">Marked but not received</span></td><td class="dash">&#8212;</td></tr>
+              <tr><td class="mono">NB-5560098</td><td class="mono">NB-5560***</td><td>Skyline Internet</td><td>NCR</td><td><span class="pill p-warn">Serial mismatch</span></td><td>17 Aug 09:15</td></tr>
+              <tr><td class="mono">NB-6610455</td><td class="mono">NB-6610455</td><td>Sunrise Cable Net</td><td>Bharat</td><td><span class="pill p-warn">Type: got Router, marked ONT</span></td><td>18 Aug 11:30</td></tr>
+              <tr><td class="mono">NB-4490231</td><td class="dash">&#8212;</td><td>Horizon Fibernet</td><td>NCR</td><td><span class="pill p-bad">Extra unit (not marked)</span></td><td>18 Aug 10:10</td></tr>
+              <tr><td class="dash">&#8212; (short)</td><td class="mono">NB-3312090</td><td>Crystal Cable Net</td><td>Bharat</td><td><span class="pill p-bad">Marked but not received</span></td><td class="dash">&#8212;</td></tr>
             </tbody>
           </table></div>
         </div>
@@ -448,7 +490,7 @@
             <tbody>
               <tr><td class="mono">NB-3320450</td><td>Apex Cable Network</td><td>9000000014</td><td>NCR</td><td>17 Aug 10:48</td><td>17 Aug 15:30</td><td><span class="pill p-mut">Device still in use</span></td></tr>
               <tr><td class="mono">NB-1122980</td><td>Bharat Net Services</td><td>9000000017</td><td>NCR</td><td>16 Aug 16:00</td><td>17 Aug 11:10</td><td><span class="pill p-mut">Marked by mistake</span></td></tr>
-              <tr><td class="mono">NB-8890123</td><td>Unity Broadband</td><td>9000000018</td><td>NCR</td><td>17 Aug 09:20</td><td>17 Aug 18:00</td><td><span class="pill p-mut">Wants to retain</span></td></tr>
+              <tr><td class="mono">NB-8890123</td><td>Unity Broadband</td><td>9000000018</td><td>Bharat</td><td>17 Aug 09:20</td><td>17 Aug 18:00</td><td><span class="pill p-mut">Wants to retain</span></td></tr>
             </tbody>
           </table></div>
         </div>
