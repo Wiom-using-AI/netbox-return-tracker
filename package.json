@@ -1,0 +1,12 @@
+{
+  "name": "netbox-return-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NetBox device-return journey tracker dashboard (mockup, fictional sample data).",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,471 @@
+<title>NetBox Return Tracker</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --panel:#ffffff; --panel-2:#f3f5f8; --line:#e6e9ef;
+    --ink:#151a22; --ink-2:#5b6473; --muted:#949cab;
+    --brand:#c21d9a; --marked:#7c3aed; --porter:#3a56d4; --tpl:#0e8f83;
+    --good:#159a5b; --warn:#e08a1e; --bad:#d8492c;
+    --shadow:0 1px 2px rgba(21,26,34,.04),0 4px 14px rgba(21,26,34,.05);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0d1015; --panel:#161b22; --panel-2:#1d232d; --line:#2a313d;
+      --ink:#eef1f6; --ink-2:#a6b0c0; --muted:#6a7383;
+      --brand:#e94bab; --marked:#a481f7; --porter:#6d84f2; --tpl:#2cc3b4;
+      --good:#3cc48d; --warn:#e0a94a; --bad:#ef6a4c;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0}
+  .app{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+  .vradio{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;top:0;left:0}
+
+  .side{width:212px;flex:none;background:var(--panel);border-right:1px solid var(--line);padding:18px 12px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh}
+  .brand{display:flex;align-items:center;gap:10px;padding:6px 8px 16px}
+  .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--marked));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px}
+  .brand b{font-size:15px;letter-spacing:-.01em}
+  .brand span{display:block;font-size:10.5px;color:var(--muted);font-weight:500}
+  .nav{display:flex;flex-direction:column;gap:2px}
+  .navitem{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:9px;color:var(--ink-2);font-size:13.5px;font-weight:550;cursor:pointer;border:1px solid transparent;user-select:none}
+  .navitem .ic{width:16px;text-align:center;font-size:14px}
+  .navitem:hover{background:var(--panel-2)}
+  .navitem .badge{margin-left:auto;font-size:10.5px;font-weight:800;padding:1px 7px;border-radius:999px;background:color-mix(in srgb,var(--bad) 16%,transparent);color:var(--bad)}
+  .side .sfoot{margin-top:auto;font-size:10.5px;color:var(--muted);padding:8px}
+
+  .main{flex:1;min-width:0;display:flex;flex-direction:column}
+  .top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:14px clamp(16px,3vw,28px);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .top h1{margin:0;font-size:19px;font-weight:750;letter-spacing:-.02em}
+  .live{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.05em;color:var(--good);background:color-mix(in srgb,var(--good) 14%,transparent);padding:4px 10px;border-radius:999px}
+  .live .d{width:7px;height:7px;border-radius:50%;background:var(--good)}
+  .srcpill{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;color:var(--ink-2);background:var(--panel);border:1px solid var(--line);padding:5px 11px;border-radius:999px}
+  .mocktag{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--warn);background:color-mix(in srgb,var(--warn) 15%,transparent);padding:3px 9px;border-radius:6px}
+  .top .sp{flex:1}
+  .btn{font-size:12.5px;font-weight:650;padding:8px 14px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+  .btn.pri{background:linear-gradient(135deg,var(--brand),var(--marked));color:#fff;border:none}
+
+  .content{padding:clamp(16px,3vw,28px)}
+  .view{display:none;flex-direction:column;gap:20px}
+  .vh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .vh h2{margin:0;font-size:17px;font-weight:750;letter-spacing:-.01em}
+  .vh .sub{font-size:12.5px;color:var(--muted)}
+  .seclab{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:6px 0 -6px}
+
+  .kgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  @media(max-width:1200px){.kgrid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:640px){.kgrid{grid-template-columns:repeat(2,1fr)}}
+  .k4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:1000px){.k4{grid-template-columns:repeat(2,1fr)}}
+  .kc{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 15px 13px;box-shadow:var(--shadow);overflow:hidden}
+  .kc::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--c,var(--brand))}
+  .kc .lab{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+  .kc .num{font-size:27px;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--ink)}
+  .kc .sub{font-size:11px;color:var(--ink-2);margin-top:8px;line-height:1.35}
+  .kc .sub .g{color:var(--good);font-weight:700}.kc .sub .r{color:var(--bad);font-weight:700}.kc .sub .b{color:var(--porter);font-weight:700}.kc .sub .t{color:var(--tpl);font-weight:700}
+
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow)}
+  .panel h3{margin:0 0 3px;font-size:14.5px;font-weight:700}
+  .panel .cap{margin:0 0 16px;font-size:12px;color:var(--muted)}
+  .two{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+  @media(max-width:900px){.two{grid-template-columns:1fr}}
+
+  .funnel{display:flex;flex-direction:column;gap:10px}
+  .fstage{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center}
+  @media(max-width:560px){.fstage{grid-template-columns:1fr}}
+  .fstage .fl{font-size:12.5px;font-weight:600}
+  .fstage .fl small{display:block;color:var(--muted);font-weight:500;font-size:11px}
+  .ftrack{position:relative;height:32px;background:var(--panel-2);border-radius:8px;overflow:hidden}
+  .fbar{height:100%;border-radius:8px;display:flex;align-items:center;padding:0 11px;color:#fff;font-weight:750;font-size:12.5px;white-space:nowrap;min-width:52px}
+
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+  .lg{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-2)}
+  .lg i{width:12px;height:3px;border-radius:2px;display:inline-block}
+  .chartbox{width:100%;overflow-x:auto}
+  .grid{stroke:var(--line);stroke-width:1}
+  .axt{fill:var(--muted);font-size:11px}
+  .dot{stroke:var(--panel);stroke-width:2}
+
+  .scroller{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:640px}
+  th,td{padding:9px 11px;text-align:left;white-space:nowrap}
+  thead th{font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:700;border-bottom:1.5px solid var(--line)}
+  tbody td{border-bottom:1px solid var(--line)}
+  tbody tr:hover{background:var(--panel-2)}
+  tfoot td{font-weight:750;border-top:1.5px solid var(--line)}
+  .mono{font-family:ui-monospace,Consolas,monospace;font-weight:600}
+  .pill{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:999px;display:inline-block}
+  .p-marked{background:color-mix(in srgb,var(--marked) 15%,transparent);color:var(--marked)}
+  .p-porter{background:color-mix(in srgb,var(--porter) 15%,transparent);color:var(--porter)}
+  .p-tpl{background:color-mix(in srgb,var(--tpl) 16%,transparent);color:var(--tpl)}
+  .p-ok{background:color-mix(in srgb,var(--good) 15%,transparent);color:var(--good)}
+  .p-warn{background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)}
+  .p-bad{background:color-mix(in srgb,var(--bad) 15%,transparent);color:var(--bad)}
+  .p-mut{background:var(--panel-2);color:var(--ink-2)}
+  .dash{color:var(--muted)}
+  .g{color:var(--good);font-weight:700}.r{color:var(--bad);font-weight:700}
+
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  .search{flex:1;min-width:200px;display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:8px 12px}
+  .search input{border:none;background:none;outline:none;color:var(--ink);font-size:13px;width:100%;font-family:inherit}
+  .note{font-size:12px;color:var(--ink-2);background:var(--panel-2);border:1px solid var(--line);border-left:3px solid var(--brand);border-radius:8px;padding:11px 14px;line-height:1.5}
+  .note b{color:var(--ink)}
+
+  /* CSS-only view switching */
+  #r-overview:checked ~ .main #v-overview,
+  #r-porter:checked   ~ .main #v-porter,
+  #r-tpl:checked      ~ .main #v-tpl,
+  #r-devices:checked  ~ .main #v-devices,
+  #r-tat:checked      ~ .main #v-tat,
+  #r-disc:checked     ~ .main #v-disc,
+  #r-refuse:checked   ~ .main #v-refuse{display:flex}
+  #r-overview:checked ~ .side label[for="r-overview"],
+  #r-porter:checked   ~ .side label[for="r-porter"],
+  #r-tpl:checked      ~ .side label[for="r-tpl"],
+  #r-devices:checked  ~ .side label[for="r-devices"],
+  #r-tat:checked      ~ .side label[for="r-tat"],
+  #r-disc:checked     ~ .side label[for="r-disc"],
+  #r-refuse:checked   ~ .side label[for="r-refuse"]{background:color-mix(in srgb,var(--brand) 12%,transparent);color:var(--brand);border-color:color-mix(in srgb,var(--brand) 22%,transparent);font-weight:700}
+</style>
+
+<div class="app">
+  <input class="vradio" type="radio" name="view" id="r-overview" checked>
+  <input class="vradio" type="radio" name="view" id="r-porter">
+  <input class="vradio" type="radio" name="view" id="r-tpl">
+  <input class="vradio" type="radio" name="view" id="r-devices">
+  <input class="vradio" type="radio" name="view" id="r-tat">
+  <input class="vradio" type="radio" name="view" id="r-disc">
+  <input class="vradio" type="radio" name="view" id="r-refuse">
+
+  <aside class="side">
+    <div class="brand"><div class="logo">W</div><div><b>Return Tracker</b><span>NetBox device journey</span></div></div>
+    <nav class="nav">
+      <label class="navitem" for="r-overview"><span class="ic">&#9638;</span> Overview</label>
+      <label class="navitem" for="r-porter"><span class="ic">&#128666;</span> Porter</label>
+      <label class="navitem" for="r-tpl"><span class="ic">&#128230;</span> 3PL</label>
+      <label class="navitem" for="r-devices"><span class="ic">&#128269;</span> Device Data</label>
+      <label class="navitem" for="r-tat"><span class="ic">&#9201;</span> TAT Breaches <span class="badge">470</span></label>
+      <label class="navitem" for="r-disc"><span class="ic">&#9888;</span> Discrepancies <span class="badge">170</span></label>
+      <label class="navitem" for="r-refuse"><span class="ic">&#10006;</span> CSP Refusals</label>
+    </nav>
+    <div class="sfoot">Live tracker &#183; running since 15 Aug 2026<br>Source: Google Sheets (to be linked)</div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <h1>Device Return Tracker</h1>
+      <span class="live"><span class="d"></span> LIVE</span>
+      <span class="srcpill">Since 15 Aug 2026</span>
+      <span class="srcpill">Updated 19 Aug, 17:10 IST</span>
+      <span class="mocktag">Mockup</span>
+      <span class="sp"></span>
+      <button class="btn">&#8635; Refresh</button>
+      <button class="btn pri">&#8595; Export</button>
+    </header>
+
+    <div class="content">
+
+      <!-- ============ OVERVIEW ============ -->
+      <section class="view" id="v-overview">
+        <div class="vh"><h2>&#9638; Overview</h2><span class="sub">is the recovery process working? &#8212; pipeline, speed & leakage</span></div>
+
+        <p class="seclab">Pipeline &#8212; marked &#8594; accepted &#8594; booked &#8594; received</p>
+        <div class="kgrid">
+          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">6,415</div><p class="sub">In-app 5,427 &#183; Forms 988</p></div>
+          <div class="kc" style="--c:var(--brand)"><p class="lab">CSP accepted</p><div class="num">4,540</div><p class="sub"><span class="g">87%</span> of contacted</p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Booked for pickup</p><div class="num">4,180</div><p class="sub"><span class="b">Porter 3,150</span> &#183; <span class="t">3PL 1,030</span></p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Received at Wiom</p><div class="num">3,260</div><p class="sub"><span class="g">51%</span> recovery rate</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Overdue backlog</p><div class="num">470</div><p class="sub"><span class="r">Porter 380</span> &#183; 3PL 90</p></div>
+          <div class="kc" style="--c:var(--warn)"><p class="lab">Discrepancies</p><div class="num">170</div><p class="sub">received &#8800; marked</p></div>
+        </div>
+
+        <p class="seclab">Process health &#8212; is it working?</p>
+        <div class="kgrid k4">
+          <div class="kc" style="--c:var(--good)"><p class="lab">Recovery rate</p><div class="num">51%</div><p class="sub">received &#247; marked &#183; target 80%</p></div>
+          <div class="kc" style="--c:var(--brand)"><p class="lab">CSP acceptance</p><div class="num">87%</div><p class="sub">660 refused &#183; 1,215 call pending</p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">On-time pickup (SLA)</p><div class="num">89%</div><p class="sub">within TAT &#183; target 95%</p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Confirmed &amp; closed</p><div class="num">3,090</div><p class="sub">verified match</p></div>
+        </div>
+
+        <div class="two">
+          <div class="panel">
+            <h3>Device journey funnel</h3>
+            <p class="cap">Where devices sit and where they leak. Width = share of the 6,415 marked.</p>
+            <div class="funnel">
+              <div class="fstage"><div class="fl">Marked<small>by CSP</small></div><div class="ftrack"><div class="fbar" style="width:100%;background:var(--marked)">6,415 &#183; 100%</div></div></div>
+              <div class="fstage"><div class="fl">Call done<small>1,215 pending</small></div><div class="ftrack"><div class="fbar" style="width:81%;background:#8f6ae0">5,200 &#183; 81%</div></div></div>
+              <div class="fstage"><div class="fl">CSP accepted<small>660 refused</small></div><div class="ftrack"><div class="fbar" style="width:71%;background:var(--brand)">4,540 &#183; 71%</div></div></div>
+              <div class="fstage"><div class="fl">Booked<small>360 awaiting</small></div><div class="ftrack"><div class="fbar" style="width:65%;background:#b02a86">4,180 &#183; 65%</div></div></div>
+              <div class="fstage"><div class="fl">Received<small>920 in transit</small></div><div class="ftrack"><div class="fbar" style="width:51%;background:var(--porter)">3,260 &#183; 51%</div></div></div>
+              <div class="fstage"><div class="fl">Confirmed<small>170 discrepancy</small></div><div class="ftrack"><div class="fbar" style="width:48%;background:var(--good)">3,090 &#183; 48%</div></div></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>TAT performance &#8212; Porter vs 3PL</h3>
+            <p class="cap">Booking &#8594; received. Are pickups happening within SLA?</p>
+            <div class="scroller">
+              <table style="min-width:auto">
+                <thead><tr><th>Partner</th><th>Target</th><th>Avg TAT</th><th>On-time</th><th>Overdue</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="pill p-porter">PORTER</span></td><td>24 h</td><td><span class="pill p-ok">19 h</span></td><td><span class="g">90%</span></td><td><span class="pill p-bad">380</span></td></tr>
+                  <tr><td><span class="pill p-tpl">3PL</span></td><td>72 h</td><td><span class="pill p-ok">58 h</span></td><td><span class="g">88%</span></td><td><span class="pill p-bad">90</span></td></tr>
+                </tbody>
+                <tfoot><tr><td>Combined</td><td>&#8212;</td><td>&#8212;</td><td>89%</td><td class="r">470</td></tr></tfoot>
+              </table>
+            </div>
+            <p class="note" style="margin-top:14px">Avg TAT is inside target for both, but <b>470 pickups are overdue and still not received</b> &#8212; the real leak. Recovery rate (51%) is the number to watch: <b>nearly half of marked devices haven't reached Wiom yet.</b></p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Pending pickups &#8212; ageing</h3>
+          <p class="cap">Of devices booked but not yet received, how long have they been waiting?</p>
+          <div class="scroller">
+            <table style="min-width:auto">
+              <thead><tr><th>Partner</th><th>Fresh (within TAT)</th><th>Nearing TAT</th><th>Overdue</th><th>Total pending</th></tr></thead>
+              <tbody>
+                <tr><td><span class="pill p-porter">PORTER</span></td><td>130</td><td>100</td><td><span class="pill p-bad">380</span></td><td>610</td></tr>
+                <tr><td><span class="pill p-tpl">3PL</span></td><td>120</td><td>100</td><td><span class="pill p-bad">90</span></td><td>310</td></tr>
+              </tbody>
+              <tfoot><tr><td>Total</td><td>250</td><td>200</td><td class="r">470</td><td>920</td></tr></tfoot>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>&#128200; Daily trend &#8212; marked &#183; received &#183; confirmed</h3>
+          <p class="cap">Rolling last 7 days. Receipts lag bookings by the TAT window.</p>
+          <div class="legend">
+            <span class="lg"><i style="background:var(--marked)"></i> Marked</span>
+            <span class="lg"><i style="background:var(--porter)"></i> Received</span>
+            <span class="lg"><i style="background:var(--good)"></i> Confirmed</span>
+          </div>
+          <div class="chartbox">
+            <svg width="100%" height="300" viewBox="0 0 860 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Daily trend of marked, received and confirmed devices over the last 7 days">
+              <line class="grid" x1="48" x2="842" y1="16" y2="16"></line>
+              <line class="grid" x1="48" x2="842" y1="77" y2="77"></line>
+              <line class="grid" x1="48" x2="842" y1="138" y2="138"></line>
+              <line class="grid" x1="48" x2="842" y1="199" y2="199"></line>
+              <line class="grid" x1="48" x2="842" y1="260" y2="260"></line>
+              <text class="axt" x="40" y="20" text-anchor="end">2400</text>
+              <text class="axt" x="40" y="81" text-anchor="end">1800</text>
+              <text class="axt" x="40" y="142" text-anchor="end">1200</text>
+              <text class="axt" x="40" y="203" text-anchor="end">600</text>
+              <text class="axt" x="40" y="264" text-anchor="end">0</text>
+              <text class="axt" x="48"  y="286" text-anchor="middle">13 Aug</text>
+              <text class="axt" x="180" y="286" text-anchor="middle">14 Aug</text>
+              <text class="axt" x="313" y="286" text-anchor="middle">15 Aug</text>
+              <text class="axt" x="445" y="286" text-anchor="middle">16 Aug</text>
+              <text class="axt" x="577" y="286" text-anchor="middle">17 Aug</text>
+              <text class="axt" x="710" y="286" text-anchor="middle">18 Aug</text>
+              <text class="axt" x="842" y="286" text-anchor="middle">19 Aug</text>
+              <polyline fill="none" stroke="var(--marked)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" points="48,254 180,255 313,177 445,38 577,68 710,106 842,234"></polyline>
+              <polyline fill="none" stroke="var(--porter)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" points="48,256 180,257 313,239 445,195 577,171 710,183 842,239"></polyline>
+              <polyline fill="none" stroke="var(--good)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" points="48,256 180,257 313,240 445,198 577,175 710,187 842,241"></polyline>
+              <circle class="dot" cx="445" cy="38" r="3.5" fill="var(--marked)"></circle>
+              <circle class="dot" cx="577" cy="68" r="3.5" fill="var(--marked)"></circle>
+              <circle class="dot" cx="445" cy="195" r="3.5" fill="var(--porter)"></circle>
+              <circle class="dot" cx="577" cy="171" r="3.5" fill="var(--porter)"></circle>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PORTER ============ -->
+      <section class="view" id="v-porter">
+        <div class="vh"><h2>&#128666; Porter pickups</h2><span class="sub">NCR + Mumbai &#183; SLA 24 h &#183; live</span></div>
+
+        <p class="seclab">Throughput</p>
+        <div class="kgrid k4">
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Booked via Porter</p><div class="num">3,150</div><p class="sub">of 4,732 allocated</p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">2,540</div><p class="sub"><span class="g">81%</span> recovery of booked</p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Pending pickup</p><div class="num">610</div><p class="sub">booked, not yet received</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Overdue (&gt;24h)</p><div class="num">380</div><p class="sub"><span class="r">62%</span> of pending is overdue</p></div>
+        </div>
+
+        <div class="two">
+          <div class="panel">
+            <h3>SLA / TAT &#8212; 24 h target</h3>
+            <p class="cap">Speed of Porter pickups, booking &#8594; received.</p>
+            <div class="scroller"><table style="min-width:auto">
+              <tbody>
+                <tr><td>Avg TAT</td><td class="mono"><span class="pill p-ok">19 h</span></td></tr>
+                <tr><td>On-time (within 24h)</td><td class="g">90%</td></tr>
+                <tr><td>Fastest / slowest received</td><td class="mono">6 h / 41 h</td></tr>
+                <tr><td>Currently overdue</td><td><span class="pill p-bad">380</span></td></tr>
+              </tbody>
+            </table></div>
+          </div>
+          <div class="panel">
+            <h3>Pending pickup &#8212; ageing</h3>
+            <p class="cap">How long the 610 booked-but-not-received have waited.</p>
+            <div class="scroller"><table style="min-width:auto">
+              <thead><tr><th>Age since booking</th><th>Devices</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>0&#8211;12 h</td><td>130</td><td><span class="pill p-ok">On track</span></td></tr>
+                <tr><td>12&#8211;24 h</td><td>100</td><td><span class="pill p-warn">Nearing SLA</span></td></tr>
+                <tr><td>24&#8211;48 h</td><td>250</td><td><span class="pill p-bad">Overdue</span></td></tr>
+                <tr><td>&gt; 48 h</td><td>130</td><td><span class="pill p-bad">Critical</span></td></tr>
+              </tbody>
+            </table></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Porter shipments</h3><p class="cap">Sample rows &#8212; full list pulls live from the Porter booking sheet.</p>
+          <div class="scroller"><table>
+            <thead><tr><th>Device ID</th><th>Type</th><th>CSP</th><th>Region</th><th>Booked</th><th>Received</th><th>TAT</th><th>Verify</th><th>Stage</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">NB-5560098</td><td>Router</td><td>Skyline Internet</td><td>NCR</td><td>16 Aug 14:30</td><td>17 Aug 09:15</td><td><span class="pill p-ok">19h</span></td><td><span class="pill p-bad">Mismatch</span></td><td><span class="pill p-warn">Discrepancy</span></td></tr>
+              <tr><td class="mono">NB-4471203</td><td>ONT</td><td>Star Digital Net</td><td>NCR</td><td>16 Aug 15:10</td><td>17 Aug 10:40</td><td><span class="pill p-ok">19h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
+              <tr><td class="mono">NB-9982001</td><td>ONT</td><td>Apex Cable Network</td><td>NCR</td><td>17 Aug 09:00</td><td class="dash">&#8212;</td><td><span class="pill p-bad">31h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-porter">In transit</span></td></tr>
+              <tr><td class="mono">NB-3320876</td><td>ONT</td><td>Greenline Broadband</td><td>NCR</td><td>17 Aug 12:20</td><td>18 Aug 08:05</td><td><span class="pill p-ok">20h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
+              <tr><td class="mono">NB-7788345</td><td>ONT</td><td>Omega Broadband</td><td>Mumbai</td><td>17 Aug 16:40</td><td class="dash">&#8212;</td><td><span class="pill p-bad">26h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-porter">In transit</span></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- ============ 3PL ============ -->
+      <section class="view" id="v-tpl">
+        <div class="vh"><h2>&#128230; 3PL pickups</h2><span class="sub">Other UP &#183; SLA 72 h &#183; live</span></div>
+        <p class="seclab">Throughput</p>
+        <div class="kgrid k4">
+          <div class="kc" style="--c:var(--tpl)"><p class="lab">Booked via 3PL</p><div class="num">1,030</div><p class="sub">of 1,449 allocated</p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">720</div><p class="sub"><span class="g">70%</span> recovery of booked</p></div>
+          <div class="kc" style="--c:var(--tpl)"><p class="lab">Pending pickup</p><div class="num">310</div><p class="sub">booked, not yet received</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Overdue (&gt;72h)</p><div class="num">90</div><p class="sub"><span class="r">29%</span> of pending is overdue</p></div>
+        </div>
+        <div class="two">
+          <div class="panel">
+            <h3>SLA / TAT &#8212; 72 h target</h3>
+            <div class="scroller"><table style="min-width:auto">
+              <tbody>
+                <tr><td>Avg TAT</td><td><span class="pill p-ok">58 h</span></td></tr>
+                <tr><td>On-time (within 72h)</td><td class="g">88%</td></tr>
+                <tr><td>Fastest / slowest received</td><td class="mono">36 h / 86 h</td></tr>
+                <tr><td>Currently overdue</td><td><span class="pill p-bad">90</span></td></tr>
+              </tbody>
+            </table></div>
+          </div>
+          <div class="panel">
+            <h3>Pending pickup &#8212; ageing</h3>
+            <div class="scroller"><table style="min-width:auto">
+              <thead><tr><th>Age since booking</th><th>Devices</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>0&#8211;36 h</td><td>120</td><td><span class="pill p-ok">On track</span></td></tr>
+                <tr><td>36&#8211;72 h</td><td>100</td><td><span class="pill p-warn">Nearing SLA</span></td></tr>
+                <tr><td>&gt; 72 h</td><td>90</td><td><span class="pill p-bad">Overdue</span></td></tr>
+              </tbody>
+            </table></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>3PL shipments</h3><p class="cap">Sample rows &#8212; full list pulls live from the 3PL booking sheet.</p>
+          <div class="scroller"><table>
+            <thead><tr><th>Device ID</th><th>Type</th><th>CSP</th><th>Region</th><th>Booked</th><th>Received</th><th>TAT</th><th>Verify</th><th>Stage</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">NB-8842011</td><td>ONT</td><td>Sunrise Cable Net</td><td>Other UP</td><td>15 Aug 18:10</td><td>17 Aug 14:20</td><td><span class="pill p-ok">68h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
+              <tr><td class="mono">NB-7741220</td><td>ONT</td><td>Metro Fibernet</td><td>Other UP</td><td>16 Aug 12:00</td><td class="dash">&#8212;</td><td><span class="pill p-bad">78h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-tpl">In transit</span></td></tr>
+              <tr><td class="mono">NB-6610455</td><td>Router</td><td>Sunrise Cable Net</td><td>Other UP</td><td>15 Aug 18:12</td><td>18 Aug 11:30</td><td><span class="pill p-ok">65h</span></td><td><span class="pill p-bad">Mismatch</span></td><td><span class="pill p-warn">Discrepancy</span></td></tr>
+              <tr><td class="mono">NB-5523901</td><td>ONT</td><td>Nova Broadband</td><td>Other UP</td><td>17 Aug 11:00</td><td class="dash">&#8212;</td><td><span class="pill p-warn">44h</span></td><td class="dash">&#8212;</td><td><span class="pill p-tpl">In transit</span></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- ============ DEVICE DATA ============ -->
+      <section class="view" id="v-devices">
+        <div class="vh"><h2>&#128269; Device-level data</h2><span class="sub">for PTL agents &#8212; full journey per device to answer CSP queries</span></div>
+        <p class="note">Search a device ID, CSP name or mobile to see the complete history: when the CSP <b>raised</b> the request, whether they <b>confirmed</b> on the call, when it was <b>booked</b> and by whom, and when it was <b>received</b> &#8212; everything an agent needs to resolve a CSP query on the spot.</p>
+        <div class="panel">
+          <div class="toolbar">
+            <label class="search">&#128270; <input id="devsearch" placeholder="Search device ID, CSP name or mobile&#8230;"></label>
+          </div>
+          <div class="scroller"><table id="devtable">
+            <thead><tr>
+              <th>Device ID</th><th>Type</th><th>CSP</th><th>Mobile</th><th>Region</th>
+              <th>Request raised</th><th>Channel</th><th>CSP confirmed?</th><th>Booked on</th><th>Partner</th>
+              <th>Picked up</th><th>Received</th><th>TAT</th><th>Verify</th><th>Status</th>
+            </tr></thead>
+            <tbody>
+              <tr><td class="mono">NB-8842011</td><td>ONT</td><td>Sunrise Cable Net</td><td>9000000011</td><td>Other UP</td><td>15 Aug 17:39</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 15 Aug 19:02</span></td><td>15 Aug 18:10</td><td><span class="pill p-tpl">3PL</span></td><td>16 Aug 10:00</td><td>17 Aug 14:20</td><td><span class="pill p-ok">68h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
+              <tr><td class="mono">NB-7741220</td><td>ONT</td><td>Metro Fibernet</td><td>9000000012</td><td>Other UP</td><td>16 Aug 11:20</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 16 Aug 11:48</span></td><td>16 Aug 12:00</td><td><span class="pill p-tpl">3PL</span></td><td>17 Aug 09:30</td><td class="dash">&#8212;</td><td><span class="pill p-bad">78h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-tpl">In transit</span></td></tr>
+              <tr><td class="mono">NB-5560098</td><td>Router</td><td>Skyline Internet</td><td>9000000013</td><td>NCR</td><td>16 Aug 13:05</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 16 Aug 14:05</span></td><td>16 Aug 14:30</td><td><span class="pill p-porter">Porter</span></td><td>16 Aug 20:10</td><td>17 Aug 09:15</td><td><span class="pill p-ok">19h</span></td><td><span class="pill p-bad">Mismatch</span></td><td><span class="pill p-warn">Discrepancy</span></td></tr>
+              <tr><td class="mono">NB-3320450</td><td>ONT</td><td>Apex Cable Network</td><td>9000000014</td><td>NCR</td><td>17 Aug 10:48</td><td><span class="pill p-marked">Form</span></td><td><span class="pill p-bad">No &#183; refused 17 Aug 15:30</span></td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td><span class="pill p-bad">Refused</span></td></tr>
+              <tr><td class="mono">NB-9910233</td><td>ONT</td><td>Star Digital Net</td><td>9000000015</td><td>NCR</td><td>16 Aug 09:30</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-warn">Pending call</span></td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td><span class="pill p-warn">Awaiting call</span></td></tr>
+              <tr><td class="mono">NB-4471203</td><td>ONT</td><td>Star Digital Net</td><td>9000000015</td><td>NCR</td><td>16 Aug 10:05</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 16 Aug 14:20</span></td><td>16 Aug 15:10</td><td><span class="pill p-porter">Porter</span></td><td>16 Aug 22:00</td><td>17 Aug 10:40</td><td><span class="pill p-ok">19h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
+              <tr><td class="mono">NB-9982001</td><td>ONT</td><td>Apex Cable Network</td><td>9000000014</td><td>NCR</td><td>17 Aug 08:20</td><td><span class="pill p-marked">Form</span></td><td><span class="pill p-ok">Yes &#183; 17 Aug 08:50</span></td><td>17 Aug 09:00</td><td><span class="pill p-porter">Porter</span></td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td><span class="pill p-bad">31h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-porter">In transit</span></td></tr>
+              <tr><td class="mono">NB-3320876</td><td>ONT</td><td>Greenline Broadband</td><td>9000000016</td><td>NCR</td><td>17 Aug 11:40</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 17 Aug 12:05</span></td><td>17 Aug 12:20</td><td><span class="pill p-porter">Porter</span></td><td>17 Aug 19:30</td><td>18 Aug 08:05</td><td><span class="pill p-ok">20h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
+              <tr><td class="mono">NB-6610455</td><td>Router</td><td>Sunrise Cable Net</td><td>9000000011</td><td>Other UP</td><td>15 Aug 17:44</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 15 Aug 19:02</span></td><td>15 Aug 18:12</td><td><span class="pill p-tpl">3PL</span></td><td>16 Aug 09:00</td><td>18 Aug 11:30</td><td><span class="pill p-ok">65h</span></td><td><span class="pill p-bad">Mismatch</span></td><td><span class="pill p-warn">Discrepancy</span></td></tr>
+              <tr><td class="mono">NB-1122980</td><td>ONT</td><td>Bharat Net Services</td><td>9000000017</td><td>NCR</td><td>16 Aug 16:00</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-bad">No &#183; refused 17 Aug 11:10</span></td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td><span class="pill p-bad">Refused</span></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- ============ TAT BREACHES ============ -->
+      <section class="view" id="v-tat">
+        <div class="vh"><h2>&#9201; TAT breaches</h2><span class="sub">booked but not received within SLA &#183; Porter 24h &#183; 3PL 72h</span></div>
+        <p class="note"><b>470 shipments</b> have crossed their SLA without being received &#8212; <b>380 Porter</b> (&gt;24h) and <b>90 3PL</b> (&gt;72h). Chase oldest first.</p>
+        <div class="panel">
+          <div class="scroller"><table>
+            <thead><tr><th>Device ID</th><th>CSP</th><th>Partner</th><th>Region</th><th>Booked</th><th>Elapsed</th><th>Over by</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">NB-2201567</td><td>Pinnacle Net</td><td><span class="pill p-tpl">3PL</span></td><td>Other UP</td><td>16 Aug 09:15</td><td><span class="pill p-bad">80h</span></td><td>+8h</td><td><span class="pill p-tpl">In transit</span></td></tr>
+              <tr><td class="mono">NB-7741220</td><td>Metro Fibernet</td><td><span class="pill p-tpl">3PL</span></td><td>Other UP</td><td>16 Aug 12:00</td><td><span class="pill p-bad">78h</span></td><td>+6h</td><td><span class="pill p-tpl">In transit</span></td></tr>
+              <tr><td class="mono">NB-9982001</td><td>Apex Cable Network</td><td><span class="pill p-porter">Porter</span></td><td>NCR</td><td>17 Aug 09:00</td><td><span class="pill p-bad">31h</span></td><td>+7h</td><td><span class="pill p-porter">In transit</span></td></tr>
+              <tr><td class="mono">NB-7788345</td><td>Omega Broadband</td><td><span class="pill p-porter">Porter</span></td><td>Mumbai</td><td>17 Aug 16:40</td><td><span class="pill p-bad">26h</span></td><td>+2h</td><td><span class="pill p-porter">In transit</span></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- ============ DISCREPANCIES ============ -->
+      <section class="view" id="v-disc">
+        <div class="vh"><h2>&#9888; Discrepancies</h2><span class="sub">received device &#8800; device the CSP marked</span></div>
+        <p class="note"><b>170 devices</b> received don't match what the CSP marked &#8212; wrong serial, wrong type, or extra/short units. Need agent reconciliation before closure.</p>
+        <div class="panel">
+          <div class="scroller"><table>
+            <thead><tr><th>Received Device ID</th><th>Marked Device ID</th><th>CSP</th><th>Partner</th><th>Issue</th><th>Received</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">NB-5560098</td><td class="mono">NB-5560***</td><td>Skyline Internet</td><td><span class="pill p-porter">Porter</span></td><td><span class="pill p-warn">Serial mismatch</span></td><td>17 Aug 09:15</td></tr>
+              <tr><td class="mono">NB-6610455</td><td class="mono">NB-6610455</td><td>Sunrise Cable Net</td><td><span class="pill p-tpl">3PL</span></td><td><span class="pill p-warn">Type: got Router, marked ONT</span></td><td>18 Aug 11:30</td></tr>
+              <tr><td class="mono">NB-4490231</td><td class="dash">&#8212;</td><td>Horizon Fibernet</td><td><span class="pill p-porter">Porter</span></td><td><span class="pill p-bad">Extra unit (not marked)</span></td><td>18 Aug 10:10</td></tr>
+              <tr><td class="dash">&#8212; (short)</td><td class="mono">NB-3312090</td><td>Crystal Cable Net</td><td><span class="pill p-tpl">3PL</span></td><td><span class="pill p-bad">Marked but not received</span></td><td class="dash">&#8212;</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- ============ REFUSALS ============ -->
+      <section class="view" id="v-refuse">
+        <div class="vh"><h2>&#10006; CSP refusals</h2><span class="sub">marked for return, then declined on the pickup call</span></div>
+        <p class="note"><b>660 devices</b> were marked but the CSP refused pickup on the call. Capture the reason so ops can re-attempt or de-mark.</p>
+        <div class="panel">
+          <div class="scroller"><table>
+            <thead><tr><th>Device ID</th><th>CSP</th><th>Mobile</th><th>Region</th><th>Marked</th><th>Refused on</th><th>Reason</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">NB-3320450</td><td>Apex Cable Network</td><td>9000000014</td><td>NCR</td><td>17 Aug 10:48</td><td>17 Aug 15:30</td><td><span class="pill p-mut">Device still in use</span></td></tr>
+              <tr><td class="mono">NB-1122980</td><td>Bharat Net Services</td><td>9000000017</td><td>NCR</td><td>16 Aug 16:00</td><td>17 Aug 11:10</td><td><span class="pill p-mut">Marked by mistake</span></td></tr>
+              <tr><td class="mono">NB-8890123</td><td>Unity Broadband</td><td>9000000018</td><td>NCR</td><td>17 Aug 09:20</td><td>17 Aug 18:00</td><td><span class="pill p-mut">Wants to retain</span></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var s=document.getElementById('devsearch'); if(!s) return;
+    s.addEventListener('input',function(){
+      var q=(s.value||'').toLowerCase();
+      document.querySelectorAll('#devtable tbody tr').forEach(function(r){
+        r.style.display = r.textContent.toLowerCase().indexOf(q)>-1 ? '' : 'none';
+      });
+    });
+  })();
+</script>
