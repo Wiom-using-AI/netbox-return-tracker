@@ -104,6 +104,24 @@
   .dash{color:var(--muted)}
   .g{color:var(--good);font-weight:700}.r{color:var(--bad);font-weight:700}
 
+  /* TAT heatmap */
+  .hm{min-width:920px}
+  .hm td,.hm th{text-align:center}
+  .hm th:first-child,.hm td:first-child{text-align:left;font-weight:650}
+  .hm thead th{border-bottom:1px solid var(--line)}
+  .grp-g{color:var(--good)}.grp-r{color:var(--bad)}.grp-n{color:var(--ink-2)}
+  .hm .subt{font-weight:750;background:var(--panel-2)}
+  .hm .z{color:var(--muted)}
+  .g1{background:color-mix(in srgb,var(--good) 12%,var(--panel))}
+  .g2{background:color-mix(in srgb,var(--good) 28%,var(--panel))}
+  .g3{background:color-mix(in srgb,var(--good) 46%,var(--panel));font-weight:700}
+  .r1{background:color-mix(in srgb,var(--bad) 12%,var(--panel))}
+  .r2{background:color-mix(in srgb,var(--bad) 30%,var(--panel))}
+  .r3{background:color-mix(in srgb,var(--bad) 48%,var(--panel));font-weight:700}
+  .hmleg{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:11.5px;color:var(--ink-2)}
+  .hmleg span{display:inline-flex;align-items:center;gap:6px}
+  .hmleg i{width:26px;height:12px;border-radius:3px;display:inline-block}
+
   .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
   .search{flex:1;min-width:200px;display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:8px 12px}
   .search input{border:none;background:none;outline:none;color:var(--ink);font-size:13px;width:100%;font-family:inherit}
@@ -287,6 +305,43 @@
           <div class="kc" style="--c:var(--porter)"><p class="lab">Pending pickup</p><div class="num">560</div><p class="sub">booked, not yet received</p></div>
           <div class="kc" style="--c:var(--bad)"><p class="lab">Overdue (&gt;24h)</p><div class="num">350</div><p class="sub"><span class="r">63%</span> of pending is overdue</p></div>
         </div>
+
+        <div class="panel">
+          <h3>TAT heatmap &#8212; time from marking to received</h3>
+          <p class="cap">Rows = date the CSP marked the device. Green = returned within 24 h SLA, red = breached. Scheduled / not-scheduled = still not back.</p>
+          <div class="scroller"><table class="hm">
+            <thead>
+              <tr>
+                <th rowspan="2">Marked date</th>
+                <th colspan="5" class="grp-g">Within TAT (&#8804;24h)</th>
+                <th colspan="5" class="grp-r">Beyond TAT (&gt;24h)</th>
+                <th colspan="2" class="grp-n">Not yet received</th>
+                <th rowspan="2">Total marked</th>
+                <th rowspan="2">% within TAT</th>
+              </tr>
+              <tr>
+                <th>0&#8211;6h</th><th>6&#8211;12h</th><th>12&#8211;18h</th><th>18&#8211;24h</th><th class="subt">Within</th>
+                <th>24&#8211;36h</th><th>36&#8211;48h</th><th>48&#8211;60h</th><th>&gt;60h</th><th class="subt">Beyond</th>
+                <th>Scheduled</th><th>Not sched.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>15 Aug</td><td class="g1">25</td><td class="g2">60</td><td class="g2">70</td><td class="g1">35</td><td class="subt">190</td><td class="r1">20</td><td class="r1">10</td><td class="r1">6</td><td class="r1">4</td><td class="subt">40</td><td>20</td><td>18</td><td>268</td><td class="g">83%</td></tr>
+              <tr><td>16 Aug</td><td class="g2">110</td><td class="g3">280</td><td class="g3">300</td><td class="g3">160</td><td class="subt">850</td><td class="r3">100</td><td class="r2">50</td><td class="r2">30</td><td class="r1">20</td><td class="subt">200</td><td>320</td><td>284</td><td>1,654</td><td class="g">81%</td></tr>
+              <tr><td>17 Aug</td><td class="g2">80</td><td class="g3">190</td><td class="g3">210</td><td class="g2">120</td><td class="subt">600</td><td class="r2">60</td><td class="r2">35</td><td class="r1">15</td><td class="r1">10</td><td class="subt">120</td><td>180</td><td>533</td><td>1,433</td><td class="g">83%</td></tr>
+              <tr><td>18 Aug</td><td class="g1">30</td><td class="g2">70</td><td class="g2">70</td><td class="g1">40</td><td class="subt">210</td><td class="r2">45</td><td class="r1">20</td><td class="r1">10</td><td class="r1">5</td><td class="subt">80</td><td>40</td><td>576</td><td>906</td><td class="r">72%</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><td>Total</td><td>245</td><td>600</td><td>650</td><td>355</td><td class="subt">1,850</td><td>225</td><td>115</td><td>61</td><td>39</td><td class="subt">440</td><td>560</td><td>1,411</td><td>4,261</td><td>81%</td></tr>
+            </tfoot>
+          </table></div>
+          <div class="hmleg">
+            <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Within TAT (returned &#8804;24h)</span>
+            <span><i style="background:color-mix(in srgb,var(--bad) 40%,var(--panel))"></i> Beyond TAT (>24h)</span>
+            <span>Darker = more devices</span>
+          </div>
+        </div>
+
         <div class="two">
           <div class="panel">
             <h3>SLA / TAT &#8212; 24 h target</h3>
@@ -334,6 +389,43 @@
           <div class="kc" style="--c:var(--porter)"><p class="lab">Pending pickup</p><div class="num">50</div><p class="sub">booked, not yet received</p></div>
           <div class="kc" style="--c:var(--bad)"><p class="lab">Overdue (&gt;24h)</p><div class="num">30</div><p class="sub"><span class="r">60%</span> of pending is overdue</p></div>
         </div>
+
+        <div class="panel">
+          <h3>TAT heatmap &#8212; time from marking to received</h3>
+          <p class="cap">Rows = date the CSP marked the device. Green = returned within 24 h SLA, red = breached. Scheduled / not-scheduled = still not back.</p>
+          <div class="scroller"><table class="hm">
+            <thead>
+              <tr>
+                <th rowspan="2">Marked date</th>
+                <th colspan="5" class="grp-g">Within TAT (&#8804;24h)</th>
+                <th colspan="5" class="grp-r">Beyond TAT (&gt;24h)</th>
+                <th colspan="2" class="grp-n">Not yet received</th>
+                <th rowspan="2">Total marked</th>
+                <th rowspan="2">% within TAT</th>
+              </tr>
+              <tr>
+                <th>0&#8211;6h</th><th>6&#8211;12h</th><th>12&#8211;18h</th><th>18&#8211;24h</th><th class="subt">Within</th>
+                <th>24&#8211;36h</th><th>36&#8211;48h</th><th>48&#8211;60h</th><th>&gt;60h</th><th class="subt">Beyond</th>
+                <th>Scheduled</th><th>Not sched.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>15 Aug</td><td class="z">0</td><td class="g1">1</td><td class="z">0</td><td class="z">0</td><td class="subt">1</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="subt">0</td><td>0</td><td>0</td><td>1</td><td class="g">100%</td></tr>
+              <tr><td>16 Aug</td><td class="g1">6</td><td class="g2">15</td><td class="g2">16</td><td class="g1">8</td><td class="subt">45</td><td class="r2">5</td><td class="r1">3</td><td class="r1">1</td><td class="r1">1</td><td class="subt">10</td><td>8</td><td>5</td><td>68</td><td class="g">82%</td></tr>
+              <tr><td>17 Aug</td><td class="g2">14</td><td class="g3">34</td><td class="g3">37</td><td class="g2">20</td><td class="subt">105</td><td class="r3">13</td><td class="r2">7</td><td class="r1">3</td><td class="r1">2</td><td class="subt">25</td><td>25</td><td>70</td><td>225</td><td class="g">81%</td></tr>
+              <tr><td>18 Aug</td><td class="g1">7</td><td class="g2">16</td><td class="g2">16</td><td class="g2">10</td><td class="subt">49</td><td class="r2">8</td><td class="r2">4</td><td class="r1">2</td><td class="r1">1</td><td class="subt">15</td><td>17</td><td>96</td><td>177</td><td class="r">77%</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><td>Total</td><td>27</td><td>66</td><td>69</td><td>38</td><td class="subt">200</td><td>26</td><td>14</td><td>6</td><td>4</td><td class="subt">50</td><td>50</td><td>171</td><td>471</td><td>80%</td></tr>
+            </tfoot>
+          </table></div>
+          <div class="hmleg">
+            <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Within TAT (returned &#8804;24h)</span>
+            <span><i style="background:color-mix(in srgb,var(--bad) 40%,var(--panel))"></i> Beyond TAT (>24h)</span>
+            <span>Darker = more devices</span>
+          </div>
+        </div>
+
         <div class="two">
           <div class="panel">
             <h3>SLA / TAT &#8212; 24 h target</h3>
