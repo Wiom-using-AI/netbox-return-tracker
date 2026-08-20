@@ -363,20 +363,20 @@
       <section class="view" id="v-bharat">
         <div class="vh"><h2>&#128205; Bharat</h2><span class="sub">rest of India (ex-NCR / ex-Mumbai) &#183; carrier 3PL &#183; SLA 3 days</span></div>
         <div class="kgrid k4">
-          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">1,484</div><p class="sub">since 15 Aug</p></div>
-          <div class="kc" style="--c:var(--good)"><p class="lab">Within 3-day window</p><div class="num">533</div><p class="sub"><span class="g">36%</span> not yet breached</p></div>
-          <div class="kc" style="--c:var(--bad)"><p class="lab">TAT breached (&gt;3d)</p><div class="num">951</div><p class="sub"><span class="r">64%</span> past 3-day SLA</p></div>
-          <div class="kc" style="--c:var(--warn)"><p class="lab">CSP refused</p><div class="num">1,006</div><p class="sub"><span class="r">68%</span> of marked</p></div>
+          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">1,484</div><p class="sub">Aug 15-18 &#183; in-app</p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Within TAT (&le;3d)</p><div class="num">533</div><p class="sub"><span class="g">36%</span> still in window</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Breached TAT (&gt;3d)</p><div class="num">951</div><p class="sub"><span class="r">64%</span> past 3-day SLA</p></div>
+          <div class="kc" style="--c:var(--warn)"><p class="lab">CSP refused</p><div class="num">1,006</div><p class="sub">68% of marked &#183; subset</p></div>
         </div>
         <div style="display:flex;gap:28px;flex-wrap:wrap;font-size:13px;padding:13px 18px;background:var(--panel-2);border:1px solid var(--line);border-radius:11px">
           <span><b style="color:var(--ink)">Returned so far:</b> <span class="r">0</span></span>
-          <span><b style="color:var(--ink)">Total booked:</b> 0</span>
-          <span><b style="color:var(--ink)">Pickups not scheduled:</b> <span class="r">1,484</span></span>
+          <span><b style="color:var(--ink)">Picked up:</b> <span class="r">0</span></span>
+          <span><b style="color:var(--ink)">Within TAT + Breached =</b> 1,484</span>
         </div>
 
         <div class="panel">
-          <h3>TAT heatmap &#8212; days pending since marking (nothing returned yet)</h3>
-          <p class="cap">3PL SLA = 3 days. Buckets = how long each cohort has been pending as of today. Nothing confirmed returned, so "within TAT" = still inside the 3-day window (&#8804;3d), "outside TAT" = breached (&gt;3d). CSP refusal = declined by the CSP.</p>
+          <h3>TAT heatmap &mdash; within vs breached (3-day SLA)</h3>
+          <p class="cap">Rows = date the CSP marked the device. Nothing has been returned yet, so TAT is measured as days pending vs the 3-day 3PL SLA: <b>Within TAT</b> = cohort still &le;3 days old (clock running, not yet breached); <b>Breached TAT</b> = &gt;3 days old, SLA already missed. Within + Breached = Total marked. <b>CSP refused</b> is a subset shown for context &mdash; it cuts across both columns, so it is not added into the total.</p>
           <div class="scroller"><table class="hm">
             <thead>
               <tr>
@@ -384,9 +384,9 @@
                 <th>Total marked</th>
                 <th class="grp-g">1d</th><th>2d</th><th>3d</th>
                 <th>4d</th><th>5d+</th>
-                <th class="grp-g">% within TAT</th>
-                <th class="grp-r">% outside TAT</th>
-                <th class="grp-r">CSP refusal</th>
+                <th class="grp-g">Within TAT</th>
+                <th class="grp-r">Breached TAT</th>
+                <th>CSP refused</th>
               </tr>
             </thead>
             <tbody>
@@ -400,7 +400,7 @@
             </tfoot>
           </table></div>
           <div class="hmleg">
-            <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Within 3-day window (not breached)</span>
+            <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Within TAT (&le;3 days, not yet breached)</span>
             <span><i style="background:color-mix(in srgb,var(--bad) 40%,var(--panel))"></i> Breached (&gt;3 days pending)</span>
             <span>Darker = more devices</span>
           </div>
