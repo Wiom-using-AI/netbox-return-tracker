@@ -281,18 +281,19 @@
         <div class="kgrid k4">
           <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">5,081</div><p class="sub">In-app 4,267 &middot; Forms 814</p></div>
           <div class="kc" style="--c:var(--good)"><p class="lab">Within 24h TAT</p><div class="num">968</div><p class="sub"><span class="g">19%</span> of marked</p></div>
-          <div class="kc" style="--c:var(--bad)"><p class="lab">Outside TAT</p><div class="num">4,113</div><p class="sub"><span class="r">81%</span> - incl. 3,356 not scheduled</p></div>
-          <div class="kc" style="--c:var(--warn)"><p class="lab">CSP refused</p><div class="num">615</div><p class="sub">~14% of in-app base &middot; subset</p></div>
+          <div class="kc" style="--c:var(--warn)"><p class="lab">Returned beyond TAT</p><div class="num">757</div><p class="sub">picked up late (2-4 days)</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">3,356</div><p class="sub"><span class="r">66%</span> of marked - not yet picked</p></div>
         </div>
         <div style="display:flex;gap:28px;flex-wrap:wrap;font-size:13px;padding:13px 18px;background:var(--panel-2);border:1px solid var(--line);border-radius:11px">
           <span><b style="color:var(--ink)">Total booked:</b> 1,725</span>
           <span><b style="color:var(--ink)">% within TAT:</b> <span class="g">19%</span></span>
-          <span><b style="color:var(--ink)">Outside TAT:</b> <span class="r">4,113</span> (late 757 + not scheduled 3,356)</span>
+          <span><b style="color:var(--ink)">Not booked:</b> <span class="r">3,356</span></span>
+          <span><b style="color:var(--ink)">CSP refused:</b> <span class="r">615</span> (~14%)</span>
         </div>
 
         <div class="panel">
           <h3>TAT heatmap - time from marking to returned</h3>
-          <p class="cap">Rows = date the CSP marked the device. Green = returned within the 24 h SLA (&le;1 day). <b>Outside TAT</b> = returned late (the red 2-4 day buckets) <b>plus devices with no pickup scheduled</b> (past 24 h = breached). Within + outside = Total marked. <b>CSP refused</b> is a subset of outside TAT, shown for context - not added into the total.</p>
+          <p class="cap">Rows = date the CSP marked the device. Green = returned within the 24 h SLA (&le;1 day), red = beyond. Combines in-app + forms. Within-TAT + outside-TAT + not booked = Total marked. <b>CSP refused</b> is a subset of "not booked" (a refused device is never picked), shown for context - it is not added into the total.</p>
           <div class="scroller"><table class="hm">
             <thead>
               <tr>
@@ -302,22 +303,23 @@
                 <th>2 day</th><th>3 day</th><th>4 day+</th>
                 <th class="grp-g">% within TAT</th>
                 <th class="grp-r">% outside TAT</th>
+                <th class="grp-r">Not booked</th>
                 <th>CSP refused</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>15 Aug</td><td>198</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="r1">5</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">198</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td><td>1</td></tr>
-              <tr><td>16 Aug</td><td>1,707</td><td class="g2">270</td><td class="r1">34</td><td class="r3">321</td><td class="z">0</td><td><b class="g">270</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">16%</span></td><td><b class="r">1,437</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">84%</span></td><td>157</td></tr>
-              <tr><td>17 Aug</td><td>1,395</td><td class="g1">169</td><td class="r3">397</td><td class="z">0</td><td class="z">0</td><td><b class="g">169</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">12%</span></td><td><b class="r">1,226</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">88%</span></td><td>117</td></tr>
-              <tr><td>18 Aug</td><td>1,781</td><td class="g3">529</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">529</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">30%</span></td><td><b class="r">1,252</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">70%</span></td><td class="r">340</td></tr>
+              <tr><td>15 Aug</td><td>198</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="r1">5</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">5</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">3%</span></td><td><b>193</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">97%</span></td><td>1</td></tr>
+              <tr><td>16 Aug</td><td>1,707</td><td class="g2">270</td><td class="r1">34</td><td class="r3">321</td><td class="z">0</td><td><b class="g">270</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">16%</span></td><td><b class="r">355</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">21%</span></td><td><b>1,082</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">63%</span></td><td>157</td></tr>
+              <tr><td>17 Aug</td><td>1,395</td><td class="g1">169</td><td class="r3">397</td><td class="z">0</td><td class="z">0</td><td><b class="g">169</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">12%</span></td><td><b class="r">397</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">28%</span></td><td><b>829</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">59%</span></td><td>117</td></tr>
+              <tr><td>18 Aug</td><td>1,781</td><td class="g3">529</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">529</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">30%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>1,252</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">70%</span></td><td class="r">340</td></tr>
             </tbody>
             <tfoot>
-              <tr><td>Total</td><td>5,081</td><td>968</td><td>431</td><td>321</td><td>5</td><td><b class="g">968</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">19%</span></td><td><b class="r">4,113</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">81%</span></td><td class="r">615</td></tr>
+              <tr><td>Total</td><td>5,081</td><td>968</td><td>431</td><td>321</td><td>5</td><td><b class="g">968</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">19%</span></td><td><b class="r">757</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">15%</span></td><td><b class="r">3,356</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">66%</span></td><td class="r">615</td></tr>
             </tfoot>
           </table></div>
           <div class="hmleg">
             <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Within TAT (returned &le;1 day)</span>
-            <span><i style="background:color-mix(in srgb,var(--bad) 40%,var(--panel))"></i> Outside TAT (late returns + not scheduled)</span>
+            <span><i style="background:color-mix(in srgb,var(--bad) 40%,var(--panel))"></i> Beyond TAT (2-4 days)</span>
             <span>Darker = more devices</span>
           </div>
         </div>
@@ -345,18 +347,18 @@
         <div class="kgrid k4">
           <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">429</div><p class="sub">Forms 354 &#183; in-app 75</p></div>
           <div class="kc" style="--c:var(--good)"><p class="lab">Within 24h TAT</p><div class="num">281</div><p class="sub"><span class="g">66%</span> of marked</p></div>
-          <div class="kc" style="--c:var(--bad)"><p class="lab">Outside TAT</p><div class="num">148</div><p class="sub"><span class="r">34%</span> - late 73 + not scheduled 75</p></div>
-          <div class="kc" style="--c:var(--porter)"><p class="lab">Received</p><div class="num">354</div><p class="sub">all forms devices back</p></div>
+          <div class="kc" style="--c:var(--warn)"><p class="lab">Returned beyond TAT</p><div class="num">73</div><p class="sub">one Aug 17 batch (2 days)</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">75</div><p class="sub"><span class="r">17%</span> in-app, awaiting pickup</p></div>
         </div>
         <div style="display:flex;gap:28px;flex-wrap:wrap;font-size:13px;padding:13px 18px;background:var(--panel-2);border:1px solid var(--line);border-radius:11px">
           <span><b style="color:var(--ink)">Received:</b> <span class="g">354</span></span>
           <span><b style="color:var(--ink)">% within TAT:</b> <span class="g">66%</span></span>
-          <span><b style="color:var(--ink)">Outside TAT:</b> <span class="r">148</span> (late 73 + not scheduled 75)</span>
+          <span><b style="color:var(--ink)">Not booked:</b> <span class="r">75</span></span>
         </div>
 
         <div class="panel">
           <h3>TAT heatmap &#8212; time from marking to returned</h3>
-          <p class="cap">Rows = date the CSP marked the device. Green = returned within the 24 h SLA (&le;1 day). <b>Outside TAT</b> = returned late (red 2-day bucket) <b>plus in-app devices with no pickup scheduled</b> (past 24 h = breached). Combines Forms 2/3 (received) with the in-app cohort awaiting pickup; 57 already-actioned (refused / closed) in-app devices are excluded. Within + outside = Total marked.</p>
+          <p class="cap">Rows = date the CSP marked the device. Green = returned within the 24 h SLA (&le;1 day), red = beyond. Combines Forms 2/3 (received, TAT-tracked) with the in-app cohort still awaiting pickup. 57 in-app devices already actioned (refused / closed) are excluded. Within-TAT + outside-TAT + not booked = Total marked.</p>
           <div class="scroller"><table class="hm">
             <thead>
               <tr>
@@ -366,20 +368,21 @@
                 <th>2 day</th><th>3 day</th><th>4 day+</th>
                 <th class="grp-g">% within TAT</th>
                 <th class="grp-r">% outside TAT</th>
+                <th class="grp-r">Not booked</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>16 Aug</td><td>7</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">7</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td></tr>
-              <tr><td>17 Aug</td><td>225</td><td class="g2">108</td><td class="r3">73</td><td class="z">0</td><td class="z">0</td><td><b class="g">108</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">48%</span></td><td><b class="r">117</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">52%</span></td></tr>
-              <tr><td>18 Aug</td><td>197</td><td class="g3">173</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">173</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">88%</span></td><td><b class="r">24</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">12%</span></td></tr>
+              <tr><td>16 Aug</td><td>7</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>7</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td></tr>
+              <tr><td>17 Aug</td><td>225</td><td class="g2">108</td><td class="r3">73</td><td class="z">0</td><td class="z">0</td><td><b class="g">108</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">48%</span></td><td><b class="r">73</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">32%</span></td><td><b>44</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">20%</span></td></tr>
+              <tr><td>18 Aug</td><td>197</td><td class="g3">173</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">173</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">88%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>24</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">12%</span></td></tr>
             </tbody>
             <tfoot>
-              <tr><td>Total</td><td>429</td><td>281</td><td>73</td><td>0</td><td>0</td><td><b class="g">281</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">66%</span></td><td><b class="r">148</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">34%</span></td></tr>
+              <tr><td>Total</td><td>429</td><td>281</td><td>73</td><td>0</td><td>0</td><td><b class="g">281</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">66%</span></td><td><b class="r">73</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">17%</span></td><td><b class="r">75</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">17%</span></td></tr>
             </tfoot>
           </table></div>
           <div class="hmleg">
             <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Within TAT (returned &le;1 day)</span>
-            <span><i style="background:color-mix(in srgb,var(--bad) 40%,var(--panel))"></i> Outside TAT (late returns + not scheduled)</span>
+            <span><i style="background:color-mix(in srgb,var(--bad) 40%,var(--panel))"></i> Beyond TAT (&gt;24h)</span>
             <span>Darker = more devices</span>
           </div>
         </div>
