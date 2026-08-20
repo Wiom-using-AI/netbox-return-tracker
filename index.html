@@ -1,18 +1,19 @@
 <title>NetBox Return Tracker</title>
 <style>
   :root{
-    --bg:#f6f7f9; --panel:#ffffff; --panel-2:#f3f5f8; --line:#e6e9ef;
-    --ink:#151a22; --ink-2:#5b6473; --muted:#949cab;
-    --brand:#c21d9a; --marked:#7c3aed; --porter:#3a56d4; --tpl:#0e8f83;
-    --good:#159a5b; --warn:#e08a1e; --bad:#d8492c;
-    --shadow:0 1px 2px rgba(21,26,34,.04),0 4px 14px rgba(21,26,34,.05);
+    /* Wiom Design System tokens */
+    --bg:#FAF9FC; --panel:#FFFFFF; --panel-2:#F1EDF7; --line:#D7D3E0;
+    --ink:#161021; --ink-2:#665E75; --muted:#A7A1B2;
+    --brand:#D9008D; --marked:#6D17CE; --porter:#443152; --tpl:#8F7420;
+    --good:#008043; --warn:#FF8000; --bad:#E01E00;
+    --shadow:0 1px 2px rgba(22,16,33,.04),0 4px 14px rgba(22,16,33,.05);
   }
   @media (prefers-color-scheme:dark){
     :root{
-      --bg:#0d1015; --panel:#161b22; --panel-2:#1d232d; --line:#2a313d;
-      --ink:#eef1f6; --ink-2:#a6b0c0; --muted:#6a7383;
-      --brand:#e94bab; --marked:#a481f7; --porter:#6d84f2; --tpl:#2cc3b4;
-      --good:#3cc48d; --warn:#e0a94a; --bad:#ef6a4c;
+      --bg:#161021; --panel:#352D42; --panel-2:#3F3650; --line:#443152;
+      --ink:#FAF9FC; --ink-2:#A7A1B2; --muted:#665E75;
+      --brand:#FF3DAE; --marked:#A06BE8; --porter:#A78BC0; --tpl:#D5AF4A;
+      --good:#2FB673; --warn:#FF9A33; --bad:#FF6B52;
       --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.35);
     }
   }
@@ -208,9 +209,9 @@
             <p class="cap">Where devices sit and where they leak. Width = share of the 6,415 marked.</p>
             <div class="funnel">
               <div class="fstage"><div class="fl">Marked<small>by CSP</small></div><div class="ftrack"><div class="fbar" style="width:100%;background:var(--marked)">6,415 &#183; 100%</div></div></div>
-              <div class="fstage"><div class="fl">Call done<small>1,215 pending</small></div><div class="ftrack"><div class="fbar" style="width:81%;background:#8f6ae0">5,200 &#183; 81%</div></div></div>
+              <div class="fstage"><div class="fl">Call done<small>1,215 pending</small></div><div class="ftrack"><div class="fbar" style="width:81%;background:#A31DAE">5,200 &#183; 81%</div></div></div>
               <div class="fstage"><div class="fl">CSP accepted<small>660 refused</small></div><div class="ftrack"><div class="fbar" style="width:71%;background:var(--brand)">4,540 &#183; 71%</div></div></div>
-              <div class="fstage"><div class="fl">Booked<small>360 awaiting</small></div><div class="ftrack"><div class="fbar" style="width:65%;background:#b02a86">4,180 &#183; 65%</div></div></div>
+              <div class="fstage"><div class="fl">Booked<small>360 awaiting</small></div><div class="ftrack"><div class="fbar" style="width:65%;background:#8E2472">4,180 &#183; 65%</div></div></div>
               <div class="fstage"><div class="fl">Received<small>920 in transit</small></div><div class="ftrack"><div class="fbar" style="width:51%;background:var(--porter)">3,260 &#183; 51%</div></div></div>
               <div class="fstage"><div class="fl">Confirmed<small>170 discrepancy</small></div><div class="ftrack"><div class="fbar" style="width:48%;background:var(--good)">3,090 &#183; 48%</div></div></div>
             </div>
