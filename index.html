@@ -179,8 +179,8 @@
       <label class="navitem" for="r-mumbai"><span class="ic">&#128205;</span> Mumbai</label>
       <label class="navitem" for="r-bharat"><span class="ic">&#128205;</span> Bharat</label>
       <label class="navitem" for="r-devices"><span class="ic">&#128269;</span> Device Data</label>
-      <label class="navitem" for="r-tat"><span class="ic">&#9201;</span> TAT Breaches <span class="badge">470</span></label>
-      <label class="navitem" for="r-disc"><span class="ic">&#9888;</span> Discrepancies <span class="badge">170</span></label>
+      <label class="navitem" for="r-tat"><span class="ic">&#9201;</span> TAT Breaches</label>
+      <label class="navitem" for="r-disc"><span class="ic">&#9888;</span> Discrepancies</label>
       <label class="navitem" for="r-refuse"><span class="ic">&#10006;</span> CSP Refusals</label>
     </nav>
     <div class="sfoot">Live tracker &#183; running since 15 Aug 2026<br>NCR &amp; Mumbai &rarr; Porter &#183; Bharat &rarr; 3PL</div>
@@ -546,80 +546,36 @@
       <!-- ============ DEVICE DATA ============ -->
       <section class="view" id="v-devices">
         <div class="vh"><h2>&#128269; Device-level data</h2><span class="sub">for PTL agents &#8212; full journey per device to answer CSP queries</span></div>
-        <p class="note">Search a device ID, CSP name or mobile to see the complete history: when the CSP <b>raised</b> the request, whether they <b>confirmed</b> on the call, when it was <b>booked</b> and by whom, and when it was <b>received</b> &#8212; everything an agent needs to resolve a CSP query on the spot.</p>
         <div class="panel">
-          <div class="toolbar">
-            <label class="search">&#128270; <input id="devsearch" placeholder="Search device ID, CSP name or mobile&#8230;"></label>
-          </div>
-          <div class="scroller"><table id="devtable">
-            <thead><tr>
-              <th>Device ID</th><th>Type</th><th>CSP</th><th>Mobile</th><th>Region</th>
-              <th>Request raised</th><th>Channel</th><th>CSP confirmed?</th><th>Booked on</th><th>Carrier</th>
-              <th>Picked up</th><th>Received</th><th>TAT</th><th>Verify</th><th>Status</th>
-            </tr></thead>
-            <tbody>
-              <tr><td class="mono">NB-8842011</td><td>ONT</td><td>Sunrise Cable Net</td><td>9000000011</td><td>Bharat</td><td>15 Aug 17:39</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 15 Aug 19:02</span></td><td>15 Aug 18:10</td><td><span class="pill p-tpl">3PL</span></td><td>16 Aug 10:00</td><td>17 Aug 14:20</td><td><span class="pill p-ok">68h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
-              <tr><td class="mono">NB-7741220</td><td>ONT</td><td>Metro Fibernet</td><td>9000000012</td><td>Bharat</td><td>16 Aug 11:20</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 16 Aug 11:48</span></td><td>16 Aug 12:00</td><td><span class="pill p-tpl">3PL</span></td><td>17 Aug 09:30</td><td class="dash">&#8212;</td><td><span class="pill p-bad">78h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-tpl">In transit</span></td></tr>
-              <tr><td class="mono">NB-5560098</td><td>Router</td><td>Skyline Internet</td><td>9000000013</td><td>NCR</td><td>16 Aug 13:05</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 16 Aug 14:05</span></td><td>16 Aug 14:30</td><td><span class="pill p-porter">Porter</span></td><td>16 Aug 20:10</td><td>17 Aug 09:15</td><td><span class="pill p-ok">19h</span></td><td><span class="pill p-bad">Mismatch</span></td><td><span class="pill p-warn">Discrepancy</span></td></tr>
-              <tr><td class="mono">NB-3320450</td><td>ONT</td><td>Apex Cable Network</td><td>9000000014</td><td>NCR</td><td>17 Aug 10:48</td><td><span class="pill p-marked">Form</span></td><td><span class="pill p-bad">No &#183; refused 17 Aug 15:30</span></td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td><span class="pill p-bad">Refused</span></td></tr>
-              <tr><td class="mono">NB-9910233</td><td>ONT</td><td>Star Digital Net</td><td>9000000015</td><td>NCR</td><td>16 Aug 09:30</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-warn">Pending call</span></td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td><span class="pill p-warn">Awaiting call</span></td></tr>
-              <tr><td class="mono">NB-4471203</td><td>ONT</td><td>Star Digital Net</td><td>9000000015</td><td>NCR</td><td>16 Aug 10:05</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 16 Aug 14:20</span></td><td>16 Aug 15:10</td><td><span class="pill p-porter">Porter</span></td><td>16 Aug 22:00</td><td>17 Aug 10:40</td><td><span class="pill p-ok">19h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
-              <tr><td class="mono">NB-9982001</td><td>ONT</td><td>Apex Cable Network</td><td>9000000014</td><td>NCR</td><td>17 Aug 08:20</td><td><span class="pill p-marked">Form</span></td><td><span class="pill p-ok">Yes &#183; 17 Aug 08:50</span></td><td>17 Aug 09:00</td><td><span class="pill p-porter">Porter</span></td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td><span class="pill p-bad">31h &#9888;</span></td><td class="dash">&#8212;</td><td><span class="pill p-porter">In transit</span></td></tr>
-              <tr><td class="mono">NB-3320876</td><td>ONT</td><td>Greenline Broadband</td><td>9000000016</td><td>NCR</td><td>17 Aug 11:40</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 17 Aug 12:05</span></td><td>17 Aug 12:20</td><td><span class="pill p-porter">Porter</span></td><td>17 Aug 19:30</td><td>18 Aug 08:05</td><td><span class="pill p-ok">20h</span></td><td><span class="pill p-ok">Match</span></td><td><span class="pill p-ok">Confirmed</span></td></tr>
-              <tr><td class="mono">NB-6610455</td><td>Router</td><td>Sunrise Cable Net</td><td>9000000011</td><td>Bharat</td><td>15 Aug 17:44</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-ok">Yes &#183; 15 Aug 19:02</span></td><td>15 Aug 18:12</td><td><span class="pill p-tpl">3PL</span></td><td>16 Aug 09:00</td><td>18 Aug 11:30</td><td><span class="pill p-ok">65h</span></td><td><span class="pill p-bad">Mismatch</span></td><td><span class="pill p-warn">Discrepancy</span></td></tr>
-              <tr><td class="mono">NB-1122980</td><td>ONT</td><td>Bharat Net Services</td><td>9000000017</td><td>NCR</td><td>16 Aug 16:00</td><td><span class="pill p-marked">In-app</span></td><td><span class="pill p-bad">No &#183; refused 17 Aug 11:10</span></td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td class="dash">&#8212;</td><td><span class="pill p-bad">Refused</span></td></tr>
-            </tbody>
-          </table></div>
+          <h3>No device-level data loaded yet</h3>
+          <p class="cap" style="margin:0">This tab will let PTL agents search any device ID, CSP name or mobile and see the full journey (raised &#8594; confirmed &#8594; booked &#8594; picked up &#8594; received). It needs a device-level export from the retrieval sheet + Forms sheet to be wired in &#8212; no records are loaded yet.</p>
         </div>
       </section>
 
       <!-- ============ TAT BREACHES ============ -->
       <section class="view" id="v-tat">
         <div class="vh"><h2>&#9201; TAT breaches</h2><span class="sub">booked but not received within SLA &#183; Porter 24h &#183; 3PL 72h</span></div>
-        <p class="note"><b>470 shipments</b> have crossed their SLA without being received &#8212; <b>380 Porter</b> (NCR + Mumbai) and <b>90 3PL</b> (Bharat). Chase oldest first.</p>
         <div class="panel">
-          <div class="scroller"><table>
-            <thead><tr><th>Device ID</th><th>CSP</th><th>Region</th><th>Carrier</th><th>Booked</th><th>Elapsed</th><th>Over by</th><th>Status</th></tr></thead>
-            <tbody>
-              <tr><td class="mono">NB-2201567</td><td>Pinnacle Net</td><td>Bharat</td><td><span class="pill p-tpl">3PL</span></td><td>16 Aug 09:15</td><td><span class="pill p-bad">80h</span></td><td>+8h</td><td><span class="pill p-tpl">In transit</span></td></tr>
-              <tr><td class="mono">NB-7741220</td><td>Metro Fibernet</td><td>Bharat</td><td><span class="pill p-tpl">3PL</span></td><td>16 Aug 12:00</td><td><span class="pill p-bad">78h</span></td><td>+6h</td><td><span class="pill p-tpl">In transit</span></td></tr>
-              <tr><td class="mono">NB-9982001</td><td>Apex Cable Network</td><td>NCR</td><td><span class="pill p-porter">Porter</span></td><td>17 Aug 09:00</td><td><span class="pill p-bad">31h</span></td><td>+7h</td><td><span class="pill p-porter">In transit</span></td></tr>
-              <tr><td class="mono">NB-7788345</td><td>Omega Broadband</td><td>Mumbai</td><td><span class="pill p-porter">Porter</span></td><td>17 Aug 16:40</td><td><span class="pill p-bad">26h</span></td><td>+2h</td><td><span class="pill p-porter">In transit</span></td></tr>
-            </tbody>
-          </table></div>
+          <h3>No breach list loaded yet</h3>
+          <p class="cap" style="margin:0">This tab will list every shipment that crossed its SLA (Porter 24 h, 3PL 3 days) without being received, oldest first, so ops can chase them. It needs shipment-level booking + receipt dates wired in from the sheets. For aggregate TAT performance, see the heatmaps on the Overview and region tabs.</p>
         </div>
       </section>
 
       <!-- ============ DISCREPANCIES ============ -->
       <section class="view" id="v-disc">
         <div class="vh"><h2>&#9888; Discrepancies</h2><span class="sub">received device &#8800; device the CSP marked</span></div>
-        <p class="note"><b>170 devices</b> received don't match what the CSP marked &#8212; wrong serial, wrong type, or extra/short units. Need agent reconciliation before closure.</p>
         <div class="panel">
-          <div class="scroller"><table>
-            <thead><tr><th>Received Device ID</th><th>Marked Device ID</th><th>CSP</th><th>Region</th><th>Issue</th><th>Received</th></tr></thead>
-            <tbody>
-              <tr><td class="mono">NB-5560098</td><td class="mono">NB-5560***</td><td>Skyline Internet</td><td>NCR</td><td><span class="pill p-warn">Serial mismatch</span></td><td>17 Aug 09:15</td></tr>
-              <tr><td class="mono">NB-6610455</td><td class="mono">NB-6610455</td><td>Sunrise Cable Net</td><td>Bharat</td><td><span class="pill p-warn">Type: got Router, marked ONT</span></td><td>18 Aug 11:30</td></tr>
-              <tr><td class="mono">NB-4490231</td><td class="dash">&#8212;</td><td>Horizon Fibernet</td><td>NCR</td><td><span class="pill p-bad">Extra unit (not marked)</span></td><td>18 Aug 10:10</td></tr>
-              <tr><td class="dash">&#8212; (short)</td><td class="mono">NB-3312090</td><td>Crystal Cable Net</td><td>Bharat</td><td><span class="pill p-bad">Marked but not received</span></td><td class="dash">&#8212;</td></tr>
-            </tbody>
-          </table></div>
+          <h3>No discrepancy list loaded yet</h3>
+          <p class="cap" style="margin:0">This tab will reconcile received devices against what the CSP marked &#8212; wrong serials, wrong types, extra or short units. The Forms sheet already captures the raw inputs (declared IDs vs received IDs vs non-Wiom device counts); the reconciliation needs to be wired in. Known signal so far: some Forms pickups receive more devices than declared.</p>
         </div>
       </section>
 
       <!-- ============ REFUSALS ============ -->
       <section class="view" id="v-refuse">
         <div class="vh"><h2>&#10006; CSP refusals</h2><span class="sub">marked for return, then declined on the pickup call</span></div>
-        <p class="note"><b>660 devices</b> were marked but the CSP refused pickup on the call. Capture the reason so ops can re-attempt or de-mark.</p>
         <div class="panel">
-          <div class="scroller"><table>
-            <thead><tr><th>Device ID</th><th>CSP</th><th>Mobile</th><th>Region</th><th>Marked</th><th>Refused on</th><th>Reason</th></tr></thead>
-            <tbody>
-              <tr><td class="mono">NB-3320450</td><td>Apex Cable Network</td><td>9000000014</td><td>NCR</td><td>17 Aug 10:48</td><td>17 Aug 15:30</td><td><span class="pill p-mut">Device still in use</span></td></tr>
-              <tr><td class="mono">NB-1122980</td><td>Bharat Net Services</td><td>9000000017</td><td>NCR</td><td>16 Aug 16:00</td><td>17 Aug 11:10</td><td><span class="pill p-mut">Marked by mistake</span></td></tr>
-              <tr><td class="mono">NB-8890123</td><td>Unity Broadband</td><td>9000000018</td><td>Bharat</td><td>17 Aug 09:20</td><td>17 Aug 18:00</td><td><span class="pill p-mut">Wants to retain</span></td></tr>
-            </tbody>
-          </table></div>
+          <h3>Refusal analysis lives on the region tabs</h3>
+          <p class="cap" style="margin:0">1,678 devices were refused on the pickup call (Bharat 1,006 &#183; NCR 615 &#183; Mumbai 57). The real reason breakdowns from the calling sheets are on the <b>NCR</b> and <b>Bharat</b> tabs ("Why CSPs refused pickup"). A device-level refusal list will be added here once the calling-sheet rows are wired in.</p>
         </div>
       </section>
 
