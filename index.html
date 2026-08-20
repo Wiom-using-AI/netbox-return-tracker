@@ -282,26 +282,27 @@
 
         <div class="panel">
           <h3>TAT heatmap &#8212; time from marking to returned</h3>
-          <p class="cap">Rows = date the CSP marked the device. Green = returned within the 24 h SLA (&#8804;1 day), red = beyond. Combines in-app + forms. Last column = still no pickup scheduled.</p>
+          <p class="cap">Rows = date the CSP marked the device. Green = returned within the 24 h SLA (&#8804;1 day), red = beyond. Combines in-app + forms. Each date splits into within-TAT, outside-TAT, and not-yet-picked.</p>
           <div class="scroller"><table class="hm">
             <thead>
               <tr>
                 <th>Marked date</th>
-                <th class="grp-g">1 day</th>
-                <th>2 day</th><th>3 day</th><th>4 day+</th><th class="subt">Beyond</th>
                 <th>Total marked</th>
-                <th>% within TAT</th>
+                <th class="grp-g">1 day</th>
+                <th>2 day</th><th>3 day</th><th>4 day+</th>
+                <th class="grp-g">% within TAT</th>
+                <th class="grp-r">% outside TAT</th>
                 <th class="grp-r">Pickup not scheduled</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>15 Aug</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="r1">5</td><td class="subt">5</td><td>198</td><td class="r">0%</td><td>193</td></tr>
-              <tr><td>16 Aug</td><td class="g2">270</td><td class="r1">34</td><td class="r3">321</td><td class="z">0</td><td class="subt">355</td><td>1,707</td><td class="r">16%</td><td>1,082</td></tr>
-              <tr><td>17 Aug</td><td class="g1">169</td><td class="r3">397</td><td class="z">0</td><td class="z">0</td><td class="subt">397</td><td>1,395</td><td class="r">12%</td><td>829</td></tr>
-              <tr><td>18 Aug</td><td class="g3">529</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="subt">0</td><td>1,781</td><td>30%</td><td class="r">1,252</td></tr>
+              <tr><td>15 Aug</td><td>198</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="r1">5</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">5</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">3%</span></td><td><b>193</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">97%</span></td></tr>
+              <tr><td>16 Aug</td><td>1,707</td><td class="g2">270</td><td class="r1">34</td><td class="r3">321</td><td class="z">0</td><td><b class="g">270</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">16%</span></td><td><b class="r">355</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">21%</span></td><td><b>1,082</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">63%</span></td></tr>
+              <tr><td>17 Aug</td><td>1,395</td><td class="g1">169</td><td class="r3">397</td><td class="z">0</td><td class="z">0</td><td><b class="g">169</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">12%</span></td><td><b class="r">397</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">28%</span></td><td><b>829</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">59%</span></td></tr>
+              <tr><td>18 Aug</td><td>1,781</td><td class="g3">529</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">529</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">30%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>1,252</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">70%</span></td></tr>
             </tbody>
             <tfoot>
-              <tr><td>Total</td><td class="subt">968</td><td>431</td><td>321</td><td>5</td><td class="subt">757</td><td>5,081</td><td>19%</td><td class="r">3,356</td></tr>
+              <tr><td>Total</td><td>5,081</td><td>968</td><td>431</td><td>321</td><td>5</td><td><b class="g">968</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">19%</span></td><td><b class="r">757</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">15%</span></td><td><b class="r">3,356</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">66%</span></td></tr>
             </tfoot>
           </table></div>
           <div class="hmleg">
