@@ -6,7 +6,16 @@
     --ink:#161021; --ink-2:#665E75; --muted:#A7A1B2;
     --brand:#D9008D; --marked:#6D17CE; --porter:#443152; --tpl:#8F7420;
     --good:#008043; --warn:#FF8000; --bad:#E01E00;
+    --nav-active-bg:#FFE5F6; --nav-active-bd:#FFB2E4;
     --shadow:0 1px 2px rgba(22,16,33,.04),0 4px 14px rgba(22,16,33,.05);
+  }
+  .app.dark{
+    --bg:#161021; --panel:#352D42; --panel-2:#3F3650; --line:#443152;
+    --ink:#FAF9FC; --ink-2:#A7A1B2; --muted:#665E75;
+    --brand:#FF3DAE; --marked:#A06BE8; --porter:#A78BC0; --tpl:#D5AF4A;
+    --good:#2FB673; --warn:#FF9A33; --bad:#FF6B52;
+    --nav-active-bg:rgba(255,61,174,.14); --nav-active-bd:rgba(255,61,174,.35);
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.35);
   }
   *{box-sizing:border-box}
   body{margin:0}
@@ -130,10 +139,10 @@
   #r-devices:checked  ~ .side label[for="r-devices"],
   #r-tat:checked      ~ .side label[for="r-tat"],
   #r-disc:checked     ~ .side label[for="r-disc"],
-  #r-refuse:checked   ~ .side label[for="r-refuse"]{background:#FFE5F6;color:var(--brand);border-color:#FFB2E4;font-weight:700}
+  #r-refuse:checked   ~ .side label[for="r-refuse"]{background:var(--nav-active-bg);color:var(--brand);border-color:var(--nav-active-bd);font-weight:700}
 </style>
 
-<div class="app">
+<div class="app" id="app">
   <input class="vradio" type="radio" name="view" id="r-overview" checked>
   <input class="vradio" type="radio" name="view" id="r-ncr">
   <input class="vradio" type="radio" name="view" id="r-mumbai">
@@ -166,6 +175,7 @@
       <span class="srcpill">Updated 19 Aug, 17:10 IST</span>
       <span class="mocktag">Mockup</span>
       <span class="sp"></span>
+      <button class="btn" id="themeToggle" title="Toggle dark mode">&#127769; Dark</button>
       <button class="btn">&#8635; Refresh</button>
       <button class="btn pri">&#8595; Export</button>
     </header>
@@ -492,6 +502,17 @@
 </div>
 
 <script>
+  (function(){
+    var app=document.getElementById('app'), t=document.getElementById('themeToggle');
+    function setLabel(){ t.innerHTML = app.classList.contains('dark') ? '&#9728;&#65039; Light' : '&#127769; Dark'; }
+    try{ if(localStorage.getItem('theme')==='dark') app.classList.add('dark'); }catch(e){}
+    setLabel();
+    t.addEventListener('click',function(){
+      app.classList.toggle('dark');
+      try{ localStorage.setItem('theme', app.classList.contains('dark')?'dark':'light'); }catch(e){}
+      setLabel();
+    });
+  })();
   (function(){
     var s=document.getElementById('devsearch'); if(!s) return;
     s.addEventListener('input',function(){
