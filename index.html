@@ -8,15 +8,6 @@
     --good:#008043; --warn:#FF8000; --bad:#E01E00;
     --shadow:0 1px 2px rgba(22,16,33,.04),0 4px 14px rgba(22,16,33,.05);
   }
-  @media (prefers-color-scheme:dark){
-    :root{
-      --bg:#161021; --panel:#352D42; --panel-2:#3F3650; --line:#443152;
-      --ink:#FAF9FC; --ink-2:#A7A1B2; --muted:#665E75;
-      --brand:#FF3DAE; --marked:#A06BE8; --porter:#A78BC0; --tpl:#D5AF4A;
-      --good:#2FB673; --warn:#FF9A33; --bad:#FF6B52;
-      --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.35);
-    }
-  }
   *{box-sizing:border-box}
   body{margin:0}
   .app{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
@@ -24,7 +15,7 @@
 
   .side{width:212px;flex:none;background:var(--panel);border-right:1px solid var(--line);padding:18px 12px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh}
   .brand{display:flex;align-items:center;gap:10px;padding:6px 8px 16px}
-  .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--marked));color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px}
+  .logo{width:30px;height:30px;border-radius:8px;background:var(--brand);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px}
   .brand b{font-size:15px;letter-spacing:-.01em}
   .brand span{display:block;font-size:10.5px;color:var(--muted);font-weight:500}
   .nav{display:flex;flex-direction:column;gap:2px}
@@ -43,7 +34,7 @@
   .mocktag{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--warn);background:color-mix(in srgb,var(--warn) 15%,transparent);padding:3px 9px;border-radius:6px}
   .top .sp{flex:1}
   .btn{font-size:12.5px;font-weight:650;padding:8px 14px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
-  .btn.pri{background:linear-gradient(135deg,var(--brand),var(--marked));color:#fff;border:none}
+  .btn.pri{background:var(--brand);color:#fff;border:none}
 
   .content{padding:clamp(16px,3vw,28px)}
   .view{display:none;flex-direction:column;gap:20px}
@@ -139,7 +130,7 @@
   #r-devices:checked  ~ .side label[for="r-devices"],
   #r-tat:checked      ~ .side label[for="r-tat"],
   #r-disc:checked     ~ .side label[for="r-disc"],
-  #r-refuse:checked   ~ .side label[for="r-refuse"]{background:color-mix(in srgb,var(--brand) 12%,transparent);color:var(--brand);border-color:color-mix(in srgb,var(--brand) 22%,transparent);font-weight:700}
+  #r-refuse:checked   ~ .side label[for="r-refuse"]{background:#FFE5F6;color:var(--brand);border-color:#FFB2E4;font-weight:700}
 </style>
 
 <div class="app">
