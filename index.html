@@ -279,20 +279,21 @@
       <section class="view" id="v-ncr">
         <div class="vh"><h2>&#128205; NCR</h2><span class="sub">Delhi &#183; in-app + forms &#183; carrier Porter &#183; SLA 24 h</span></div>
         <div class="kgrid k4">
-          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">5,081</div><p class="sub">In-app 4,267 &#183; Forms 814</p></div>
+          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">5,081</div><p class="sub">In-app 4,267 &middot; Forms 814</p></div>
           <div class="kc" style="--c:var(--good)"><p class="lab">Within 24h TAT</p><div class="num">968</div><p class="sub"><span class="g">19%</span> of marked</p></div>
-          <div class="kc" style="--c:var(--warn)"><p class="lab">Returned beyond TAT</p><div class="num">757</div><p class="sub">picked up late (2&#8211;4 days)</p></div>
-          <div class="kc" style="--c:var(--bad)"><p class="lab">Pickup not scheduled</p><div class="num">3,356</div><p class="sub"><span class="r">66%</span> of marked &#8212; not yet picked</p></div>
+          <div class="kc" style="--c:var(--warn)"><p class="lab">Returned beyond TAT</p><div class="num">757</div><p class="sub">picked up late (2-4 days)</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Pickup not scheduled</p><div class="num">3,356</div><p class="sub"><span class="r">66%</span> of marked - not yet picked</p></div>
         </div>
         <div style="display:flex;gap:28px;flex-wrap:wrap;font-size:13px;padding:13px 18px;background:var(--panel-2);border:1px solid var(--line);border-radius:11px">
           <span><b style="color:var(--ink)">Total booked:</b> 1,725</span>
           <span><b style="color:var(--ink)">% within TAT:</b> <span class="g">19%</span></span>
           <span><b style="color:var(--ink)">Pickups not scheduled:</b> <span class="r">3,356</span></span>
+          <span><b style="color:var(--ink)">CSP refused:</b> <span class="r">615</span> (~14%)</span>
         </div>
 
         <div class="panel">
-          <h3>TAT heatmap &#8212; time from marking to returned</h3>
-          <p class="cap">Rows = date the CSP marked the device. Green = returned within the 24 h SLA (&#8804;1 day), red = beyond. Combines in-app + forms. Each date splits into within-TAT, outside-TAT, and not-yet-picked.</p>
+          <h3>TAT heatmap - time from marking to returned</h3>
+          <p class="cap">Rows = date the CSP marked the device. Green = returned within the 24 h SLA (&le;1 day), red = beyond. Combines in-app + forms. Within-TAT + outside-TAT + not-scheduled = Total marked. <b>CSP refused</b> is a subset of "not scheduled" (a refused device is never picked), shown for context - it is not added into the total.</p>
           <div class="scroller"><table class="hm">
             <thead>
               <tr>
@@ -303,23 +304,40 @@
                 <th class="grp-g">% within TAT</th>
                 <th class="grp-r">% outside TAT</th>
                 <th class="grp-r">Pickup not scheduled</th>
+                <th>CSP refused</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>15 Aug</td><td>198</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="r1">5</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">5</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">3%</span></td><td><b>193</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">97%</span></td></tr>
-              <tr><td>16 Aug</td><td>1,707</td><td class="g2">270</td><td class="r1">34</td><td class="r3">321</td><td class="z">0</td><td><b class="g">270</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">16%</span></td><td><b class="r">355</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">21%</span></td><td><b>1,082</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">63%</span></td></tr>
-              <tr><td>17 Aug</td><td>1,395</td><td class="g1">169</td><td class="r3">397</td><td class="z">0</td><td class="z">0</td><td><b class="g">169</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">12%</span></td><td><b class="r">397</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">28%</span></td><td><b>829</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">59%</span></td></tr>
-              <tr><td>18 Aug</td><td>1,781</td><td class="g3">529</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">529</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">30%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>1,252</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">70%</span></td></tr>
+              <tr><td>15 Aug</td><td>198</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="r1">5</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">5</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">3%</span></td><td><b>193</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">97%</span></td><td>1</td></tr>
+              <tr><td>16 Aug</td><td>1,707</td><td class="g2">270</td><td class="r1">34</td><td class="r3">321</td><td class="z">0</td><td><b class="g">270</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">16%</span></td><td><b class="r">355</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">21%</span></td><td><b>1,082</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">63%</span></td><td>157</td></tr>
+              <tr><td>17 Aug</td><td>1,395</td><td class="g1">169</td><td class="r3">397</td><td class="z">0</td><td class="z">0</td><td><b class="g">169</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">12%</span></td><td><b class="r">397</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">28%</span></td><td><b>829</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">59%</span></td><td>117</td></tr>
+              <tr><td>18 Aug</td><td>1,781</td><td class="g3">529</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">529</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">30%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>1,252</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">70%</span></td><td class="r">340</td></tr>
             </tbody>
             <tfoot>
-              <tr><td>Total</td><td>5,081</td><td>968</td><td>431</td><td>321</td><td>5</td><td><b class="g">968</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">19%</span></td><td><b class="r">757</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">15%</span></td><td><b class="r">3,356</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">66%</span></td></tr>
+              <tr><td>Total</td><td>5,081</td><td>968</td><td>431</td><td>321</td><td>5</td><td><b class="g">968</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">19%</span></td><td><b class="r">757</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">15%</span></td><td><b class="r">3,356</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">66%</span></td><td class="r">615</td></tr>
             </tfoot>
           </table></div>
           <div class="hmleg">
-            <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Within TAT (returned &#8804;1 day)</span>
-            <span><i style="background:color-mix(in srgb,var(--bad) 40%,var(--panel))"></i> Beyond TAT (2&#8211;4 days)</span>
+            <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Within TAT (returned &le;1 day)</span>
+            <span><i style="background:color-mix(in srgb,var(--bad) 40%,var(--panel))"></i> Beyond TAT (2-4 days)</span>
             <span>Darker = more devices</span>
           </div>
+        </div>
+
+        <div class="panel">
+          <h3>Why CSPs refused pickup</h3>
+          <p class="cap">From the Delhi calling-sheet remarks (Col I). Only <b>17 CSPs / 637 devices</b> (615 in the Aug 15-18 window) refused &mdash; just <b>~14% of the in-app base</b>. Unlike Bharat, Delhi refusals are mostly <b>soft / recoverable</b> (commercial confirmation, call-backs, escalation), not outright cancellations. Willingness is not the NCR problem &mdash; pickup execution is.</p>
+          <div class="scroller"><table>
+            <thead><tr><th>Reason</th><th>Devices</th><th>What the CSP is saying (verbatim)</th></tr></thead>
+            <tbody>
+              <tr><td><span class="pill p-warn">Commercial / refund / wants confirmation first</span></td><td>217</td><td>SAP IT (185): "pehle Wiom ki taraf se mail karo"; World Wide (32): "refund ke liye bol raha"</td></tr>
+              <tr><td><span class="pill p-warn">Not available / "call tomorrow"</span></td><td>165</td><td>Arora, ATS "not in office"; Digital, Micky "call tomorrow"; Deepak "another person picked"</td></tr>
+              <tr><td><span class="pill p-warn">Wants senior / PTL to call (escalation)</span></td><td>83</td><td>M K Net: "PTL se call karane ko bola"</td></tr>
+              <tr><td><span class="pill p-warn">Wants receiving on own terms</span></td><td>75</td><td>Ranjan (68): "turant receiving chahiye"; Ajay: "khud call karunga jab bhejna"</td></tr>
+              <tr><td><span class="pill p-bad">Confusion / not ready / wrong number</span></td><td>97</td><td>Jai Bala, Bunty: "pata nahi kaunse device dene hain"; Mentro "changed the number"; Keshav/Skynet cancelled</td></tr>
+            </tbody>
+            <tfoot><tr><td>Total refused</td><td>637</td><td class="dash">calling-sheet devices (615 attributable to Aug 15-18)</td></tr></tfoot>
+          </table></div>
         </div>
       </section>
 
