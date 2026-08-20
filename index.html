@@ -267,45 +267,45 @@
 
       <!-- ============ NCR ============ -->
       <section class="view" id="v-ncr">
-        <div class="vh"><h2>&#128205; NCR</h2><span class="sub">Delhi / Gurgaon / Noida / Ghaziabad &#183; carrier Porter &#183; SLA 24 h</span></div>
+        <div class="vh"><h2>&#128205; NCR</h2><span class="sub">Delhi &#183; in-app + forms &#183; carrier Porter &#183; SLA 24 h</span></div>
         <div class="kgrid k4">
-          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">4,261</div><p class="sub">since 15 Aug</p></div>
-          <div class="kc" style="--c:var(--good)"><p class="lab">Received at Wiom</p><div class="num">2,290</div><p class="sub"><span class="g">54%</span> recovery</p></div>
-          <div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT (&#8804;24h)</p><div class="num">81%</div><p class="sub">of received devices</p></div>
-          <div class="kc" style="--c:var(--bad)"><p class="lab">Pickup not scheduled</p><div class="num">1,411</div><p class="sub"><span class="r">33%</span> of marked &#8212; no pickup booked</p></div>
+          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">5,081</div><p class="sub">In-app 4,267 &#183; Forms 814</p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Within 24h TAT</p><div class="num">968</div><p class="sub"><span class="g">19%</span> of marked</p></div>
+          <div class="kc" style="--c:var(--warn)"><p class="lab">Returned beyond TAT</p><div class="num">757</div><p class="sub">picked up late (2&#8211;4 days)</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Pickup not scheduled</p><div class="num">3,356</div><p class="sub"><span class="r">66%</span> of marked &#8212; not yet picked</p></div>
         </div>
 
         <div class="panel">
-          <h3>TAT heatmap &#8212; time from marking to received</h3>
-          <p class="cap">Rows = date the CSP marked the device. Green = returned within the 24 h SLA, red = breached. Last column = still no pickup booked.</p>
+          <h3>TAT heatmap &#8212; time from marking to returned</h3>
+          <p class="cap">Rows = date the CSP marked the device. Green = returned within the 24 h SLA (&#8804;1 day), red = beyond. Combines in-app + forms. Last column = still no pickup scheduled.</p>
           <div class="scroller"><table class="hm">
             <thead>
               <tr>
                 <th rowspan="2">Marked date</th>
-                <th colspan="5" class="grp-g">Within TAT (&#8804;24h)</th>
-                <th colspan="5" class="grp-r">Beyond TAT (&gt;24h)</th>
+                <th colspan="1" class="grp-g">Within TAT (&#8804;24h)</th>
+                <th colspan="4" class="grp-r">Beyond TAT (&gt;24h)</th>
                 <th rowspan="2">Total marked</th>
                 <th rowspan="2">% within TAT</th>
                 <th rowspan="2" class="grp-r">Pickup not scheduled</th>
               </tr>
               <tr>
-                <th>0&#8211;6h</th><th>6&#8211;12h</th><th>12&#8211;18h</th><th>18&#8211;24h</th><th class="subt">Within</th>
-                <th>24&#8211;36h</th><th>36&#8211;48h</th><th>48&#8211;60h</th><th>&gt;60h</th><th class="subt">Beyond</th>
+                <th class="subt">1 day</th>
+                <th>2 day</th><th>3 day</th><th>4 day+</th><th class="subt">Beyond</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>15 Aug</td><td class="g1">25</td><td class="g2">60</td><td class="g2">70</td><td class="g1">35</td><td class="subt">190</td><td class="r1">20</td><td class="r1">10</td><td class="r1">6</td><td class="r1">4</td><td class="subt">40</td><td>268</td><td class="g">83%</td><td>18</td></tr>
-              <tr><td>16 Aug</td><td class="g2">110</td><td class="g3">280</td><td class="g3">300</td><td class="g3">160</td><td class="subt">850</td><td class="r3">100</td><td class="r2">50</td><td class="r2">30</td><td class="r1">20</td><td class="subt">200</td><td>1,654</td><td class="g">81%</td><td>284</td></tr>
-              <tr><td>17 Aug</td><td class="g2">80</td><td class="g3">190</td><td class="g3">210</td><td class="g2">120</td><td class="subt">600</td><td class="r2">60</td><td class="r2">35</td><td class="r1">15</td><td class="r1">10</td><td class="subt">120</td><td>1,433</td><td class="g">83%</td><td>533</td></tr>
-              <tr><td>18 Aug</td><td class="g1">30</td><td class="g2">70</td><td class="g2">70</td><td class="g1">40</td><td class="subt">210</td><td class="r2">45</td><td class="r1">20</td><td class="r1">10</td><td class="r1">5</td><td class="subt">80</td><td>906</td><td class="r">72%</td><td class="r">576</td></tr>
+              <tr><td>15 Aug</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="r1">5</td><td class="subt">5</td><td>198</td><td class="r">0%</td><td>193</td></tr>
+              <tr><td>16 Aug</td><td class="g2">270</td><td class="r1">34</td><td class="r3">321</td><td class="z">0</td><td class="subt">355</td><td>1,707</td><td class="r">16%</td><td>1,082</td></tr>
+              <tr><td>17 Aug</td><td class="g1">169</td><td class="r3">397</td><td class="z">0</td><td class="z">0</td><td class="subt">397</td><td>1,395</td><td class="r">12%</td><td>829</td></tr>
+              <tr><td>18 Aug</td><td class="g3">529</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="subt">0</td><td>1,781</td><td>30%</td><td class="r">1,252</td></tr>
             </tbody>
             <tfoot>
-              <tr><td>Total</td><td>245</td><td>600</td><td>650</td><td>355</td><td class="subt">1,850</td><td>225</td><td>115</td><td>61</td><td>39</td><td class="subt">440</td><td>4,261</td><td>81%</td><td>1,411</td></tr>
+              <tr><td>Total</td><td class="subt">968</td><td>431</td><td>321</td><td>5</td><td class="subt">757</td><td>5,081</td><td>19%</td><td class="r">3,356</td></tr>
             </tfoot>
           </table></div>
           <div class="hmleg">
-            <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Within TAT (returned &#8804;24h)</span>
-            <span><i style="background:color-mix(in srgb,var(--bad) 40%,var(--panel))"></i> Beyond TAT (>24h)</span>
+            <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Within TAT (returned &#8804;1 day)</span>
+            <span><i style="background:color-mix(in srgb,var(--bad) 40%,var(--panel))"></i> Beyond TAT (2&#8211;4 days)</span>
             <span>Darker = more devices</span>
           </div>
         </div>
