@@ -172,8 +172,7 @@
       <h1>Device Return Tracker</h1>
       <span class="live"><span class="d"></span> LIVE</span>
       <span class="srcpill">Since 15 Aug 2026</span>
-      <span class="srcpill">Updated 19 Aug, 17:10 IST</span>
-      <span class="mocktag">Mockup</span>
+      <span class="srcpill">Data as of 19 Aug 2026, 11:59 PM</span>
       <span class="sp"></span>
       <button class="btn" id="themeToggle" title="Toggle dark mode">&#127769; Dark</button>
       <button class="btn">&#8635; Refresh</button>
@@ -182,8 +181,17 @@
 
     <div class="content">
 
-                  <!-- ============ OVERVIEW ============ -->
+                        <!-- ============ OVERVIEW ============ -->
       <section class="view" id="v-overview">
+        <style>
+          #v-overview .kgrid{grid-template-columns:repeat(3,1fr);gap:18px}
+          #v-overview .kc{min-height:150px;padding:20px 22px;display:flex;flex-direction:column;justify-content:center}
+          #v-overview .kc .lab{font-size:12px;margin-bottom:12px}
+          #v-overview .kc .num{font-size:42px}
+          #v-overview .kc .sub{font-size:13px;margin-top:12px}
+          @media(max-width:900px){#v-overview .kgrid{grid-template-columns:repeat(2,1fr)}}
+          @media(max-width:560px){#v-overview .kgrid{grid-template-columns:1fr}}
+        </style>
         <div class="vh"><h2>&#9635; Overview</h2><span class="sub">all regions &#183; Aug 15-18 &#183; is the recovery process working?</span></div>
 
         <p class="seclab">Headline &#8212; marked &#8594; received &#8594; on time</p>
