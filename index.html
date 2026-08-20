@@ -182,95 +182,60 @@
 
     <div class="content">
 
-      <!-- ============ OVERVIEW ============ -->
+            <!-- ============ OVERVIEW ============ -->
       <section class="view" id="v-overview">
-        <div class="vh"><h2>&#9638; Overview</h2><span class="sub">is the recovery process working? &#8212; pipeline, speed &amp; leakage</span></div>
+        <div class="vh"><h2>&#9635; Overview</h2><span class="sub">all regions &#183; Aug 15-18 &#183; is the recovery process working?</span></div>
 
-        <p class="seclab">Pipeline &#8212; marked &#8594; accepted &#8594; booked &#8594; received</p>
+        <p class="seclab">Headline &#8212; marked &#8594; received &#8594; on time</p>
         <div class="kgrid">
-          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">6,415</div><p class="sub">In-app 5,427 &#183; Forms 988</p></div>
-          <div class="kc" style="--c:var(--brand)"><p class="lab">CSP accepted</p><div class="num">4,540</div><p class="sub"><span class="g">87%</span> of contacted</p></div>
-          <div class="kc" style="--c:var(--porter)"><p class="lab">Booked for pickup</p><div class="num">4,180</div><p class="sub">NCR+Mum 3,150 &#183; Bharat 1,030</p></div>
-          <div class="kc" style="--c:var(--good)"><p class="lab">Received at Wiom</p><div class="num">3,260</div><p class="sub"><span class="g">51%</span> recovery rate</p></div>
-          <div class="kc" style="--c:var(--bad)"><p class="lab">Overdue backlog</p><div class="num">470</div><p class="sub"><span class="r">NCR+Mum 380</span> &#183; Bharat 90</p></div>
-          <div class="kc" style="--c:var(--warn)"><p class="lab">Discrepancies</p><div class="num">170</div><p class="sub">received &#8800; marked</p></div>
+          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">6,994</div><p class="sub">NCR 5,081 &#183; Bharat 1,484 &#183; Mumbai 429</p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Received back</p><div class="num">2,079</div><p class="sub"><span class="g">30%</span> recovery rate</p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">1,249</div><p class="sub">60% of received &#183; 18% of marked</p></div>
+          <div class="kc" style="--c:var(--warn)"><p class="lab">Returned late</p><div class="num">830</div><p class="sub">outside SLA but back</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Not booked / not back</p><div class="num">4,915</div><p class="sub"><span class="r">70%</span> of marked</p></div>
+          <div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">1,678</div><p class="sub">Bharat 1,006 &#183; NCR 615 &#183; Mum 57</p></div>
         </div>
 
-        <p class="seclab">Process health &#8212; is it working?</p>
-        <div class="kgrid k4">
-          <div class="kc" style="--c:var(--good)"><p class="lab">Recovery rate</p><div class="num">51%</div><p class="sub">received &#247; marked &#183; target 80%</p></div>
-          <div class="kc" style="--c:var(--brand)"><p class="lab">CSP acceptance</p><div class="num">87%</div><p class="sub">660 refused &#183; 1,215 call pending</p></div>
-          <div class="kc" style="--c:var(--porter)"><p class="lab">On-time pickup (SLA)</p><div class="num">89%</div><p class="sub">within TAT &#183; target 95%</p></div>
-          <div class="kc" style="--c:var(--good)"><p class="lab">Confirmed &amp; closed</p><div class="num">3,090</div><p class="sub">verified match</p></div>
+        <div class="panel">
+          <h3>Region summary</h3>
+          <p class="cap">One row per region across all channels (in-app + Forms 2/3), Aug 15-18. <b>Received</b> = devices physically back at Wiom; <b>Within TAT</b> is the on-time share of those received. <b>Not booked</b> = marked but no pickup yet. <b>Refused</b> is a subset memo (declined by the CSP) &mdash; not added into the total. Bharat has 0 receipts, so its pipeline sits entirely in Not booked.</p>
+          <div class="scroller"><table>
+            <thead><tr><th>Region</th><th>Carrier / SLA</th><th>Marked</th><th>Received</th><th>Recovery</th><th>Within TAT</th><th>Returned late</th><th>Not booked</th><th>Refused</th></tr></thead>
+            <tbody>
+              <tr><td><b>NCR</b> (Delhi)</td><td><span class="pill p-porter">Porter &#183; 24h</span></td><td>5,081</td><td>1,725</td><td>34%</td><td class="g">968</td><td class="r">757</td><td class="r">3,356</td><td>615</td></tr>
+              <tr><td><b>Mumbai</b></td><td><span class="pill p-porter">Porter &#183; 24h</span></td><td>429</td><td class="g">354</td><td><b class="g">82%</b></td><td class="g">281</td><td class="r">73</td><td>75</td><td>57</td></tr>
+              <tr><td><b>Bharat</b></td><td><span class="pill p-tpl">3PL &#183; 3 days</span></td><td>1,484</td><td class="r">0</td><td class="r">0%</td><td class="dash">0</td><td class="dash">0</td><td class="r">1,484</td><td>1,006</td></tr>
+            </tbody>
+            <tfoot><tr><td>Total</td><td class="dash">&mdash;</td><td>6,994</td><td>2,079</td><td>30%</td><td class="g">1,249</td><td class="r">830</td><td class="r">4,915</td><td>1,678</td></tr></tfoot>
+          </table></div>
         </div>
 
-        <div class="two">
-          <div class="panel">
-            <h3>Device journey funnel</h3>
-            <p class="cap">Where devices sit and where they leak. Width = share of the 6,415 marked.</p>
-            <div class="funnel">
-              <div class="fstage"><div class="fl">Marked<small>by CSP</small></div><div class="ftrack"><div class="fbar" style="width:100%;background:var(--marked)">6,415 &#183; 100%</div></div></div>
-              <div class="fstage"><div class="fl">Call done<small>1,215 pending</small></div><div class="ftrack"><div class="fbar" style="width:81%;background:#A31DAE">5,200 &#183; 81%</div></div></div>
-              <div class="fstage"><div class="fl">CSP accepted<small>660 refused</small></div><div class="ftrack"><div class="fbar" style="width:71%;background:var(--brand)">4,540 &#183; 71%</div></div></div>
-              <div class="fstage"><div class="fl">Booked<small>360 awaiting</small></div><div class="ftrack"><div class="fbar" style="width:65%;background:#8E2472">4,180 &#183; 65%</div></div></div>
-              <div class="fstage"><div class="fl">Received<small>920 in transit</small></div><div class="ftrack"><div class="fbar" style="width:51%;background:var(--porter)">3,260 &#183; 51%</div></div></div>
-              <div class="fstage"><div class="fl">Confirmed<small>170 discrepancy</small></div><div class="ftrack"><div class="fbar" style="width:48%;background:var(--good)">3,090 &#183; 48%</div></div></div>
+        <div class="panel">
+          <h3>What the numbers say &#8212; three different problems</h3>
+          <p class="cap">Same symptom (devices not back), three different root causes. Fixes cannot be one-size-fits-all.</p>
+          <div class="funnel">
+            <div class="fstage">
+              <div class="fl">NCR &#8212; 73% of volume<small>execution bottleneck</small></div>
+              <div class="ftrack"><div class="fbar" style="width:100%;background:var(--porter)">66% not booked &#183; pickups only began Aug 19 &#183; willingness fine (~14% refused)</div></div>
             </div>
-          </div>
-
-          <div class="panel">
-            <h3>TAT performance &#8212; by region</h3>
-            <p class="cap">Booking &#8594; received. NCR &amp; Mumbai via Porter (24h) &#183; Bharat via 3PL (72h).</p>
-            <div class="scroller">
-              <table style="min-width:auto">
-                <thead><tr><th>Region</th><th>Carrier</th><th>Target</th><th>Avg</th><th>On-time</th><th>Overdue</th></tr></thead>
-                <tbody>
-                  <tr><td>NCR</td><td><span class="pill p-porter">Porter</span></td><td>24 h</td><td><span class="pill p-ok">19 h</span></td><td><span class="g">90%</span></td><td><span class="pill p-bad">350</span></td></tr>
-                  <tr><td>Mumbai</td><td><span class="pill p-porter">Porter</span></td><td>24 h</td><td><span class="pill p-ok">17 h</span></td><td><span class="g">92%</span></td><td><span class="pill p-bad">30</span></td></tr>
-                  <tr><td>Bharat</td><td><span class="pill p-tpl">3PL</span></td><td>72 h</td><td><span class="pill p-ok">58 h</span></td><td><span class="g">88%</span></td><td><span class="pill p-bad">90</span></td></tr>
-                </tbody>
-                <tfoot><tr><td>All</td><td>&#8212;</td><td>&#8212;</td><td>&#8212;</td><td>89%</td><td class="r">470</td></tr></tfoot>
-              </table>
+            <div class="fstage">
+              <div class="fl">Bharat &#8212; 21% of volume<small>willingness failure</small></div>
+              <div class="ftrack"><div class="fbar" style="width:80%;background:var(--bad)">68% refused &#183; 0 returned &#183; stuck at agreement (GOYLA 500 + CHOICE 250)</div></div>
             </div>
-            <p class="note" style="margin-top:14px">Avg TAT is inside target everywhere, but <b>470 pickups are overdue and still not received</b>. Recovery rate (51%) is the number to watch &#8212; <b>nearly half of marked devices haven't reached Wiom yet.</b></p>
+            <div class="fstage">
+              <div class="fl">Mumbai &#8212; 6% of volume<small>clean</small></div>
+              <div class="ftrack"><div class="fbar" style="width:52%;background:var(--good)">82% recovered &#183; only slip = one 73-device batch, 2 days late</div></div>
+            </div>
           </div>
         </div>
 
         <div class="panel">
-          <h3>&#128200; Daily trend &#8212; marked &#183; received &#183; confirmed</h3>
-          <p class="cap">Rolling last 7 days. Receipts lag bookings by the TAT window.</p>
-          <div class="legend">
-            <span class="lg"><i style="background:var(--marked)"></i> Marked</span>
-            <span class="lg"><i style="background:var(--porter)"></i> Received</span>
-            <span class="lg"><i style="background:var(--good)"></i> Confirmed</span>
-          </div>
-          <div class="chartbox">
-            <svg width="100%" height="300" viewBox="0 0 860 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Daily trend of marked, received and confirmed devices over the last 7 days">
-              <line class="grid" x1="48" x2="842" y1="16" y2="16"></line>
-              <line class="grid" x1="48" x2="842" y1="77" y2="77"></line>
-              <line class="grid" x1="48" x2="842" y1="138" y2="138"></line>
-              <line class="grid" x1="48" x2="842" y1="199" y2="199"></line>
-              <line class="grid" x1="48" x2="842" y1="260" y2="260"></line>
-              <text class="axt" x="40" y="20" text-anchor="end">2400</text>
-              <text class="axt" x="40" y="81" text-anchor="end">1800</text>
-              <text class="axt" x="40" y="142" text-anchor="end">1200</text>
-              <text class="axt" x="40" y="203" text-anchor="end">600</text>
-              <text class="axt" x="40" y="264" text-anchor="end">0</text>
-              <text class="axt" x="48"  y="286" text-anchor="middle">13 Aug</text>
-              <text class="axt" x="180" y="286" text-anchor="middle">14 Aug</text>
-              <text class="axt" x="313" y="286" text-anchor="middle">15 Aug</text>
-              <text class="axt" x="445" y="286" text-anchor="middle">16 Aug</text>
-              <text class="axt" x="577" y="286" text-anchor="middle">17 Aug</text>
-              <text class="axt" x="710" y="286" text-anchor="middle">18 Aug</text>
-              <text class="axt" x="842" y="286" text-anchor="middle">19 Aug</text>
-              <polyline fill="none" stroke="var(--marked)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" points="48,254 180,255 313,177 445,38 577,68 710,106 842,234"></polyline>
-              <polyline fill="none" stroke="var(--porter)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" points="48,256 180,257 313,239 445,195 577,171 710,183 842,239"></polyline>
-              <polyline fill="none" stroke="var(--good)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" points="48,256 180,257 313,240 445,198 577,175 710,187 842,241"></polyline>
-              <circle class="dot" cx="445" cy="38" r="3.5" fill="var(--marked)"></circle>
-              <circle class="dot" cx="577" cy="68" r="3.5" fill="var(--marked)"></circle>
-              <circle class="dot" cx="445" cy="195" r="3.5" fill="var(--porter)"></circle>
-              <circle class="dot" cx="577" cy="171" r="3.5" fill="var(--porter)"></circle>
-            </svg>
+          <h3>Overall recovery funnel</h3>
+          <p class="cap">Where the 6,994 marked devices sit today. Bars = share of marked.</p>
+          <div class="funnel">
+            <div class="fstage"><div class="fl">Marked for return<small>Aug 15-18</small></div><div class="ftrack"><div class="fbar" style="width:100%;background:var(--marked)">6,994 &#183; 100%</div></div></div>
+            <div class="fstage"><div class="fl">Received back<small>&minus;4,915 not yet back</small></div><div class="ftrack"><div class="fbar" style="width:30%;background:var(--good)">2,079 &#183; 30%</div></div></div>
+            <div class="fstage"><div class="fl">Within TAT<small>&minus;830 returned late</small></div><div class="ftrack"><div class="fbar" style="width:18%;background:var(--porter)">1,249 &#183; 18%</div></div></div>
           </div>
         </div>
       </section>
