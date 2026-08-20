@@ -364,38 +364,39 @@
         <div class="vh"><h2>&#128205; Bharat</h2><span class="sub">rest of India (ex-NCR / ex-Mumbai) &#183; carrier 3PL &#183; SLA 3 days</span></div>
         <div class="kgrid k4">
           <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">1,484</div><p class="sub">since 15 Aug</p></div>
-          <div class="kc" style="--c:var(--good)"><p class="lab">Returned within TAT</p><div class="num">0</div><p class="sub">nothing returned yet</p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Within 3-day window</p><div class="num">533</div><p class="sub"><span class="g">36%</span> not yet breached</p></div>
           <div class="kc" style="--c:var(--bad)"><p class="lab">TAT breached (&gt;3d)</p><div class="num">951</div><p class="sub"><span class="r">64%</span> past 3-day SLA</p></div>
           <div class="kc" style="--c:var(--warn)"><p class="lab">CSP refused</p><div class="num">1,006</div><p class="sub"><span class="r">68%</span> of marked</p></div>
         </div>
         <div style="display:flex;gap:28px;flex-wrap:wrap;font-size:13px;padding:13px 18px;background:var(--panel-2);border:1px solid var(--line);border-radius:11px">
+          <span><b style="color:var(--ink)">Returned so far:</b> <span class="r">0</span></span>
           <span><b style="color:var(--ink)">Total booked:</b> 0</span>
-          <span><b style="color:var(--ink)">% within TAT:</b> <span class="r">0%</span></span>
           <span><b style="color:var(--ink)">Pickups not scheduled:</b> <span class="r">1,484</span></span>
         </div>
 
         <div class="panel">
           <h3>TAT heatmap &#8212; days pending since marking (nothing returned yet)</h3>
-          <p class="cap">3PL SLA = 3 days. Buckets = how long each cohort has been pending as of today. Green &#8804;3 days (within window), red &gt;3 days (breached). Nothing confirmed returned; CSP refusal shows how many the CSP declined.</p>
+          <p class="cap">3PL SLA = 3 days. Buckets = how long each cohort has been pending as of today. Nothing confirmed returned, so "within TAT" = still inside the 3-day window (&#8804;3d), "outside TAT" = breached (&gt;3d). CSP refusal = declined by the CSP.</p>
           <div class="scroller"><table class="hm">
             <thead>
               <tr>
                 <th>Marked date</th>
-                <th class="grp-g">1d</th><th>2d</th><th>3d</th><th class="subt">Within</th>
-                <th>4d</th><th>5d+</th><th class="subt">Breached</th>
                 <th>Total marked</th>
-                <th>% within TAT</th>
+                <th class="grp-g">1d</th><th>2d</th><th>3d</th>
+                <th>4d</th><th>5d+</th>
+                <th class="grp-g">% within TAT</th>
+                <th class="grp-r">% outside TAT</th>
                 <th class="grp-r">CSP refusal</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>15 Aug</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="subt">0</td><td class="z">0</td><td class="r3">548</td><td class="subt">548</td><td>548</td><td class="r">0%</td><td class="r">538</td></tr>
-              <tr><td>16 Aug</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="subt">0</td><td class="r3">403</td><td class="z">0</td><td class="subt">403</td><td>403</td><td class="r">0%</td><td>94</td></tr>
-              <tr><td>17 Aug</td><td class="z">0</td><td class="z">0</td><td class="g2">176</td><td class="subt">176</td><td class="z">0</td><td class="z">0</td><td class="subt">0</td><td>176</td><td class="r">0%</td><td>68</td></tr>
-              <tr><td>18 Aug</td><td class="z">0</td><td class="g3">357</td><td class="z">0</td><td class="subt">357</td><td class="z">0</td><td class="z">0</td><td class="subt">0</td><td>357</td><td class="r">0%</td><td class="r">306</td></tr>
+              <tr><td>15 Aug</td><td>548</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="r3">548</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">548</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td><td class="r">538</td></tr>
+              <tr><td>16 Aug</td><td>403</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="r3">403</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">403</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td><td>94</td></tr>
+              <tr><td>17 Aug</td><td>176</td><td class="z">0</td><td class="z">0</td><td class="g2">176</td><td class="z">0</td><td class="z">0</td><td><b class="g">176</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td>68</td></tr>
+              <tr><td>18 Aug</td><td>357</td><td class="z">0</td><td class="g3">357</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">357</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td class="r">306</td></tr>
             </tbody>
             <tfoot>
-              <tr><td>Total</td><td>0</td><td>357</td><td>176</td><td class="subt">533</td><td>403</td><td>548</td><td class="subt">951</td><td>1,484</td><td>0%</td><td class="r">1,006</td></tr>
+              <tr><td>Total</td><td>1,484</td><td>0</td><td>357</td><td>176</td><td>403</td><td>548</td><td><b class="g">533</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">36%</span></td><td><b class="r">951</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">64%</span></td><td class="r">1,006</td></tr>
             </tfoot>
           </table></div>
           <div class="hmleg">
