@@ -274,6 +274,11 @@
           <div class="kc" style="--c:var(--warn)"><p class="lab">Returned beyond TAT</p><div class="num">757</div><p class="sub">picked up late (2&#8211;4 days)</p></div>
           <div class="kc" style="--c:var(--bad)"><p class="lab">Pickup not scheduled</p><div class="num">3,356</div><p class="sub"><span class="r">66%</span> of marked &#8212; not yet picked</p></div>
         </div>
+        <div style="display:flex;gap:28px;flex-wrap:wrap;font-size:13px;padding:13px 18px;background:var(--panel-2);border:1px solid var(--line);border-radius:11px">
+          <span><b style="color:var(--ink)">Total booked:</b> 1,725</span>
+          <span><b style="color:var(--ink)">% within TAT:</b> <span class="g">19%</span></span>
+          <span><b style="color:var(--ink)">Pickups not scheduled:</b> <span class="r">3,356</span></span>
+        </div>
 
         <div class="panel">
           <h3>TAT heatmap &#8212; time from marking to returned</h3>
@@ -281,16 +286,12 @@
           <div class="scroller"><table class="hm">
             <thead>
               <tr>
-                <th rowspan="2">Marked date</th>
-                <th colspan="1" class="grp-g">Within TAT (&#8804;24h)</th>
-                <th colspan="4" class="grp-r">Beyond TAT (&gt;24h)</th>
-                <th rowspan="2">Total marked</th>
-                <th rowspan="2">% within TAT</th>
-                <th rowspan="2" class="grp-r">Pickup not scheduled</th>
-              </tr>
-              <tr>
-                <th class="subt">1 day</th>
+                <th>Marked date</th>
+                <th class="grp-g">1 day</th>
                 <th>2 day</th><th>3 day</th><th>4 day+</th><th class="subt">Beyond</th>
+                <th>Total marked</th>
+                <th>% within TAT</th>
+                <th class="grp-r">Pickup not scheduled</th>
               </tr>
             </thead>
             <tbody>
