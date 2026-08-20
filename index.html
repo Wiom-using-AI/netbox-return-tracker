@@ -363,8 +363,8 @@
                 <th>Total marked</th>
                 <th class="grp-g">1 day</th>
                 <th>2 day</th><th>3 day</th><th>4 day+</th>
-                <th class="grp-g">% within TAT</th>
-                <th class="grp-r">% outside TAT</th>
+                <th class="grp-g">Within TAT</th>
+                <th class="grp-r">Outside TAT</th>
                 <th class="grp-r">Not booked</th>
                 <th>CSP refused</th>
               </tr>
@@ -440,7 +440,7 @@
 
         <div class="panel mode-book">
           <h3>TAT heatmap &#8212; time from marking to returned</h3>
-          <p class="cap">Rows = date the CSP marked the device. Green = returned within the 24 h SLA (&le;1 day), red = beyond. Combines Forms 2/3 (received, TAT-tracked) with the in-app cohort still awaiting pickup. 57 in-app devices already actioned (refused / closed) are excluded. Within-TAT + outside-TAT + not booked = Total marked.</p>
+          <p class="cap">Rows = date the CSP marked the device. Green = returned within the 24 h SLA (&le;1 day), red = beyond. Combines Forms 2/3 (received, TAT-tracked) with the in-app cohort still awaiting pickup. 57 in-app devices already actioned (refused / closed) are excluded. Within-TAT + outside-TAT + not booked = Total marked. <b>CSP refused</b> shows those 57 for context (56 against 16 Aug marks, 1 against 15 Aug which has no row) &#8212; they are not added into the total.</p>
           <div class="scroller"><table class="hm">
             <thead>
               <tr>
@@ -448,18 +448,19 @@
                 <th>Total marked</th>
                 <th class="grp-g">1 day</th>
                 <th>2 day</th><th>3 day</th><th>4 day+</th>
-                <th class="grp-g">% within TAT</th>
-                <th class="grp-r">% outside TAT</th>
+                <th class="grp-g">Within TAT</th>
+                <th class="grp-r">Outside TAT</th>
                 <th class="grp-r">Not booked</th>
+                <th>CSP refused</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>16 Aug</td><td>7</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>7</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td></tr>
-              <tr><td>17 Aug</td><td>225</td><td class="g2">108</td><td class="r3">73</td><td class="z">0</td><td class="z">0</td><td><b class="g">108</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">48%</span></td><td><b class="r">73</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">32%</span></td><td><b>44</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">20%</span></td></tr>
-              <tr><td>18 Aug</td><td>197</td><td class="g3">173</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">173</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">88%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>24</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">12%</span></td></tr>
+              <tr><td>16 Aug</td><td>7</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>7</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td><td class="r">56</td></tr>
+              <tr><td>17 Aug</td><td>225</td><td class="g2">108</td><td class="r3">73</td><td class="z">0</td><td class="z">0</td><td><b class="g">108</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">48%</span></td><td><b class="r">73</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">32%</span></td><td><b>44</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">20%</span></td><td>0</td></tr>
+              <tr><td>18 Aug</td><td>197</td><td class="g3">173</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">173</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">88%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>24</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">12%</span></td><td>0</td></tr>
             </tbody>
             <tfoot>
-              <tr><td>Total</td><td>429</td><td>281</td><td>73</td><td>0</td><td>0</td><td><b class="g">281</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">66%</span></td><td><b class="r">73</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">17%</span></td><td><b class="r">75</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">17%</span></td></tr>
+              <tr><td>Total</td><td>429</td><td>281</td><td>73</td><td>0</td><td>0</td><td><b class="g">281</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">66%</span></td><td><b class="r">73</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">17%</span></td><td><b class="r">75</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">17%</span></td><td class="r">57</td></tr>
             </tfoot>
           </table></div>
           <div class="hmleg">
@@ -497,7 +498,7 @@
 
         <div class="panel mode-book">
           <h3>TAT heatmap &mdash; within vs breached (3-day SLA)</h3>
-          <p class="cap">Rows = date the CSP marked the device. Nothing has been returned yet, so TAT is measured as days pending vs the 3-day 3PL SLA: <b>Within TAT</b> = cohort still &le;3 days old (clock running, not yet breached); <b>Breached TAT</b> = &gt;3 days old, SLA already missed. Within + Breached = Total marked. <b>CSP refused</b> is a subset shown for context &mdash; it cuts across both columns, so it is not added into the total.</p>
+          <p class="cap">Rows = date the CSP marked the device. Nothing has been returned yet, so TAT is measured as days pending vs the 3-day 3PL SLA: <b>Within TAT</b> = cohort still &le;3 days old (clock running, not yet breached); <b>Breached TAT</b> = &gt;3 days old, SLA already missed. Within + Breached = Total marked. <b>Not booked</b> = no 3PL booking made yet (only 6 of 1,484 devices have a booking, all from 15 Aug). <b>Not booked</b> and <b>CSP refused</b> are context columns that cut across Within/Breached &mdash; neither is added into the total.</p>
           <div class="scroller"><table class="hm">
             <thead>
               <tr>
@@ -507,17 +508,18 @@
                 <th>4d</th><th>5d+</th>
                 <th class="grp-g">Within TAT</th>
                 <th class="grp-r">Breached TAT</th>
+                <th class="grp-r">Not booked</th>
                 <th>CSP refused</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>15 Aug</td><td>548</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="r3">548</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">548</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td><td class="r">538</td></tr>
-              <tr><td>16 Aug</td><td>403</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="r3">403</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">403</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td><td>94</td></tr>
-              <tr><td>17 Aug</td><td>176</td><td class="z">0</td><td class="z">0</td><td class="g2">176</td><td class="z">0</td><td class="z">0</td><td><b class="g">176</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td>68</td></tr>
-              <tr><td>18 Aug</td><td>357</td><td class="z">0</td><td class="g3">357</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">357</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td class="r">306</td></tr>
+              <tr><td>15 Aug</td><td>548</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="r3">548</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">548</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td><td class="r">542</td><td class="r">538</td></tr>
+              <tr><td>16 Aug</td><td>403</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="r3">403</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">403</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td><td class="r">403</td><td>94</td></tr>
+              <tr><td>17 Aug</td><td>176</td><td class="z">0</td><td class="z">0</td><td class="g2">176</td><td class="z">0</td><td class="z">0</td><td><b class="g">176</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td class="r">176</td><td>68</td></tr>
+              <tr><td>18 Aug</td><td>357</td><td class="z">0</td><td class="g3">357</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">357</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td class="r">357</td><td class="r">306</td></tr>
             </tbody>
             <tfoot>
-              <tr><td>Total</td><td>1,484</td><td>0</td><td>357</td><td>176</td><td>403</td><td>548</td><td><b class="g">533</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">36%</span></td><td><b class="r">951</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">64%</span></td><td class="r">1,006</td></tr>
+              <tr><td>Total</td><td>1,484</td><td>0</td><td>357</td><td>176</td><td>403</td><td>548</td><td><b class="g">533</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">36%</span></td><td><b class="r">951</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">64%</span></td><td class="r">1,478</td><td class="r">1,006</td></tr>
             </tfoot>
           </table></div>
           <div class="hmleg">
