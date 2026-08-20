@@ -105,6 +105,13 @@
   .dash{color:var(--muted)}
   .g{color:var(--good);font-weight:700}.r{color:var(--bad);font-weight:700}
 
+  /* Booked | Received lens toggle */
+  .lens{display:inline-flex;background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
+  .lbtn{font-size:12px;font-weight:700;padding:5px 13px;border-radius:999px;border:none;background:transparent;color:var(--ink-2);cursor:pointer}
+  .app:not(.recv) .lbtn[data-lens="book"],.app.recv .lbtn[data-lens="recv"]{background:var(--brand);color:#fff}
+  .app.recv .mode-book{display:none!important}
+  .app:not(.recv) .mode-recv{display:none!important}
+
   /* TAT heatmap */
   .hm{min-width:920px}
   .hm td,.hm th{text-align:center}
@@ -172,7 +179,9 @@
       <h1>Device Return Tracker</h1>
       <span class="live"><span class="d"></span> LIVE</span>
       <span class="srcpill">Since 15 Aug 2026</span>
-      <span class="srcpill">Data as of 19 Aug 2026, 11:59 PM</span>
+      <span class="srcpill mode-book">Data as of 19 Aug 2026, 11:59 PM</span>
+      <span class="lens" id="lens"><button class="lbtn" data-lens="book">Booked</button><button class="lbtn" data-lens="recv">Received</button></span>
+      <span class="srcpill mode-recv">Warehouse receipts &#183; sheet as of 20 Aug</span>
       <span class="sp"></span>
       <button class="btn" id="themeToggle" title="Toggle dark mode">&#127769; Dark</button>
       <button class="btn">&#8635; Refresh</button>
@@ -194,8 +203,57 @@
         </style>
         <div class="vh"><h2>&#9635; Overview</h2><span class="sub">all regions &#183; Aug 15-18 &#183; is the recovery process working?</span></div>
 
-        <p class="seclab">Headline &#8212; marked &#8594; received &#8594; on time</p>
-        <div class="kgrid">
+        <p class="seclab mode-recv">Warehouse truth &#8212; what has physically reached Wiom</p>
+        <div class="kgrid mode-recv">
+          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked since 15 Aug</p><div class="num">7,377</div><p class="sub">in-app sheet &#183; NCR 5,505 &#183; Bharat 1,637 &#183; Mum 235</p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Received at Wiom</p><div class="num">128</div><p class="sub">NCR 121 &#183; Bharat 7 &#183; <span class="r">Mumbai 0</span></p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Recovery rate</p><div class="num">1.7%</div><p class="sub">received &#247; marked &#183; target 80%</p></div>
+          <div class="kc" style="--c:var(--brand)"><p class="lab">Clean-dated receipts</p><div class="num">98</div><p class="sub">2 on 17 Aug &#183; 96 on 18 Aug</p></div>
+          <div class="kc" style="--c:var(--warn)"><p class="lab">Date anomalies</p><div class="num">30</div><p class="sub">25 pre-drive dates &#183; 5 missing</p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Backlog receipts</p><div class="num">1,107</div><p class="sub">marked before 15 Aug</p></div>
+        </div>
+        <div class="two mode-recv">
+          <div class="panel">
+            <h3>Recovery by region &#8212; received &#247; marked</h3>
+            <p class="cap">Drive cohort (marked since 15 Aug, in-app warehouse sheet). Bar width = share of that region's marked devices actually received.</p>
+            <div class="funnel">
+              <div class="fstage"><div class="fl">NCR<small>5,505 marked</small></div><div class="ftrack"><div class="fbar" style="width:2.2%;background:var(--good)">121 &#183; 2.2%</div></div></div>
+              <div class="fstage"><div class="fl">Bharat<small>1,637 marked</small></div><div class="ftrack"><div class="fbar" style="width:0.4%;background:var(--warn)">7 &#183; 0.4%</div></div></div>
+              <div class="fstage"><div class="fl">Mumbai<small>235 marked</small></div><div class="ftrack"><div class="fbar" style="width:0%;background:var(--bad)">0 &#183; 0%</div></div></div>
+            </div>
+            <p class="note" style="margin-top:14px">The booked lens counts a device as "received" on pickup/booking logic; this lens counts only <b>warehouse receipt dates in the sheet</b>. By that stricter bar, just <b>128 of 7,377</b> marked devices are physically back &#8212; receipts started 17 Aug and lag marking by the pickup + transit window.</p>
+          </div>
+          <div class="panel">
+            <h3>Receipt speed &#8212; marking &#8594; warehouse</h3>
+            <p class="cap">Days from CSP marking to warehouse receipt, drive cohort only.</p>
+            <div class="scroller"><table style="min-width:auto">
+              <thead><tr><th>Days to receive</th><th>Devices</th><th>Share</th></tr></thead>
+              <tbody>
+                <tr><td>&#8804; 1 day</td><td>1</td><td>1%</td></tr>
+                <tr><td>2 days</td><td>97</td><td><span class="g">76%</span></td></tr>
+                <tr><td>3&#8211;4 days</td><td>0</td><td>0%</td></tr>
+                <tr><td><span class="pill p-warn">Date anomaly</span></td><td>30</td><td class="r">23%</td></tr>
+              </tbody>
+              <tfoot><tr><td>Total received</td><td>128</td><td>&#8212;</td></tr></tfoot>
+            </table></div>
+            <p class="note" style="margin-top:14px">&#9888; <b>30 received rows have broken dates</b> &#8212; 25 show warehouse dates <i>before</i> the drive (June) and 5 have none. Needs cleanup in the sheet.</p>
+          </div>
+        </div>
+        <div class="panel mode-recv">
+          <h3>&#128230; Warehouse receipts per day</h3>
+          <p class="cap">All devices received at Wiom since the drive began, by warehouse date. Cohort = marked since 15 Aug; backlog = marked earlier.</p>
+          <div class="scroller"><table style="min-width:auto">
+            <thead><tr><th>Warehouse date</th><th>Total received</th><th>Drive cohort</th><th>Backlog</th></tr></thead>
+            <tbody>
+              <tr><td>15&#8211;16 Aug</td><td>0</td><td>0</td><td>0</td></tr>
+              <tr><td>17 Aug</td><td>9</td><td>2</td><td>7</td></tr>
+              <tr><td>18 Aug</td><td><b>157</b></td><td><span class="g">96</span></td><td>61</td></tr>
+            </tbody>
+          </table></div>
+          <p class="note" style="margin-top:14px">Receipts are just starting to ramp &#8212; 18 Aug was the first real intake day. Another 1,107 backlog receipts (devices marked before 15 Aug) are also on record.</p>
+        </div>
+        <p class="seclab mode-book">Headline &#8212; marked &#8594; received &#8594; on time</p>
+        <div class="kgrid mode-book">
           <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">6,994</div><p class="sub">NCR 5,081 &#183; Bharat 1,484 &#183; Mumbai 429</p></div>
           <div class="kc" style="--c:var(--good)"><p class="lab">Received back</p><div class="num">2,079</div><p class="sub"><span class="g">30%</span> recovery rate</p></div>
           <div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">1,249</div><p class="sub">60% of received &#183; 18% of marked</p></div>
@@ -208,20 +266,46 @@
       <!-- ============ NCR ============ -->
       <section class="view" id="v-ncr">
         <div class="vh"><h2>&#128205; NCR</h2><span class="sub">Delhi &#183; in-app + forms &#183; carrier Porter &#183; SLA 24 h</span></div>
-        <div class="kgrid k4">
+        <div class="kgrid k4 mode-recv">
+          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked since 15 Aug</p><div class="num">5,505</div><p class="sub">in-app sheet &#183; as of 20 Aug</p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Received at Wiom</p><div class="num">121</div><p class="sub"><span class="g">2.2%</span> of marked</p></div>
+          <div class="kc" style="--c:var(--brand)"><p class="lab">Received in 2 days</p><div class="num">97</div><p class="sub">of 98 clean-dated receipts</p></div>
+          <div class="kc" style="--c:var(--warn)"><p class="lab">Date anomalies</p><div class="num">23</div><p class="sub">19 pre-drive dates &#183; 4 missing</p></div>
+        </div>
+        <div class="panel mode-recv">
+          <h3>Received heatmap &#8212; marking date &#8594; warehouse receipt</h3>
+          <p class="cap">Rows = date the CSP marked the device (in-app warehouse sheet, as of 20 Aug &#8212; includes 19&#8211;20 Aug markings the booked lens doesn't). Counts only devices physically received at Wiom. <b>Date anomaly</b> = received-status rows whose warehouse date is missing or earlier than marking.</p>
+          <div class="scroller"><table class="hm">
+            <thead><tr><th>Marked date</th><th>Total marked</th><th class="grp-g">&#8804;1 day</th><th>2 days</th><th>3 days</th><th>4 days+</th><th>Date anomaly</th><th class="grp-g">Total received</th><th>% received</th></tr></thead>
+            <tbody>
+              <tr><td>15 Aug</td><td>201</td><td class="z">0</td><td class="g1">1</td><td class="z">0</td><td class="z">0</td><td class="r2">19</td><td><b>20</b></td><td class="g">10.0%</td></tr>
+              <tr><td>16 Aug</td><td>1,404</td><td class="g1">1</td><td class="g3">96</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b>97</b></td><td class="g">6.9%</td></tr>
+              <tr><td>17 Aug</td><td>1,226</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b>0</b></td><td class="r">0%</td></tr>
+              <tr><td>18 Aug</td><td>1,440</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="r1">3</td><td><b>3</b></td><td class="r">0.2%</td></tr>
+              <tr><td>19 Aug</td><td>1,217</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="r1">1</td><td><b>1</b></td><td class="r">0.1%</td></tr>
+              <tr><td>20 Aug</td><td>17</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b>0</b></td><td class="z">&#8212;</td></tr>
+            </tbody>
+            <tfoot><tr><td>Total</td><td>5,505</td><td>1</td><td>97</td><td>0</td><td>0</td><td class="r">23</td><td><b>121</b></td><td>2.2%</td></tr></tfoot>
+          </table></div>
+          <div class="hmleg">
+            <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Received (valid dates)</span>
+            <span><i style="background:color-mix(in srgb,var(--bad) 40%,var(--panel))"></i> Date anomaly &#8212; needs sheet cleanup</span>
+          </div>
+        </div>
+        <div class="kgrid k4 mode-book">
           <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">5,081</div><p class="sub">In-app 4,267 &middot; Forms 814</p></div>
           <div class="kc" style="--c:var(--good)"><p class="lab">Within 24h TAT</p><div class="num">968</div><p class="sub"><span class="g">19%</span> of marked</p></div>
           <div class="kc" style="--c:var(--warn)"><p class="lab">Returned beyond TAT</p><div class="num">757</div><p class="sub">picked up late (2-4 days)</p></div>
           <div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">3,356</div><p class="sub"><span class="r">66%</span> of marked - not yet picked</p></div>
         </div>
-        <div style="display:flex;gap:28px;flex-wrap:wrap;font-size:13px;padding:13px 18px;background:var(--panel-2);border:1px solid var(--line);border-radius:11px">
+        <div class="mode-book" style="display:flex;gap:28px;flex-wrap:wrap;font-size:13px;padding:13px 18px;background:var(--panel-2);border:1px solid var(--line);border-radius:11px">
           <span><b style="color:var(--ink)">Total booked:</b> 1,725</span>
           <span><b style="color:var(--ink)">% within TAT:</b> <span class="g">19%</span></span>
           <span><b style="color:var(--ink)">Not booked:</b> <span class="r">3,356</span></span>
           <span><b style="color:var(--ink)">CSP refused:</b> <span class="r">615</span> (~14%)</span>
         </div>
 
-        <div class="panel">
+        <div class="panel mode-book">
           <h3>TAT heatmap - time from marking to returned</h3>
           <p class="cap">Rows = date the CSP marked the device. Green = returned within the 24 h SLA (&le;1 day), red = beyond. Combines in-app + forms. Within-TAT + outside-TAT + not booked = Total marked. <b>CSP refused</b> is a subset of "not booked" (a refused device is never picked), shown for context - it is not added into the total.</p>
           <div class="scroller"><table class="hm">
@@ -254,7 +338,7 @@
           </div>
         </div>
 
-        <div class="panel">
+        <div class="panel mode-book">
           <h3>Why CSPs refused pickup</h3>
           <p class="cap">From the Delhi calling-sheet remarks (Col I). Only <b>17 CSPs / 637 devices</b> (615 in the Aug 15-18 window) refused &mdash; just <b>~14% of the in-app base</b>. Unlike Bharat, Delhi refusals are mostly <b>soft / recoverable</b> (commercial confirmation, call-backs, escalation), not outright cancellations. Willingness is not the NCR problem &mdash; pickup execution is.</p>
           <div class="scroller"><table>
@@ -274,19 +358,29 @@
       <!-- ============ MUMBAI ============ -->
       <section class="view" id="v-mumbai">
         <div class="vh"><h2>&#128205; Mumbai</h2><span class="sub">Mumbai metro &#183; in-app + forms &#183; carrier Porter &#183; SLA 24 h</span></div>
-        <div class="kgrid k4">
+        <div class="kgrid k4 mode-recv">
+          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked since 15 Aug</p><div class="num">235</div><p class="sub">in-app sheet &#183; as of 20 Aug</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Received at Wiom</p><div class="num">0</div><p class="sub"><span class="r">0%</span> of in-app marked</p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Backlog receipts</p><div class="num">59</div><p class="sub">marked before 15 Aug</p></div>
+          <div class="kc" style="--c:var(--warn)"><p class="lab">First cohort receipt</p><div class="num">&#8212;</div><p class="sub">none logged yet</p></div>
+        </div>
+        <div class="panel mode-recv">
+          <h3>No drive-cohort warehouse receipts yet</h3>
+          <p class="cap">235 in-app devices have been marked in Mumbai since 15 Aug, but none has a warehouse receipt date in the sheet. The 59 Mumbai receipts on record all belong to devices marked before the drive. Note: the booked lens shows 354 Forms devices as received &#8212; those come from the Forms tracker, which this warehouse sheet does not cover.</p>
+        </div>
+        <div class="kgrid k4 mode-book">
           <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">429</div><p class="sub">Forms 354 &#183; in-app 75</p></div>
           <div class="kc" style="--c:var(--good)"><p class="lab">Within 24h TAT</p><div class="num">281</div><p class="sub"><span class="g">66%</span> of marked</p></div>
           <div class="kc" style="--c:var(--warn)"><p class="lab">Returned beyond TAT</p><div class="num">73</div><p class="sub">one Aug 17 batch (2 days)</p></div>
           <div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">75</div><p class="sub"><span class="r">17%</span> in-app, awaiting pickup</p></div>
         </div>
-        <div style="display:flex;gap:28px;flex-wrap:wrap;font-size:13px;padding:13px 18px;background:var(--panel-2);border:1px solid var(--line);border-radius:11px">
+        <div class="mode-book" style="display:flex;gap:28px;flex-wrap:wrap;font-size:13px;padding:13px 18px;background:var(--panel-2);border:1px solid var(--line);border-radius:11px">
           <span><b style="color:var(--ink)">Received:</b> <span class="g">354</span></span>
           <span><b style="color:var(--ink)">% within TAT:</b> <span class="g">66%</span></span>
           <span><b style="color:var(--ink)">Not booked:</b> <span class="r">75</span></span>
         </div>
 
-        <div class="panel">
+        <div class="panel mode-book">
           <h3>TAT heatmap &#8212; time from marking to returned</h3>
           <p class="cap">Rows = date the CSP marked the device. Green = returned within the 24 h SLA (&le;1 day), red = beyond. Combines Forms 2/3 (received, TAT-tracked) with the in-app cohort still awaiting pickup. 57 in-app devices already actioned (refused / closed) are excluded. Within-TAT + outside-TAT + not booked = Total marked.</p>
           <div class="scroller"><table class="hm">
@@ -321,19 +415,29 @@
       <!-- ============ BHARAT ============ -->
       <section class="view" id="v-bharat">
         <div class="vh"><h2>&#128205; Bharat</h2><span class="sub">rest of India (ex-NCR / ex-Mumbai) &#183; carrier 3PL &#183; SLA 3 days</span></div>
-        <div class="kgrid k4">
+        <div class="kgrid k4 mode-recv">
+          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked since 15 Aug</p><div class="num">1,637</div><p class="sub">in-app sheet &#183; as of 20 Aug</p></div>
+          <div class="kc" style="--c:var(--warn)"><p class="lab">Received at Wiom</p><div class="num">7</div><p class="sub"><span class="r">0.4%</span> of marked</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">With valid dates</p><div class="num">0</div><p class="sub"><span class="r">all 7 date-anomalous</span></p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Backlog receipts</p><div class="num">17</div><p class="sub">marked before 15 Aug</p></div>
+        </div>
+        <div class="panel mode-recv">
+          <h3>Receipts not flowing yet &#8212; and the 7 on record are suspect</h3>
+          <p class="cap">Of 1,637 Bharat devices marked since 15 Aug, only 7 show a Received status &#8212; and every one has a broken warehouse date (6 dated June, before the drive; 1 missing). Treat Bharat physical recovery as effectively <b>zero until 3PL receipts start landing</b> and the sheet dates are fixed.</p>
+        </div>
+        <div class="kgrid k4 mode-book">
           <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">1,484</div><p class="sub">Aug 15-18 &#183; in-app</p></div>
           <div class="kc" style="--c:var(--good)"><p class="lab">Within TAT (&le;3d)</p><div class="num">533</div><p class="sub"><span class="g">36%</span> still in window</p></div>
           <div class="kc" style="--c:var(--bad)"><p class="lab">Breached TAT (&gt;3d)</p><div class="num">951</div><p class="sub"><span class="r">64%</span> past 3-day SLA</p></div>
           <div class="kc" style="--c:var(--warn)"><p class="lab">CSP refused</p><div class="num">1,006</div><p class="sub">68% of marked &#183; subset</p></div>
         </div>
-        <div style="display:flex;gap:28px;flex-wrap:wrap;font-size:13px;padding:13px 18px;background:var(--panel-2);border:1px solid var(--line);border-radius:11px">
+        <div class="mode-book" style="display:flex;gap:28px;flex-wrap:wrap;font-size:13px;padding:13px 18px;background:var(--panel-2);border:1px solid var(--line);border-radius:11px">
           <span><b style="color:var(--ink)">Returned so far:</b> <span class="r">0</span></span>
           <span><b style="color:var(--ink)">Picked up:</b> <span class="r">0</span></span>
           <span><b style="color:var(--ink)">Within TAT + Breached =</b> 1,484</span>
         </div>
 
-        <div class="panel">
+        <div class="panel mode-book">
           <h3>TAT heatmap &mdash; within vs breached (3-day SLA)</h3>
           <p class="cap">Rows = date the CSP marked the device. Nothing has been returned yet, so TAT is measured as days pending vs the 3-day 3PL SLA: <b>Within TAT</b> = cohort still &le;3 days old (clock running, not yet breached); <b>Breached TAT</b> = &gt;3 days old, SLA already missed. Within + Breached = Total marked. <b>CSP refused</b> is a subset shown for context &mdash; it cuts across both columns, so it is not added into the total.</p>
           <div class="scroller"><table class="hm">
@@ -365,7 +469,7 @@
           </div>
         </div>
 
-        <div class="panel">
+        <div class="panel mode-book">
           <h3>Why CSPs refused pickup</h3>
           <p class="cap">From the calling-sheet remarks (Col K), against the 1,006 refusals. These are mostly recoverable process / commercial blockers &mdash; not firm "no"s &mdash; so a large share is winnable with follow-up. Two CSPs dominate: <b>GOYLA (500)</b> + <b>CHOICE (250)</b> = 75% of all refusals.</p>
           <div class="scroller"><table>
@@ -475,6 +579,16 @@
       app.classList.toggle('dark');
       try{ localStorage.setItem('theme', app.classList.contains('dark')?'dark':'light'); }catch(e){}
       setLabel();
+    });
+  })();
+  (function(){
+    var app=document.getElementById('app');
+    try{ if(localStorage.getItem('lens')==='recv') app.classList.add('recv'); }catch(e){}
+    document.querySelectorAll('#lens .lbtn').forEach(function(b){
+      b.addEventListener('click',function(){
+        app.classList.toggle('recv', b.dataset.lens==='recv');
+        try{ localStorage.setItem('lens', b.dataset.lens); }catch(e){}
+      });
     });
   })();
   (function(){
