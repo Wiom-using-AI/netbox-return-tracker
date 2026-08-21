@@ -108,9 +108,12 @@
   /* Booked | Received lens toggle */
   .lens{display:inline-flex;background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
   .lbtn{font-size:12px;font-weight:700;padding:5px 13px;border-radius:999px;border:none;background:transparent;color:var(--ink-2);cursor:pointer}
-  .app:not(.recv) .lbtn[data-lens="book"],.app.recv .lbtn[data-lens="recv"]{background:var(--brand);color:#fff}
+  .app:not(.recv):not(.audit) .lbtn[data-lens="book"],.app.recv .lbtn[data-lens="recv"],.app.audit .lbtn[data-lens="audit"]{background:var(--brand);color:#fff}
   .app.recv .mode-book{display:none!important}
   .app:not(.recv) .mode-recv{display:none!important}
+  .app:not(.audit) .mode-audit{display:none!important}
+  .app.audit #v-overview .mode-book{display:none!important}
+  .app.audit .srcpill.mode-book{display:none!important}
 
   /* TAT heatmap */
   .hm{min-width:920px}
@@ -192,8 +195,9 @@
       <span class="live"><span class="d"></span> LIVE</span>
       <span class="srcpill">Since 15 Aug 2026</span>
       <span class="srcpill mode-book">Data as of 19 Aug 2026, 11:59 PM</span>
-      <span class="lens" id="lens"><button class="lbtn" data-lens="book">Booked</button><button class="lbtn" data-lens="recv">Received</button></span>
+      <span class="lens" id="lens"><button class="lbtn" data-lens="book">Booked</button><button class="lbtn" data-lens="recv">Received</button><button class="lbtn" data-lens="audit">Audit return</button></span>
       <span class="srcpill mode-recv">Warehouse receipts &#183; in-app + Forms &#183; 20 Aug</span>
+      <span class="srcpill mode-audit">Marked-for-return by CSP audit status</span>
       <span class="sp"></span>
       <button class="btn" id="themeToggle" title="Toggle dark mode">&#127769; Dark</button>
       <button class="btn">&#8635; Refresh</button>
@@ -275,6 +279,33 @@
           <div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">1,678</div><p class="sub">Bharat 1,006 &#183; NCR 615 &#183; Mum 57</p></div>
         </div>
 
+        <p class="seclab mode-audit">Marked for return &#8212; by CSP audit status</p>
+        <div class="kgrid mode-audit">
+          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">6,994</div><p class="sub">Aug 15-18 &#183; all regions</p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Audit Done</p><div class="num">6,246</div><p class="sub"><span class="g">89.3%</span> of marked</p></div>
+          <div class="kc" style="--c:var(--warn)"><p class="lab">Audit In Progress</p><div class="num">128</div><p class="sub">1.8% of marked</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Audit Not Started</p><div class="num">417</div><p class="sub"><span class="r">6.0%</span> of marked</p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Not in audit list</p><div class="num">203</div><p class="sub">2.9% &#183; all Forms partners</p></div>
+          <div class="kc" style="--c:var(--brand)"><p class="lab">Not fully audited</p><div class="num">748</div><p class="sub"><span class="r">10.7%</span> of marked</p></div>
+        </div>
+        <div class="panel mode-audit">
+          <h3>Marked-for-return devices by CSP audit status</h3>
+          <p class="cap">Every marked device attributed to its CSP's audit status &#8212; in-app joined by CSP ID, Forms by Partner ID. ~89% of all returns come from fully-audited (Done) CSPs: audit completion is effectively the trigger for return. Done is shown as the balance to the 6,994 marked; the other three buckets are exact joins.</p>
+          <div class="scroller"><table style="min-width:auto">
+            <thead><tr><th>Audit status</th><th>Devices</th><th>Share</th></tr></thead>
+            <tbody>
+              <tr><td><span class="pill p-ok">Done</span></td><td><b>6,246</b></td><td class="g">89.3%</td></tr>
+              <tr><td><span class="pill p-warn">In Progress</span></td><td>128</td><td>1.8%</td></tr>
+              <tr><td><span class="pill p-bad">Not Started</span></td><td>417</td><td class="r">6.0%</td></tr>
+              <tr><td><span class="pill p-mut">Not in audit list</span></td><td>203</td><td>2.9%</td></tr>
+            </tbody>
+            <tfoot><tr><td>Total marked</td><td>6,994</td><td>100%</td></tr></tfoot>
+          </table></div>
+          <div style="display:flex;gap:28px;flex-wrap:wrap;font-size:13px;padding:13px 18px;margin-top:14px;background:var(--panel-2);border:1px solid var(--line);border-radius:11px">
+            <span><b style="color:var(--ink)">Audited (Done):</b> <span class="g">6,246</span> (89.3%)</span>
+            <span><b style="color:var(--ink)">Not fully audited:</b> <span class="r">748</span> (10.7%)</span>
+          </div>
+        </div>
         <div class="panel mode-book">
           <h3>TAT heatmap &#8212; all regions consolidated</h3>
           <p class="cap">Rows = date the CSP marked the device, NCR + Mumbai + Bharat summed. Day cells are shaded by volume only (regions have different SLAs); the green/red judgment lives in the % columns, where each region is measured against its own SLA (Porter 24 h, 3PL 3 days). <b>Click a date row</b> to split it by lane. Bharat's devices currently all sit in "Not booked / not back" &#8212; no 3PL returns yet.</p>
@@ -599,10 +630,11 @@
   })();
   (function(){
     var app=document.getElementById('app');
-    try{ if(localStorage.getItem('lens')==='recv') app.classList.add('recv'); }catch(e){}
+    try{ var _lz=localStorage.getItem('lens'); if(_lz==='recv') app.classList.add('recv'); if(_lz==='audit') app.classList.add('audit'); }catch(e){}
     document.querySelectorAll('#lens .lbtn').forEach(function(b){
       b.addEventListener('click',function(){
         app.classList.toggle('recv', b.dataset.lens==='recv');
+        app.classList.toggle('audit', b.dataset.lens==='audit');
         try{ localStorage.setItem('lens', b.dataset.lens); }catch(e){}
       });
     });
