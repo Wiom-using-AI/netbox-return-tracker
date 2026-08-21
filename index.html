@@ -114,6 +114,7 @@
   .app:not(.audit) .mode-audit{display:none!important}
   .app.audit #v-overview .mode-book{display:none!important}
   .app.audit .srcpill.mode-book{display:none!important}
+  .app.audit .navitem:not([for="r-overview"]){display:none!important}
 
   /* TAT heatmap */
   .hm{min-width:920px}
@@ -305,6 +306,20 @@
             <span><b style="color:var(--ink)">Audited (Done):</b> <span class="g">6,246</span> (89.3%)</span>
             <span><b style="color:var(--ink)">Not fully audited:</b> <span class="r">748</span> (10.7%)</span>
           </div>
+        </div>
+        <div class="panel mode-audit">
+          <h3>Audit status vs return activity &#8212; CSP level</h3>
+          <p class="cap">Of all audited CSPs, how many have actually raised a return request (Aug 15-18) and how many devices they marked. Audit-Done CSPs raise returns at <b>~5&#215; the rate</b> of Not-Started ones &#8212; audit completion clearly drives returns.</p>
+          <div class="scroller"><table style="min-width:auto">
+            <thead><tr><th>Audit status</th><th>CSPs</th><th>Raised a request</th><th>% raised</th><th>Devices marked</th></tr></thead>
+            <tbody>
+              <tr><td><span class="pill p-ok">Done</span></td><td>846</td><td><b>281</b></td><td class="g">33%</td><td>6,246</td></tr>
+              <tr><td><span class="pill p-warn">In Progress</span></td><td>45</td><td>6</td><td>13%</td><td>128</td></tr>
+              <tr><td><span class="pill p-bad">Not Started</span></td><td>180</td><td>11</td><td class="r">6%</td><td>417</td></tr>
+            </tbody>
+            <tfoot><tr><td>Total audited</td><td>1,071</td><td>298</td><td>28%</td><td>6,791</td></tr></tfoot>
+          </table></div>
+          <p class="cap" style="margin-top:12px">A further 203 devices came from partners not in the audit list (all Forms). Total marked = 6,791 audited + 203 = 6,994.</p>
         </div>
         <div class="panel mode-book">
           <h3>TAT heatmap &#8212; all regions consolidated</h3>
@@ -630,11 +645,12 @@
   })();
   (function(){
     var app=document.getElementById('app');
-    try{ var _lz=localStorage.getItem('lens'); if(_lz==='recv') app.classList.add('recv'); if(_lz==='audit') app.classList.add('audit'); }catch(e){}
+    try{ var _lz=localStorage.getItem('lens'); if(_lz==='recv') app.classList.add('recv'); if(_lz==='audit'){ app.classList.add('audit'); var _ro=document.getElementById('r-overview'); if(_ro) _ro.checked=true; } }catch(e){}
     document.querySelectorAll('#lens .lbtn').forEach(function(b){
       b.addEventListener('click',function(){
         app.classList.toggle('recv', b.dataset.lens==='recv');
         app.classList.toggle('audit', b.dataset.lens==='audit');
+        if(b.dataset.lens==='audit'){ var _ro=document.getElementById('r-overview'); if(_ro) _ro.checked=true; }
         try{ localStorage.setItem('lens', b.dataset.lens); }catch(e){}
       });
     });
