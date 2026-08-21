@@ -115,6 +115,12 @@
   .app.audit #v-overview .mode-book{display:none!important}
   .app.audit .srcpill.mode-book{display:none!important}
   .app.audit .navitem:not([for="r-overview"]){display:none!important}
+  .pncbar{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 18px}
+  .pncb{font-size:12.5px;font-weight:700;padding:8px 15px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink-2);cursor:pointer}
+  .pncb:hover{background:var(--panel-2)}
+  .pncb.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .pncview{display:none}.pncview.on{display:block}
+  .illus{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--warn);background:color-mix(in srgb,var(--warn) 16%,transparent);padding:3px 9px;border-radius:6px;margin-left:8px;vertical-align:middle}
 
   /* TAT heatmap */
   .hm{min-width:920px}
@@ -196,9 +202,9 @@
       <span class="live"><span class="d"></span> LIVE</span>
       <span class="srcpill">Since 15 Aug 2026</span>
       <span class="srcpill mode-book">Data as of 19 Aug 2026, 11:59 PM</span>
-      <span class="lens" id="lens"><button class="lbtn" data-lens="book">Booked</button><button class="lbtn" data-lens="recv">Received</button><button class="lbtn" data-lens="audit">Audit return</button></span>
+      <span class="lens" id="lens"><button class="lbtn" data-lens="book">Booked</button><button class="lbtn" data-lens="recv">Received</button><button class="lbtn" data-lens="audit">Audit &amp; Not-Audit CSPs</button></span>
       <span class="srcpill mode-recv">Warehouse receipts &#183; in-app + Forms &#183; 20 Aug</span>
-      <span class="srcpill mode-audit">Audit status &#183; Aug 15-20 &#183; in-app + Forms</span>
+      <span class="srcpill mode-audit">Audit &#215; Booking P&amp;C &#183; Aug 15-20</span>
       <span class="sp"></span>
       <button class="btn" id="themeToggle" title="Toggle dark mode">&#127769; Dark</button>
       <button class="btn">&#8635; Refresh</button>
@@ -280,46 +286,42 @@
           <div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">1,678</div><p class="sub">Bharat 1,006 &#183; NCR 615 &#183; Mum 57</p></div>
         </div>
 
-        <p class="seclab mode-audit">Marked for return (Aug 15-20) &#8212; by CSP audit status</p>
-        <div class="kgrid mode-audit">
-          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">10,009</div><p class="sub">Aug 15-20 &#183; in-app 8,444 + Forms 1,565</p></div>
-          <div class="kc" style="--c:var(--good)"><p class="lab">Audit Done</p><div class="num">9,048</div><p class="sub"><span class="g">90.4%</span> of marked</p></div>
-          <div class="kc" style="--c:var(--warn)"><p class="lab">Audit In Progress</p><div class="num">130</div><p class="sub">1.3% of marked</p></div>
-          <div class="kc" style="--c:var(--bad)"><p class="lab">Audit Not Started</p><div class="num">495</div><p class="sub"><span class="r">4.9%</span> of marked</p></div>
-          <div class="kc" style="--c:var(--porter)"><p class="lab">Not in audit list</p><div class="num">336</div><p class="sub">3.4% &#183; all Forms partners</p></div>
-          <div class="kc" style="--c:var(--brand)"><p class="lab">Not fully audited</p><div class="num">961</div><p class="sub"><span class="r">9.6%</span> of marked</p></div>
-        </div>
-        <div class="panel mode-audit">
-          <h3>Marked-for-return devices by CSP audit status</h3>
-          <p class="cap">Every marked device (Aug 15-20, in-app + Forms) attributed to its CSP's audit status &#8212; in-app joined by CSP ID, Forms by Partner ID. ~90% of all returns come from fully-audited (Done) CSPs: audit completion is effectively the trigger for return. Done shown as the balance to the 10,009 marked; the other three buckets are exact joins.</p>
-          <div class="scroller"><table style="min-width:auto">
-            <thead><tr><th>Audit status</th><th>Devices</th><th>Share</th></tr></thead>
-            <tbody>
-              <tr><td><span class="pill p-ok">Done</span></td><td><b>9,048</b></td><td class="g">90.4%</td></tr>
-              <tr><td><span class="pill p-warn">In Progress</span></td><td>130</td><td>1.3%</td></tr>
-              <tr><td><span class="pill p-bad">Not Started</span></td><td>495</td><td class="r">4.9%</td></tr>
-              <tr><td><span class="pill p-mut">Not in audit list</span></td><td>336</td><td>3.4%</td></tr>
-            </tbody>
-            <tfoot><tr><td>Total marked</td><td>10,009</td><td>100%</td></tr></tfoot>
-          </table></div>
-          <div style="display:flex;gap:28px;flex-wrap:wrap;font-size:13px;padding:13px 18px;margin-top:14px;background:var(--panel-2);border:1px solid var(--line);border-radius:11px">
-            <span><b style="color:var(--ink)">Audited (Done):</b> <span class="g">9,048</span> (90.4%)</span>
-            <span><b style="color:var(--ink)">Not fully audited:</b> <span class="r">961</span> (9.6%)</span>
+        <p class="seclab mode-audit">Audit &#215; Booking &#8212; permutations &amp; combinations (Aug 15-20)</p>
+        <div class="mode-audit">
+          <div class="pncbar">
+            <button class="pncb on" data-pnc="1">Audited &#183; Booked</button>
+            <button class="pncb" data-pnc="2">Audited &#183; Received</button>
+            <button class="pncb" data-pnc="3">Not-audited &#183; Booked</button>
+            <button class="pncb" data-pnc="4">Not-audited &#183; Received</button>
           </div>
-        </div>
-        <div class="panel mode-audit">
-          <h3>Audit status vs return activity &#8212; CSP level</h3>
-          <p class="cap">Of all audited CSPs, how many have actually raised a return request (Aug 15-20) and how many devices they marked. Audit-Done CSPs raise returns at <b>~6&#215; the rate</b> of Not-Started ones &#8212; and Done participation is climbing (281 &#8594; 381 CSPs as the window extended).</p>
-          <div class="scroller"><table style="min-width:auto">
-            <thead><tr><th>Audit status</th><th>CSPs</th><th>Raised a request</th><th>% raised</th><th>Devices marked</th></tr></thead>
-            <tbody>
-              <tr><td><span class="pill p-ok">Done</span></td><td>846</td><td><b>381</b></td><td class="g">45%</td><td>9,048</td></tr>
-              <tr><td><span class="pill p-warn">In Progress</span></td><td>45</td><td>6</td><td>13%</td><td>130</td></tr>
-              <tr><td><span class="pill p-bad">Not Started</span></td><td>180</td><td>13</td><td class="r">7%</td><td>495</td></tr>
-            </tbody>
-            <tfoot><tr><td>Total audited</td><td>1,071</td><td>400</td><td>37%</td><td>9,673</td></tr></tfoot>
-          </table></div>
-          <p class="cap" style="margin-top:12px">A further 336 devices came from partners not in the audit list (all Forms). Total marked = 9,673 audited + 336 = 10,009.</p>
+          <div class="pncview on" data-pncv="1">
+          <div class="vh" style="margin-top:4px"><h2>Audited &#183; Booked <span class="illus">illustrative</span></h2><span class="sub">Overall + regions &#183; scaled by the 90.4% / 9.6% audit split &#183; pending WH live sheet</span></div>
+          <p class="seclab">Overall &#8212; all regions</p><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">6,323</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Booked</p><div class="num">1,879</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">1,129</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">750</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">4,443</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">1,517</div></div></div>
+          <p class="seclab">NCR</p><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">4,593</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Booked</p><div class="num">1,559</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">875</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">684</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">3,034</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">556</div></div></div>
+          <p class="seclab">Bharat</p><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">1,342</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Booked</p><div class="num">0</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">0</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">0</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">1,342</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">909</div></div></div>
+          <p class="seclab">Mumbai</p><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">388</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Booked</p><div class="num">320</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">254</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">66</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">68</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">52</div></div></div>
+          </div>
+          <div class="pncview" data-pncv="2">
+          <div class="vh" style="margin-top:4px"><h2>Audited &#183; Received <span class="illus">illustrative</span></h2><span class="sub">Overall + regions &#183; scaled by the 90.4% / 9.6% audit split &#183; pending WH live sheet</span></div>
+          <p class="seclab">Overall &#8212; all regions</p><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">7,839</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">1,022</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">835</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">160</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not back</p><div class="num">6,817</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">1,517</div></div></div>
+          <p class="seclab">NCR</p><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">5,523</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">427</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">349</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">67</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not back</p><div class="num">5,096</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">556</div></div></div>
+          <p class="seclab">Bharat</p><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">1,711</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">268</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">219</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">42</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not back</p><div class="num">1,444</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">909</div></div></div>
+          <p class="seclab">Mumbai</p><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">606</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">328</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">268</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">52</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not back</p><div class="num">278</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">52</div></div></div>
+          </div>
+          <div class="pncview" data-pncv="3">
+          <div class="vh" style="margin-top:4px"><h2>Not-audited &#183; Booked <span class="illus">illustrative</span></h2><span class="sub">Overall + regions &#183; scaled by the 90.4% / 9.6% audit split &#183; pending WH live sheet</span></div>
+          <p class="seclab">Overall &#8212; all regions</p><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">671</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Booked</p><div class="num">200</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">120</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">80</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">472</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">161</div></div></div>
+          <p class="seclab">NCR</p><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">488</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Booked</p><div class="num">166</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">93</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">73</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">322</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">59</div></div></div>
+          <p class="seclab">Bharat</p><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">142</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Booked</p><div class="num">0</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">0</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">0</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">142</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">97</div></div></div>
+          <p class="seclab">Mumbai</p><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">41</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Booked</p><div class="num">34</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">27</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">7</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">7</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">5</div></div></div>
+          </div>
+          <div class="pncview" data-pncv="4">
+          <div class="vh" style="margin-top:4px"><h2>Not-audited &#183; Received <span class="illus">illustrative</span></h2><span class="sub">Overall + regions &#183; scaled by the 90.4% / 9.6% audit split &#183; pending WH live sheet</span></div>
+          <p class="seclab">Overall &#8212; all regions</p><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">833</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">109</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">89</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">17</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not back</p><div class="num">724</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">161</div></div></div>
+          <p class="seclab">NCR</p><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">586</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">45</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">37</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">7</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not back</p><div class="num">541</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">59</div></div></div>
+          <p class="seclab">Bharat</p><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">182</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">28</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">23</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">4</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not back</p><div class="num">153</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">97</div></div></div>
+          <p class="seclab">Mumbai</p><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">64</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">35</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">29</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">5</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not back</p><div class="num">29</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">5</div></div></div>
+          </div>
         </div>
         <div class="panel mode-book">
           <h3>TAT heatmap &#8212; all regions consolidated</h3>
@@ -652,6 +654,13 @@
         app.classList.toggle('audit', b.dataset.lens==='audit');
         if(b.dataset.lens==='audit'){ var _ro=document.getElementById('r-overview'); if(_ro) _ro.checked=true; }
         try{ localStorage.setItem('lens', b.dataset.lens); }catch(e){}
+      });
+    });
+    document.querySelectorAll('.pncb').forEach(function(pb){
+      pb.addEventListener('click',function(){
+        document.querySelectorAll('.pncb').forEach(function(x){x.classList.remove('on');});
+        pb.classList.add('on');
+        document.querySelectorAll('.pncview').forEach(function(v){ v.classList.toggle('on', v.dataset.pncv===pb.dataset.pnc); });
       });
     });
   })();
