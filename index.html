@@ -113,6 +113,17 @@
   .app:not(.recv) .mode-recv{display:none!important}
   .app:not(.audit) .mode-audit{display:none!important}
   .app.audit .mode-book{display:none!important}
+  #r-july:checked ~ .main .pncbar{display:none!important}
+  #r-july:checked ~ .main .srcpill{display:none!important}
+  .fbar{display:flex;flex-direction:column;gap:9px}
+  .frow{display:grid;grid-template-columns:210px 1fr 120px;gap:12px;align-items:center}
+  .frow .fl{font-size:12.5px;font-weight:650;color:var(--ink)}
+  .frow .ft{height:30px;border-radius:7px;background:rgba(127,127,127,.13);position:relative;overflow:hidden}
+  .frow .ft i{position:absolute;top:0;bottom:0;left:0;border-radius:7px;background:var(--c,var(--brand));opacity:.92}
+  .frow .fv{text-align:right;font-size:13.5px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+  .frow .fv small{display:block;font-size:10.5px;font-weight:600;color:var(--muted);letter-spacing:0}
+  .frow.sub .fl{padding-left:16px;font-weight:600;color:var(--ink-2)}
+  @media(max-width:860px){.frow{grid-template-columns:130px 1fr 92px;gap:8px}.frow .fl{font-size:11.5px}}
   .app.audit .srcpill.mode-book{display:none!important}
   .pncbar{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 18px}
   .pncb{font-size:12.5px;font-weight:700;padding:8px 15px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink-2);cursor:pointer}
@@ -153,6 +164,7 @@
 
   /* CSS-only view switching */
   #r-overview:checked ~ .main #v-overview,
+  #r-july:checked     ~ .main #v-july,
   #r-ncr:checked      ~ .main #v-ncr,
   #r-mumbai:checked   ~ .main #v-mumbai,
   #r-bharat:checked   ~ .main #v-bharat,
@@ -161,6 +173,7 @@
   #r-disc:checked     ~ .main #v-disc,
   #r-refuse:checked   ~ .main #v-refuse{display:flex}
   #r-overview:checked ~ .side label[for="r-overview"],
+  #r-july:checked     ~ .side label[for="r-july"],
   #r-ncr:checked      ~ .side label[for="r-ncr"],
   #r-mumbai:checked   ~ .side label[for="r-mumbai"],
   #r-bharat:checked   ~ .side label[for="r-bharat"],
@@ -172,6 +185,7 @@
 
 <div class="app" id="app">
   <input class="vradio" type="radio" name="view" id="r-overview" checked>
+  <input class="vradio" type="radio" name="view" id="r-july">
   <input class="vradio" type="radio" name="view" id="r-ncr">
   <input class="vradio" type="radio" name="view" id="r-mumbai">
   <input class="vradio" type="radio" name="view" id="r-bharat">
@@ -184,6 +198,7 @@
     <div class="brand"><div class="logo">W</div><div><b>Return Tracker</b><span>NetBox device journey</span></div></div>
     <nav class="nav">
       <label class="navitem" for="r-overview"><span class="ic">&#9638;</span> Overview</label>
+      <label class="navitem" for="r-july"><span class="ic">&#128197;</span> July 2026</label>
       <label class="navitem" for="r-ncr"><span class="ic">&#128205;</span> NCR</label>
       <label class="navitem" for="r-mumbai"><span class="ic">&#128205;</span> Mumbai</label>
       <label class="navitem" for="r-bharat"><span class="ic">&#128205;</span> Bharat</label>
@@ -332,6 +347,101 @@
       </section>
 
       <!-- ============ NCR ============ -->
+      <!-- ============ JULY 2026 ============ -->
+      <section class="view" id="v-july">
+        <div class="vh"><h2>&#128197; July 2026</h2><span class="sub">full-month retrieval funnel &#183; Forms 1 + 2 + 3 &#183; unique devices</span></div>
+
+        <p class="seclab">Headline &#8212; marked &#8594; returned &#8594; still open</p>
+        <div class="kgrid">
+          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for retrieval</p><div class="num">3,917</div><p class="sub">unique devices &#183; 1&#8211;31 Jul 2026</p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Returned to Wiom</p><div class="num">3,137</div><p class="sub"><span class="g">80.1%</span> recovery rate</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Not returned</p><div class="num">780</div><p class="sub"><span class="r">19.9%</span> of marked</p></div>
+          <div class="kc" style="--c:var(--warn)"><p class="lab">Retrieval pending</p><div class="num">515</div><p class="sub">66% of all non-returns</p></div>
+          <div class="kc" style="--c:var(--brand)"><p class="lab">No action taken</p><div class="num">59</div><p class="sub">never worked by our team</p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Carry fee charged</p><div class="num">&#8377;0</div><p class="sub">on all 515 pending</p></div>
+        </div>
+
+        <div class="panel">
+          <h3>The funnel</h3>
+          <p class="cap">Base = 3,917 unique device IDs marked for retrieval 1&#8211;31 July 2026 across all three channels, de-duplicated, excluding 125 devices re-requested in August. Receipt is counted only where a source confirms it <b>on or after</b> that device&#39;s own request date.</p>
+          <div class="fbar">
+            <div class="frow"><span class="fl">Marked for retrieval</span><span class="ft" style="--c:var(--marked)"><i style="width:100%"></i></span><span class="fv">3,917<small>100%</small></span></div>
+            <div class="frow"><span class="fl">Returned to Wiom</span><span class="ft" style="--c:var(--good)"><i style="width:80.1%"></i></span><span class="fv">3,137<small>80.1%</small></span></div>
+            <div class="frow"><span class="fl">Not returned</span><span class="ft" style="--c:var(--bad)"><i style="width:19.9%"></i></span><span class="fv">780<small>19.9%</small></span></div>
+            <div class="frow sub"><span class="fl">&#8627; Retrieval pending</span><span class="ft" style="--c:var(--warn)"><i style="width:13.1%"></i></span><span class="fv">515<small>13.1%</small></span></div>
+            <div class="frow sub"><span class="fl">&#8627; No action taken by us</span><span class="ft" style="--c:var(--brand)"><i style="width:1.5%"></i></span><span class="fv">59<small>1.5%</small></span></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>What happened to the 780 that did not come back</h3>
+          <p class="cap">Current custody status in <b>NETBOX_CUSTODY</b>. 515 are genuinely still open; the other 265 left the pipeline &#8212; closed, written off, redeployed or never tracked &#8212; without ever reaching Wiom.</p>
+          <div class="scroller"><table>
+            <thead><tr><th>Status</th><th>Devices</th><th>% of 780</th><th>% of 3,917</th><th>What it means</th></tr></thead>
+            <tbody>
+              <tr><td><b>RETRIEVAL_PENDING</b></td><td><b>515</b></td><td class="grp-r">66.0%</td><td>13.1%</td><td>Still open, awaiting collection</td></tr>
+              <tr><td>Not in custody table</td><td>133</td><td>17.1%</td><td>3.4%</td><td>No custody record exists at all</td></tr>
+              <tr><td>DEPLOYED</td><td>48</td><td>6.2%</td><td>1.2%</td><td>Back in active service</td></tr>
+              <tr><td>WRITTEN_OFF</td><td>32</td><td>4.1%</td><td>0.8%</td><td>Written off the books</td></tr>
+              <tr><td>IDLE</td><td>21</td><td>2.7%</td><td>0.5%</td><td>Inactive, request closed</td></tr>
+              <tr><td>LOST</td><td>15</td><td>1.9%</td><td>0.4%</td><td>Recorded as lost</td></tr>
+              <tr><td>CUSTODIED</td><td>13</td><td>1.7%</td><td>0.3%</td><td>Reverted to normal partner custody</td></tr>
+              <tr><td>CUSTOMER_RECOVERY_PENDING</td><td>3</td><td>0.4%</td><td>0.1%</td><td>Still with an end customer</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
+        <div class="panel">
+          <h3>Why the 515 are still pending</h3>
+          <p class="cap">Reason taken from Column V of the in-app sheet. <b>389 (75.5%) are partner-driven</b>, 64 were marked in error by the partner, and <b>59 were never actioned by our team</b> &#8212; no call, no assignment, no pickup and no refusal recorded anywhere.</p>
+          <div class="scroller"><table>
+            <thead><tr><th>Reason</th><th>Devices</th><th>Share</th><th>Whose side</th></tr></thead>
+            <tbody>
+              <tr><td>Partner denied</td><td>313</td><td>60.8%</td><td>Partner</td></tr>
+              <tr><td>Marked in error by partner</td><td>64</td><td>12.4%</td><td>Partner</td></tr>
+              <tr><td><b>No action taken by Wiom</b></td><td><b>59</b></td><td class="grp-r">11.5%</td><td><span class="pill" style="background:rgba(220,60,60,.14);color:var(--bad)">Ours</span></td></tr>
+              <tr><td>Partner cancelled pickup</td><td>55</td><td>10.7%</td><td>Partner</td></tr>
+              <tr><td>Partner deferred</td><td>18</td><td>3.5%</td><td>Partner</td></tr>
+              <tr><td>Partner not available</td><td>3</td><td>0.6%</td><td>Partner</td></tr>
+              <tr><td>Marked collected, not received</td><td>2</td><td>0.4%</td><td>Logistics</td></tr>
+              <tr><td>Raised via Form 2 (no Column V)</td><td>1</td><td>0.2%</td><td>&#8212;</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
+        <div class="panel">
+          <h3>Recovery by channel</h3>
+          <p class="cap">The loss is concentrated in one channel. <b>514 of the 515 pending devices come from the in-app channel</b> &#8212; the two form channels close their loop, in-app does not.</p>
+          <div class="scroller"><table>
+            <thead><tr><th>Channel</th><th>Devices marked</th><th>Returned</th><th class="grp-g">Recovery rate</th><th>Pending</th></tr></thead>
+            <tbody>
+              <tr><td>Form 3 &#183; Partner Device Return Form</td><td>315</td><td>307</td><td><b class="g">97.5%</b></td><td>0</td></tr>
+              <tr><td>Form 2 &#183; CSP Netbox Return Form</td><td>2,686</td><td>2,447</td><td><b class="g">91.1%</b></td><td>1</td></tr>
+              <tr><td>Form 1 &#183; in-app</td><td>979</td><td>446</td><td><b class="r">45.6%</b></td><td class="r"><b>514</b></td></tr>
+              <tr style="border-top:1.5px solid var(--line)"><td><b>Total</b></td><td><b>3,917</b></td><td><b>3,137</b></td><td><b>80.1%</b></td><td><b>515</b></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
+        <div class="panel">
+          <h3>Where the 515 sit &#8212; and what it is costing</h3>
+          <p class="cap">458 devices are at partner premises, 57 with end customers, none at Wiom. The oldest has been out <b>52 days</b>. Carry fee is inactive on every one: <b>CARRY_FEE_ACTIVE = No</b>, <b>TOTAL_LIABILITY = &#8377;0</b>, <b>ACCRUAL_UNITS = 0</b>. Partners are holding 515 devices at zero cost to themselves.</p>
+          <div class="scroller"><table>
+            <thead><tr><th>Age bucket (as of 22 Aug 2026)</th><th>Devices</th><th>Physical location</th><th>Devices</th></tr></thead>
+            <tbody>
+              <tr><td>22&#8211;30 days</td><td>194</td><td>At partner premises</td><td>458</td></tr>
+              <tr><td>31&#8211;40 days</td><td>189</td><td>At end customer</td><td>57</td></tr>
+              <tr><td>41&#8211;52 days</td><td>132</td><td>At Wiom</td><td>0</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
+        <div class="panel">
+          <h3>Basis &#8212; how these numbers were built</h3>
+          <p class="cap" style="margin:0">Sources: <b>RETRIEVAL_PENDING_NetBox</b> (in-app requests), <b>CSP Netbox Return Form</b> and <b>Partner Device Return Form</b> (active response streams only). Receipt confirmed against Snowflake <b>RETURN_EVENT</b>, <b>CUSTODY_AUDIT_LOG</b>, <b>INVENTORY_MODEL</b> and <b>PYROPS_INBOUND_DATA__SALES_RETURN</b>, plus the Form 2 and Form 3 receipt columns. 92% of confirmed returns are corroborated by three or more independent sources. Known gaps: 10 device IDs were entered malformed by partners and cannot be matched, and 158 devices have no record in NETBOX_CUSTODY. Data as of 22 Aug 2026.</p>
+        </div>
+      </section>
+
       <section class="view" id="v-ncr">
         <div class="vh"><h2>&#128205; NCR</h2><span class="sub">Delhi &#183; in-app + forms &#183; carrier Porter &#183; SLA 24 h</span></div>
           <div class="pncview on mode-audit" data-pncv="1"><div class="vh" style="margin-top:2px"><h2>Audited &#183; Booked <span class="illus">illustrative</span></h2><span class="sub">NCR &#183; scaled by the 90.4% / 9.6% audit split &#183; pending WH live sheet</span></div><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">4,593</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Booked</p><div class="num">1,559</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">875</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">684</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">3,034</div></div><div class="kc" style="--c:var(--brand)"><p class="lab">CSP refused</p><div class="num">556</div></div></div></div>
