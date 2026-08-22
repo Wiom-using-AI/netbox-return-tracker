@@ -115,7 +115,8 @@
   .app:not(.audit) .mode-audit{display:none!important}
   .app.audit .mode-book{display:none!important}
   /* audit lens: only the sections that carry audit content stay in the nav */
-  .app.audit .navitem:not([for="r-ncr"]):not([for="r-mumbai"]):not([for="r-bharat"]){display:none!important}
+  /* audit lens: no side tabs at all - one consolidated all-region view */
+  .app.audit .navitem{display:none!important}
 
   #r-july:checked ~ .main .pncbar,
   #r-aug:checked ~ .main .pncbar{display:none!important}
@@ -1136,7 +1137,7 @@ window.JULY_PENDING = [["140357","Broadband tree","Marked in error",52,"partner"
       b.addEventListener('click',function(){
         app.classList.toggle('recv', b.dataset.lens!=='audit');
         app.classList.toggle('audit', b.dataset.lens==='audit');
-        if(b.dataset.lens==='audit'){ var _sel=document.querySelector('.vradio:checked'); var _ok=['r-ncr','r-mumbai','r-bharat']; if(!_sel||_ok.indexOf(_sel.id)<0){ var _ro=document.getElementById('r-ncr'); if(_ro) _ro.checked=true; } }
+        if(b.dataset.lens==='audit'){ var _ro=document.getElementById('r-overview'); if(_ro) _ro.checked=true; }
         try{ localStorage.setItem('lens', b.dataset.lens); }catch(e){}
       });
     });
