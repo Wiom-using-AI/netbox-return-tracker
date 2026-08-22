@@ -925,14 +925,89 @@
           <div class="pncview mode-audit" data-pncv="3"><div class="vh" style="margin-top:2px"><h2>Not-audited &#183; Booked <span class="illus">illustrative</span></h2><span class="sub">Bharat &#183; scaled by the 90.4% / 9.6% audit split &#183; pending WH live sheet</span></div><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">142</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Booked</p><div class="num">0</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">0</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">0</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">142</div></div></div></div>
           <div class="pncview mode-audit" data-pncv="4"><div class="vh" style="margin-top:2px"><h2>Not-audited &#183; Received <span class="illus">illustrative</span></h2><span class="sub">Bharat &#183; scaled by the 90.4% / 9.6% audit split &#183; pending WH live sheet</span></div><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">182</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">28</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">23</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">4</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not back</p><div class="num">153</div></div></div></div>
         <div class="kgrid k4 mode-recv">
-          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked since 15 Aug</p><div class="num">1,893</div><p class="sub">in-app 1,637 + Forms 256</p></div>
-          <div class="kc" style="--c:var(--good)"><p class="lab">Received at Wiom</p><div class="num">296</div><p class="sub"><span class="g">16%</span> of marked &#183; Forms 289</p></div>
-          <div class="kc" style="--c:var(--bad)"><p class="lab">In-app (3PL) received</p><div class="num">7</div><p class="sub"><span class="r">all 7 date-anomalous</span></p></div>
-          <div class="kc" style="--c:var(--warn)"><p class="lab">City data patchy</p><div class="num">262</div><p class="sub">Forms devices with city "Not Found"</p></div>
+          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked 15&#8211;21 Aug</p><div class="num">2,092</div><p class="sub">in-app 1,796 &#183; forms 296</p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Received at Wiom</p><div class="num">268</div><p class="sub"><span class="r">12.8%</span> of marked</p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT (&#8804;3 days)</p><div class="num">267</div><p class="sub">13% of marked</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Outstanding</p><div class="num">1,824</div><p class="sub"><span class="r">87.2%</span> of marked</p></div>
         </div>
+
+        <div class="panel mode-recv" style="border-left:3px solid var(--bad)">
+          <h3>&#9888; The in-app lane has recovered 1 device out of 1,796</h3>
+          <p class="cap" style="margin:0">Bharat&#39;s entire recovery comes from the two partner forms. The in-app channel &#8212; 86% of everything marked here &#8212; has produced <b>one</b> device back.</p>
+          <div class="scroller"><table>
+            <thead><tr><th>Channel</th><th>Marked</th><th>Received</th><th class="grp-g">Rate</th><th>Outstanding</th></tr></thead>
+            <tbody>
+              <tr><td>Forms 2 &amp; 3 &#183; partner-submitted</td><td>296</td><td>267</td><td><b class="g">90.2%</b></td><td>29</td></tr>
+              <tr><td>Form 1 &#183; in-app</td><td>1,796</td><td><b class="r">1</b></td><td><b class="r">0.1%</b></td><td class="r"><b>1,795</b></td></tr>
+              <tr style="border-top:1.5px solid var(--line)"><td><b>Total</b></td><td><b>2,092</b></td><td><b>268</b></td><td><b>12.8%</b></td><td><b>1,824</b></td></tr>
+            </tbody>
+          </table></div>
+          <p class="cap" style="margin:10px 0 0">The 3PL pickup lane is not running against in-app requests. Where a partner fills a form the device comes back 9 times out of 10; where they mark it in the app it effectively never does.</p>
+        </div>
+
         <div class="panel mode-recv">
-          <h3>Forms receipts are carrying Bharat &#8212; the 3PL lane is still at zero</h3>
-          <p class="cap">All 289 clean Bharat receipts came through Forms pickups (245 from 16 Aug submissions, 44 from 17 Aug), received &#8804;1 day. The in-app 3PL lane has produced only 7 received rows, every one with a broken warehouse date (6 dated June, 1 missing). Caveat: Forms city is self-reported and 262 devices say "Not Found" &#8212; some of these Bharat-bucketed receipts may belong to NCR.</p>
+          <h3>Received heatmap &#8212; marking date &#8594; warehouse receipt</h3>
+          <p class="cap">Rows = date the device was marked. Source: <b>Wiom_Device Return_End_2_End</b> (receipts to 21 Aug 2026), counting only receipts on or after each device&#39;s own marked date. SLA is <b>3PL 3 days</b>, so <b>Within TAT</b> = received within 3 days. <b>Within TAT + Outside TAT + Not received = Total marked.</b></p>
+          <div class="scroller"><table class="hm">
+            <thead><tr><th>Marked date</th><th>Total marked</th><th class="grp-g">1 day</th><th>2 day</th><th>3 day</th><th>4 day+</th><th class="grp-g">Within TAT</th><th class="grp-r">Outside TAT</th><th class="grp-r">Not received</th></tr></thead>
+            <tbody>
+              <tr><td><b>15 Aug</b></td><td>549</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>549</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td></tr>
+              <tr><td><b>16 Aug</b></td><td>422</td><td class="g1">3</td><td class="n3">9</td><td class="n3">1</td><td class="r3">1</td><td><b class="g">13</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">3%</span></td><td><b class="r">1</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>408</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">97%</span></td></tr>
+              <tr><td><b>17 Aug</b></td><td>203</td><td class="g1">27</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">27</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">13%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>176</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">87%</span></td></tr>
+              <tr><td><b>18 Aug</b></td><td>487</td><td class="g3">100</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">100</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">21%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>387</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">79%</span></td></tr>
+              <tr><td><b>19 Aug</b></td><td>220</td><td class="g3">79</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">79</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">36%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>141</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">64%</span></td></tr>
+              <tr><td><b>20 Aug</b></td><td>155</td><td class="g1">14</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">14</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">9%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>141</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">91%</span></td></tr>
+              <tr><td><b>21 Aug</b></td><td>56</td><td class="g2">34</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">34</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">61%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>22</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">39%</span></td></tr>
+            </tbody>
+            <tfoot><tr><td><b>Total</b></td><td><b>2,092</b></td><td>257</td><td>9</td><td>1</td><td>1</td><td><b class="g">267</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">13%</span></td><td><b class="r">1</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>1,824</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">87%</span></td></tr></tfoot>
+          </table></div>
+          <div class="hmleg">
+            <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Within TAT (received &#8804;3 days)</span>
+            <span><b>15 Aug is the worst day: 549 marked, 0 received.</b></span>
+          </div>
+        </div>
+
+        <div class="panel mode-recv">
+          <h3>Warehouse throughput &#8212; devices received on each day</h3>
+          <p class="cap">Columns are the date the device physically arrived, so this shows what the warehouse actually booked in from Bharat each day. Row totals tie back to the heatmap above.</p>
+          <div class="scroller"><table class="hm">
+            <thead><tr><th>Marked date</th><th>Rcvd 15 Aug</th><th>Rcvd 16 Aug</th><th>Rcvd 17 Aug</th><th>Rcvd 18 Aug</th><th>Rcvd 19 Aug</th><th>Rcvd 20 Aug</th><th>Rcvd 21 Aug</th><th class="grp-g">Row total</th></tr></thead>
+            <tbody>
+              <tr><td><b>15 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b>0</b></td></tr>
+              <tr><td><b>16 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="g1">3</td><td class="g1">9</td><td class="g1">1</td><td class="z">0</td><td class="g1">1</td><td><b>14</b></td></tr>
+              <tr><td><b>17 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">27</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b>27</b></td></tr>
+              <tr><td><b>18 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">15</td><td class="g3">85</td><td class="z">0</td><td class="z">0</td><td><b>100</b></td></tr>
+              <tr><td><b>19 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g3">79</td><td class="z">0</td><td class="z">0</td><td><b>79</b></td></tr>
+              <tr><td><b>20 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">14</td><td class="z">0</td><td><b>14</b></td></tr>
+              <tr><td><b>21 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g2">34</td><td><b>34</b></td></tr>
+            </tbody>
+            <tfoot><tr><td><b>Arrived that day</b></td><td><b class="g">0</b></td><td><b class="g">0</b></td><td><b class="g">3</b></td><td><b class="g">51</b></td><td><b class="g">165</b></td><td><b class="g">14</b></td><td><b class="g">35</b></td><td><b>268</b></td></tr></tfoot>
+          </table></div>
+          <div class="hmleg"><span><b>Bharat intake peaks at 165 on 19 Aug</b> and never exceeds it &#8212; against NCR&#39;s 1,140 the same day.</span></div>
+        </div>
+
+        <div class="panel mode-recv">
+          <h3>Status of the 1,824 outstanding Bharat devices</h3>
+          <p class="cap" style="margin:0"><b>Not one partner declined.</b> 1,787 (98.0%) are open requests awaiting follow-up, 29 came via Forms 2/3 with no status column, and 8 were marked collected but have not yet arrived. Bharat&#39;s problem is that nothing is being dispatched against these requests &#8212; not that partners are refusing.</p>
+        </div>
+
+        <div class="panel mode-recv">
+          <h3>Partners holding the most devices</h3>
+          <p class="cap">Two partners hold <b>752 devices &#8212; 41% of the entire Bharat backlog</b>.</p>
+          <div class="scroller"><table>
+            <thead><tr><th>CSP</th><th>Outstanding</th><th>Share of backlog</th></tr></thead>
+            <tbody>
+              <tr><td><b>GOYLA CABLE NETWORK</b></td><td><b class="r">500</b></td><td>27.4%</td></tr>
+              <tr><td><b>CHOICE CABLE NETWORK &amp; INTERNET SERVICE</b></td><td><b class="r">252</b></td><td>13.8%</td></tr>
+              <tr><td>One Infra &amp; Technologies <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">+ ONE INFRA &amp; TECHNOLOGY 81</span></td><td>84</td><td>4.6%</td></tr>
+              <tr><td>Saleem Cable T V Network</td><td>85</td><td>4.7%</td></tr>
+              <tr><td>Usha Network</td><td>62</td><td>3.4%</td></tr>
+              <tr><td>DEEP STAR CABLE NETWORK</td><td>59</td><td>3.2%</td></tr>
+              <tr><td>Nirmala cable TV network</td><td>52</td><td>2.9%</td></tr>
+              <tr><td>BR Enterprises Prayagraj</td><td>51</td><td>2.8%</td></tr>
+            </tbody>
+          </table></div>
+          <p class="cap" style="margin:10px 0 0"><b>&ldquo;One Infra &amp; Technologies&rdquo; and &ldquo;ONE INFRA &amp; TECHNOLOGY&rdquo; are the same partner entered twice</b> &#8212; 165 devices combined, which would make it the third largest holder. Worth fixing at source. A further 48 outstanding devices have no CSP name recorded at all.</p>
         </div>
         <div class="kgrid k4 mode-book">
           <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">1,484</div><p class="sub">Aug 15-18 &#183; in-app</p></div>
