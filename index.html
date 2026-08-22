@@ -602,16 +602,16 @@
         <div class="vh"><h2>&#128197; Aug 15&#8211;21 2026</h2><span class="sub">post markup-fee surge &#183; Forms 1 + 2 + 3 &#183; unique devices</span></div>
 
         <div class="panel" style="border-left:3px solid var(--bad)">
-          <h3>&#9888; 48 devices returned by 21 Aug with no entry in the warehouse sheet</h3>
-          <p class="cap">Every figure on this tab counts <b>only</b> what the <b>Wiom_Device Return_End_2_End</b> sheet records, and everything is held to a <b>21 Aug cut-off</b> on both sides &#8212; marked 15&#8211;21 Aug, returned on or before 21 Aug. On that basis Snowflake&#39;s <b>RETURN_EVENT</b> shows <b>48 further devices</b> returned that the sheet has no entry for. All 48 are NCR, all carry custody status <b>RETURNED</b>, and none is flagged as an anomaly.</p>
+          <h3>&#9888; 565 devices returned by 21 Aug with no entry in the warehouse sheet</h3>
+          <p class="cap">Every figure on this tab counts <b>only</b> what the <b>Wiom_Device Return_End_2_End</b> sheet records, and everything is held to a <b>21 Aug cut-off</b> on both sides &#8212; marked 15&#8211;21 Aug, returned on or before 21 Aug. On that basis Snowflake&#39;s <b>RETURN_EVENT</b> shows <b>565 further devices</b> returned that the sheet has no entry for &#8212; <b>48 in NCR</b> (ordinary lag) and <b>517 in Mumbai</b>, which the sheet does not cover at all. All carry custody status <b>RETURNED</b>.</p>
           <div class="scroller"><table>
             <thead><tr><th>Region</th><th>Per warehouse sheet</th><th class="grp-r">Extra per Snowflake</th><th>Combined</th><th>Cohort</th><th class="grp-g">Rate incl. Snowflake</th></tr></thead>
             <tbody>
               <tr><td>NCR</td><td>3,809</td><td><b class="r">+48</b></td><td>3,857</td><td>7,946</td><td><b class="g">48.5%</b> <span style="color:var(--muted)">vs 47.9% sheet-only</span></td></tr>
               <tr><td>Bharat</td><td>1</td><td>0</td><td>1</td><td>1,748</td><td><b class="r">0.1%</b></td></tr>
-              <tr><td>Mumbai <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">separate method</span></td><td>0</td><td>0</td><td>0</td><td>719</td><td>&#8212;</td></tr>
+              <tr><td>Mumbai <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">Snowflake basis</span></td><td>0</td><td><b class="g">+517</b></td><td>517</td><td>719</td><td><b class="g">71.9%</b> <span style="color:var(--muted)">sheet has none</span></td></tr>
               <tr><td>Unresolved region <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">see note</span></td><td>97</td><td>0</td><td>97</td><td>173</td><td>56.1%</td></tr>
-              <tr style="border-top:1.5px solid var(--line)"><td><b>Total</b></td><td><b>3,907</b></td><td><b class="r">+48</b></td><td><b>3,955</b></td><td><b>10,586</b></td><td><b>37.4%</b> <span style="color:var(--muted)">vs 36.9% sheet-only</span></td></tr>
+              <tr style="border-top:1.5px solid var(--line)"><td><b>Total</b></td><td><b>3,907</b></td><td><b class="r">+565</b></td><td><b>4,472</b></td><td><b>10,586</b></td><td><b>42.2%</b> <span style="color:var(--muted)">vs 36.9% sheet-only</span></td></tr>
             </tbody>
           </table></div>
           <p class="cap" style="margin:8px 0 0"><b>Note &#8212; 173 devices excluded from all region totals.</b> Region is taken from the in-app sheet&#39;s <b>city</b> and <b>zone</b>; where a device arrived only through a form, it is resolved by joining the form&#39;s <b>LCO ID</b> to <b>partner_id</b> in the in-app sheet. That resolves 815 form devices and Form&nbsp;2&#39;s city column covers a further 475, but <b>173 cannot be placed</b> &#8212; 125 form devices whose LCO ID matches no partner record, and 48 in-app rows with no city and no zone. 97 of the 173 are already received. They are held out of NCR, Mumbai and Bharat rather than defaulted into one, so the four lines sum to 10,586.</p>
@@ -664,7 +664,7 @@
             <tbody>
               <tr><td>NCR</td><td>7,946</td><td>3,809</td><td><b class="g">47.9%</b></td><td>4,137</td></tr>
               <tr><td>Bharat</td><td>1,748</td><td>1</td><td><b class="r">0.1%</b></td><td>1,747</td></tr>
-              <tr><td>Mumbai <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">not in sheet</span></td><td>719</td><td>0</td><td>&#8212;</td><td>719</td></tr>
+              <tr><td>Mumbai <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">Snowflake basis</span></td><td>719</td><td>517</td><td><b class="g">71.9%</b></td><td>202</td></tr>
               <tr><td>Unresolved region <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">see note</span></td><td>173</td><td>97</td><td>56.1%</td><td>76</td></tr>
               <tr style="border-top:1.5px solid var(--line)"><td><b>Total</b></td><td><b>10,586</b></td><td><b>3,907</b></td><td><b>36.9%</b></td><td><b>6,679</b></td></tr>
             </tbody>
@@ -867,24 +867,88 @@
           <div class="pncview mode-audit" data-pncv="3"><div class="vh" style="margin-top:2px"><h2>Not-audited &#183; Booked <span class="illus">illustrative</span></h2><span class="sub">Mumbai &#183; scaled by the 90.4% / 9.6% audit split &#183; pending WH live sheet</span></div><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">41</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Booked</p><div class="num">34</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">27</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">7</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">7</div></div></div></div>
           <div class="pncview mode-audit" data-pncv="4"><div class="vh" style="margin-top:2px"><h2>Not-audited &#183; Received <span class="illus">illustrative</span></h2><span class="sub">Mumbai &#183; scaled by the 90.4% / 9.6% audit split &#183; pending WH live sheet</span></div><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">64</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">35</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">29</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">5</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not back</p><div class="num">29</div></div></div></div>
         <div class="kgrid k4 mode-recv">
-          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked since 15 Aug</p><div class="num">670</div><p class="sub">Forms 435 + in-app 235</p></div>
-          <div class="kc" style="--c:var(--good)"><p class="lab">Received at Wiom</p><div class="num">363</div><p class="sub"><span class="g">54%</span> of marked &#183; all via Forms</p></div>
-          <div class="kc" style="--c:var(--brand)"><p class="lab">Received &#8804;1 day</p><div class="num">290</div><p class="sub">+73 in 2 days</p></div>
-          <div class="kc" style="--c:var(--bad)"><p class="lab">In-app received</p><div class="num">0</div><p class="sub">of 235 in-app marked</p></div>
+          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked 15&#8211;21 Aug</p><div class="num">719</div><p class="sub">forms 420 &#183; in-app 299</p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Returned</p><div class="num">517</div><p class="sub"><span class="g">71.9%</span> &#8212; best of the three regions</p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT (&#8804;1 day)</p><div class="num">364</div><p class="sub">51% of marked</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Outstanding</p><div class="num">202</div><p class="sub"><span class="r">28.1%</span> of marked</p></div>
         </div>
+
+        <div class="panel mode-recv" style="border-left:3px solid var(--warn)">
+          <h3>&#9888; Mumbai is measured from Snowflake, not the warehouse sheet</h3>
+          <p class="cap" style="margin:0">The <b>Wiom_Device Return_End_2_End</b> sheet records <b>0 of these 719 devices</b> &#8212; it does not cover Mumbai at all. That is not a lag: 517 devices physically arrived and none was written to the sheet. Every figure on this tab therefore comes from Snowflake <b>RETURN_EVENT</b>, counting returns on or after each device&#39;s own marked date and on or before <b>21 Aug</b>.<br><br>
+          Three Snowflake tables agree within one device: <b>RETURN_EVENT</b> 517, <b>NETBOX_CUSTODY</b> status RETURNED 518, <b>INVENTORY_MODEL</b> location <i>wiom</i> 518. All 517 are recorded as returned by the CSP; only 2 carry an anomaly flag.</p>
+        </div>
+
         <div class="panel mode-recv">
-          <h3>Received by marked date</h3>
-          <p class="cap">Forms pickups carry all Mumbai receipts; the 235 in-app devices have no warehouse receipt yet. 59 backlog receipts (pre-drive) also on record.</p>
-          <div class="scroller"><table style="min-width:auto" class="hm">
-            <thead><tr><th>Marked date</th><th>Total marked</th><th class="grp-g">&#8804;1 day</th><th>2 days</th><th class="grp-g">Total received</th><th>% received</th></tr></thead>
+          <h3>Recovery by channel</h3>
+          <p class="cap">The same split as NCR and Bharat: where a partner submits a form the device comes back almost every time; where it is marked in the app, a third of the time.</p>
+          <div class="scroller"><table>
+            <thead><tr><th>Channel</th><th>Marked</th><th>Returned</th><th class="grp-g">Rate</th><th>Outstanding</th></tr></thead>
             <tbody>
-              <tr><td>15&#8211;16 Aug</td><td>64</td><td class="z">0</td><td class="z">0</td><td><b>0</b></td><td class="r">0%</td></tr>
-              <tr><td>17 Aug</td><td>225</td><td class="g2">120</td><td class="g2">73</td><td><b>193</b></td><td class="g">86%</td></tr>
-              <tr><td>18 Aug</td><td>220</td><td class="g3">170</td><td class="z">0</td><td><b>170</b></td><td class="g">77%</td></tr>
-              <tr><td>19&#8211;20 Aug</td><td>161</td><td class="z">0</td><td class="z">0</td><td><b>0</b></td><td class="r">0%</td></tr>
+              <tr><td>Forms 2 &amp; 3 &#183; partner-submitted</td><td>420</td><td>415</td><td><b class="g">98.8%</b></td><td>5</td></tr>
+              <tr><td>Form 1 &#183; in-app</td><td>299</td><td>102</td><td><b class="r">34.1%</b></td><td class="r"><b>197</b></td></tr>
+              <tr style="border-top:1.5px solid var(--line)"><td><b>Total</b></td><td><b>719</b></td><td><b>517</b></td><td><b>71.9%</b></td><td><b>202</b></td></tr>
             </tbody>
-            <tfoot><tr><td>Total</td><td>670</td><td>290</td><td>73</td><td><b>363</b></td><td class="g">54%</td></tr></tfoot>
           </table></div>
+        </div>
+
+        <div class="panel mode-recv">
+          <h3>Return heatmap &#8212; marking date &#8594; return</h3>
+          <p class="cap">Rows = date the device was marked. Source: Snowflake <b>RETURN_EVENT</b>, returns on or after each device&#39;s marked date and on or before 21 Aug. SLA is Porter 24 h. <b>Within TAT + Outside TAT + Not returned = Total marked.</b></p>
+          <div class="scroller"><table class="hm">
+            <thead><tr><th>Marked date</th><th>Total marked</th><th class="grp-g">1 day</th><th>2 day</th><th>3 day</th><th>4 day+</th><th class="grp-g">Within TAT</th><th class="grp-r">Outside TAT</th><th class="grp-r">Not returned</th></tr></thead>
+            <tbody>
+              <tr><td><b>15 Aug</b></td><td>1</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>1</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td></tr>
+              <tr><td><b>16 Aug</b></td><td>63</td><td class="z">0</td><td class="n1">11</td><td class="z">0</td><td class="r3">21</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">32</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">51%</span></td><td><b>31</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">49%</span></td></tr>
+              <tr><td><b>17 Aug</b></td><td>224</td><td class="g2">108</td><td class="n3">79</td><td class="z">0</td><td class="z">0</td><td><b class="g">108</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">48%</span></td><td><b class="r">79</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">35%</span></td><td><b>37</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">17%</span></td></tr>
+              <tr><td><b>18 Aug</b></td><td>192</td><td class="g3">167</td><td class="z">0</td><td class="n3">3</td><td class="z">0</td><td><b class="g">167</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">87%</span></td><td><b class="r">3</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">2%</span></td><td><b>22</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">11%</span></td></tr>
+              <tr><td><b>19 Aug</b></td><td>103</td><td class="g1">19</td><td class="n2">39</td><td class="z">0</td><td class="z">0</td><td><b class="g">19</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">18%</span></td><td><b class="r">39</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">38%</span></td><td><b>45</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">44%</span></td></tr>
+              <tr><td><b>20 Aug</b></td><td>83</td><td class="g2">70</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">70</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">84%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>13</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">16%</span></td></tr>
+              <tr><td><b>21 Aug</b></td><td>53</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>53</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td></tr>
+            </tbody>
+            <tfoot><tr><td><b>Total</b></td><td><b>719</b></td><td>364</td><td>129</td><td>3</td><td>21</td><td><b class="g">364</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">51%</span></td><td><b class="r">153</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">21%</span></td><td><b>202</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">28%</span></td></tr></tfoot>
+          </table></div>
+          <div class="hmleg">
+            <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Within TAT (returned &#8804;1 day)</span>
+            <span><b>Within TAT 364 &#183; 51%</b> &#8212; more than double NCR&#39;s 20%</span>
+          </div>
+        </div>
+
+        <div class="panel mode-recv">
+          <h3>Throughput &#8212; devices returned on each day</h3>
+          <p class="cap">Columns are the date the device was returned. Row totals tie back to the heatmap above.</p>
+          <div class="scroller"><table class="hm">
+            <thead><tr><th>Marked date</th><th>Rtn 15 Aug</th><th>Rtn 16 Aug</th><th>Rtn 17 Aug</th><th>Rtn 18 Aug</th><th>Rtn 19 Aug</th><th>Rtn 20 Aug</th><th>Rtn 21 Aug</th><th class="grp-g">Row total</th></tr></thead>
+            <tbody>
+              <tr><td><b>15 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b>0</b></td></tr>
+              <tr><td><b>16 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">11</td><td class="z">0</td><td class="g1">21</td><td class="z">0</td><td><b>32</b></td></tr>
+              <tr><td><b>17 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g3">108</td><td class="g2">79</td><td class="z">0</td><td class="z">0</td><td><b>187</b></td></tr>
+              <tr><td><b>18 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">41</td><td class="g3">126</td><td class="z">0</td><td class="g1">3</td><td><b>170</b></td></tr>
+              <tr><td><b>19 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">19</td><td class="g1">39</td><td><b>58</b></td></tr>
+              <tr><td><b>20 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g2">70</td><td><b>70</b></td></tr>
+              <tr><td><b>21 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b>0</b></td></tr>
+            </tbody>
+            <tfoot><tr><td><b>Arrived that day</b></td><td><b class="g">0</b></td><td><b class="g">0</b></td><td><b class="g">0</b></td><td><b class="g">160</b></td><td><b class="g">205</b></td><td><b class="g">40</b></td><td><b class="g">112</b></td><td><b>517</b></td></tr></tfoot>
+          </table></div>
+          <div class="hmleg"><span>Peak day is <b>19 Aug at 205 devices</b>. Nothing is recorded before 18 Aug.</span></div>
+        </div>
+
+        <div class="panel mode-recv">
+          <h3>Status of the 202 outstanding</h3>
+          <p class="cap">Unlike NCR and Bharat, Mumbai&#39;s outstanding devices carry real outcomes &#8212; only 17% are awaiting follow-up. Partners here are being reached; most have deferred or declined.</p>
+          <div class="scroller"><table>
+            <thead><tr><th>Status</th><th>Devices</th><th>Share</th></tr></thead>
+            <tbody>
+              <tr><td>Partner deferred</td><td><b>84</b></td><td>41.6%</td></tr>
+              <tr><td>Awaiting follow-up</td><td>35</td><td>17.3%</td></tr>
+              <tr><td>Partner declined</td><td>32</td><td>15.8%</td></tr>
+              <tr><td>Partner not reachable</td><td>29</td><td>14.4%</td></tr>
+              <tr><td>Marked collected, not yet returned</td><td>15</td><td>7.4%</td></tr>
+              <tr><td>Raised via Form 2/3 &#183; other</td><td>7</td><td>3.5%</td></tr>
+            </tbody>
+          </table></div>
+          <p class="cap" style="margin:10px 0 0">166 sit at partner premises and 31 with end customers. Largest holders: Vandana Cable Network 37 &#183; Speed Cable Net 29 &#183; Hitech Broadband 20 &#183; Osia Cable Vision 20 &#183; ND2net 13.</p>
+          <p class="cap" style="margin:12px 0 0;padding-top:10px;border-top:1px dashed var(--line)"><b>Note &#8212; 173 devices excluded from all region totals.</b> Region is taken from the in-app sheet&#39;s <b>city</b> and <b>zone</b>; form-only devices are resolved by joining the form&#39;s <b>LCO ID</b> to <b>partner_id</b> in the in-app sheet. 173 cannot be placed &#8212; 125 form devices whose LCO ID matches no partner record, and 48 in-app rows with no city and no zone. They are held out of NCR, Mumbai and Bharat rather than defaulted into one, so the four lines sum to 10,586.</p>
         </div>
         <div class="kgrid k4 mode-book">
           <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">429</div><p class="sub">Forms 354 &#183; in-app 75</p></div>
