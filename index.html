@@ -109,6 +109,7 @@
   .lens{display:inline-flex;background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
   .lbtn{font-size:12px;font-weight:700;padding:5px 13px;border-radius:999px;border:none;background:transparent;color:var(--ink-2);cursor:pointer}
   .app:not(.recv):not(.audit) .lbtn[data-lens="book"],.app.recv .lbtn[data-lens="recv"],.app.audit .lbtn[data-lens="audit"]{background:var(--brand);color:#fff}
+  .mode-book{display:none!important}   /* archived Booked lens - retained in source, never rendered */
   .app.recv .mode-book{display:none!important}
   .app:not(.recv) .mode-recv{display:none!important}
   .app:not(.audit) .mode-audit{display:none!important}
@@ -203,7 +204,7 @@
   #r-refuse:checked   ~ .side label[for="r-refuse"]{background:var(--nav-active-bg);color:var(--brand);border-color:var(--nav-active-bd);font-weight:700}
 </style>
 
-<div class="app" id="app">
+<div class="app recv" id="app">
   <input class="vradio" type="radio" name="view" id="r-overview" checked>
   <input class="vradio" type="radio" name="view" id="r-july">
   <input class="vradio" type="radio" name="view" id="r-aug">
@@ -240,7 +241,7 @@
       <span class="live"><span class="d"></span> LIVE</span>
       <span class="srcpill">Since 15 Aug 2026</span>
       <span class="srcpill mode-book">Data as of 19 Aug 2026, 11:59 PM</span>
-      <span class="lens" id="lens"><button class="lbtn" data-lens="book">Archive (Booked)</button><button class="lbtn" data-lens="recv">Received</button><button class="lbtn" data-lens="audit">Audit &amp; Not-Audit CSPs</button></span>
+      <span class="lens" id="lens"><button class="lbtn" data-lens="recv">Received</button><button class="lbtn" data-lens="audit">Audit &amp; Not-Audit CSPs</button></span>
       <span class="srcpill mode-recv">Warehouse receipts &#183; in-app + Forms &#183; 20 Aug</span>
       <span class="srcpill mode-audit">Audit &#215; Booking P&amp;C &#183; Aug 15-20</span>
       <span class="sp"></span>
@@ -751,23 +752,24 @@
         </div>
         <div class="panel mode-recv">
           <h3>Received heatmap &#8212; marking date &#8594; warehouse receipt</h3>
-          <p class="cap">Rows = date the device was marked. Source: <b>Wiom_Device Return_End_2_End</b> (receipts current to 21 Aug 2026), counting only receipts on or after each device&#39;s own marked date. SLA is Porter 24 h. 157 NCR devices appear in the sheet with a receipt <i>predating</i> their marking &#8212; earlier return cycles, excluded here.</p>
+          <p class="cap">Rows = date the device was marked. Source: <b>Wiom_Device Return_End_2_End</b> (receipts current to 21 Aug 2026), counting only receipts on or after each device&#39;s own marked date. SLA is Porter 24 h, so <b>Within TAT</b> = received &#8804;1 day and <b>Outside TAT</b> = received in 2 days or more. <b>Within TAT + Outside TAT + Not received = Total marked.</b> <b>CSP refused</b> is a subset of &ldquo;not received&rdquo; shown for context &#8212; it is not added into the total. 157 NCR devices appear in the sheet with a receipt <i>predating</i> their marking (earlier return cycles) and are excluded.</p>
           <div class="scroller"><table class="hm">
-            <thead><tr><th>Marked date</th><th>Total marked</th><th class="grp-g">&#8804;1 day</th><th>2 days</th><th>3 days</th><th>4 days+</th><th class="grp-g">Total received</th><th>% received</th></tr></thead>
+            <thead><tr><th>Marked date</th><th>Total marked</th><th class="grp-g">1 day</th><th>2 day</th><th>3 day</th><th>4 day+</th><th class="grp-g">Within TAT</th><th class="grp-r">Outside TAT</th><th class="grp-r">Not received</th><th>CSP refused</th></tr></thead>
             <tbody>
-              <tr><td>15 Aug</td><td>201</td><td class="z">0</td><td class="g1">17</td><td class="z">0</td><td class="g1">77</td><td><b>94</b></td><td class="">46.8%</td></tr>
-              <tr><td>16 Aug</td><td>1,659</td><td class="g2">235</td><td class="g2">103</td><td class="g3">318</td><td class="g3">466</td><td><b>1,122</b></td><td class="g">67.6%</td></tr>
-              <tr><td>17 Aug</td><td>1,410</td><td class="g2">184</td><td class="g3">385</td><td class="g2">219</td><td class="g1">95</td><td><b>883</b></td><td class="g">62.6%</td></tr>
-              <tr><td>18 Aug</td><td>1,541</td><td class="g3">368</td><td class="g2">279</td><td class="g1">88</td><td class="z">0</td><td><b>735</b></td><td class="">47.7%</td></tr>
-              <tr><td>19 Aug</td><td>1,367</td><td class="g3">322</td><td class="g2">171</td><td class="z">0</td><td class="z">0</td><td><b>493</b></td><td class="">36.1%</td></tr>
-              <tr><td>20 Aug</td><td>944</td><td class="g3">311</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b>311</b></td><td class="">32.9%</td></tr>
-              <tr><td>21 Aug</td><td>653</td><td class="g1">1</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b>1</b></td><td class="">0.2%</td></tr>
+              <tr><td><b>15 Aug</b></td><td>201</td><td class="z">0</td><td class="n1">17</td><td class="z">0</td><td class="r1">77</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">94</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">47%</span></td><td><b>107</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">53%</span></td><td class="">1</td></tr>
+              <tr><td><b>16 Aug</b></td><td>1,659</td><td class="g2">235</td><td class="n1">103</td><td class="n3">318</td><td class="r3">466</td><td><b class="g">235</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">14%</span></td><td><b class="r">887</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">53%</span></td><td><b>537</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">32%</span></td><td class="">3</td></tr>
+              <tr><td><b>17 Aug</b></td><td>1,410</td><td class="g2">184</td><td class="n3">385</td><td class="n3">219</td><td class="r1">95</td><td><b class="g">184</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">13%</span></td><td><b class="r">699</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">50%</span></td><td><b>527</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">37%</span></td><td class="">4</td></tr>
+              <tr><td><b>18 Aug</b></td><td>1,541</td><td class="g3">368</td><td class="n3">279</td><td class="n1">88</td><td class="z">0</td><td><b class="g">368</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">24%</span></td><td><b class="r">367</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">24%</span></td><td><b>806</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">52%</span></td><td class="">3</td></tr>
+              <tr><td><b>19 Aug</b></td><td>1,367</td><td class="g3">322</td><td class="n2">171</td><td class="z">0</td><td class="z">0</td><td><b class="g">322</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">24%</span></td><td><b class="r">171</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">13%</span></td><td><b>874</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">64%</span></td><td class="r">13</td></tr>
+              <tr><td><b>20 Aug</b></td><td>944</td><td class="g3">311</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">311</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">33%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>633</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">67%</span></td><td class="">0</td></tr>
+              <tr><td><b>21 Aug</b></td><td>653</td><td class="g1">1</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">1</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>652</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td><td class="">0</td></tr>
             </tbody>
-            <tfoot><tr><td>Total</td><td>7,775</td><td>1,421</td><td>955</td><td>625</td><td>638</td><td><b>3,639</b></td><td class="g">46.8%</td></tr></tfoot>
+            <tfoot><tr><td><b>Total</b></td><td><b>7,775</b></td><td>1,421</td><td>955</td><td>625</td><td>638</td><td><b class="g">1,421</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">18%</span></td><td><b class="r">2,218</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">29%</span></td><td><b>4,136</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">53%</span></td><td class="r">24</td></tr></tfoot>
           </table></div>
           <div class="hmleg">
-            <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Received &#8212; darker is more devices</span>
-            <span><b>Within TAT (&#8804;1 day): 1,421 &#183; 18%</b> &#183; outside TAT 2,218 &#183; 29%</span>
+            <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Within TAT (received &#8804;1 day)</span>
+            <span><i style="background:color-mix(in srgb,var(--bad) 40%,var(--panel))"></i> Beyond TAT (2 days+)</span>
+            <span>Darker = more devices</span>
           </div>
         </div>
         <div class="panel mode-recv" style="border-left:3px solid var(--warn)">
@@ -778,6 +780,23 @@
         <div class="panel mode-recv">
           <h3>Status of the 4,136 outstanding NCR devices</h3>
           <p class="cap" style="margin:0">Only <b>24 devices</b> were declined by a partner and <b>80</b> were marked collected but have not yet arrived. The remainder are open requests awaiting follow-up. Willingness is not the NCR constraint &#8212; pickup execution against a 22&#215; volume increase is. Largest holders: SAP IT Solution 196 &#183; Shree Bankey Bihari Internet 180 &#183; AA Diamond Net Broadband 159 &#183; SA Communication 144 &#183; SAM LINK 98 &#183; JMD Computer Services 98.</p>
+        </div>
+        <div class="panel mode-recv">
+          <h3>CSP refusals &#8212; NCR, 15&#8211;21 Aug</h3>
+          <p class="cap">Only <b>24 devices across 10 partners</b> were refused on the pickup call in the whole week &#8212; <b>0.3%</b> of the 7,775 marked. Refusals are a rounding error in NCR, not a driver. They cluster late in the window and in a handful of partners.</p>
+          <div class="scroller"><table>
+            <thead><tr><th>By marked date</th><th>Refused</th><th>By partner</th><th>Refused</th></tr></thead>
+            <tbody>
+              <tr><td>15 Aug</td><td>1</td><td>Deep Traders</td><td><b>7</b></td></tr>
+              <tr><td>16 Aug</td><td>3</td><td>SHARMA CABLE NETWORK</td><td>4</td></tr>
+              <tr><td>17 Aug</td><td>4</td><td>Sainet Ghaziabad</td><td>4</td></tr>
+              <tr><td>18 Aug</td><td>3</td><td>P D Internet Service</td><td>2</td></tr>
+              <tr><td><b>19 Aug</b></td><td><b class="r">13</b></td><td>Raja Cable Network</td><td>2</td></tr>
+              <tr><td>20&#8211;21 Aug</td><td>0</td><td>5 others, 1 each</td><td>5</td></tr>
+              <tr style="border-top:1.5px solid var(--line)"><td><b>Total</b></td><td><b>24</b></td><td><b>10 partners</b></td><td><b>24</b></td></tr>
+            </tbody>
+          </table></div>
+          <p class="cap" style="margin:10px 0 0"><b>19 Aug alone carries 13 of the 24.</b> Deep Traders accounts for 7 &#8212; the same partner that declared 31 devices on a form but listed only 4 IDs. Worth a single call rather than a process change.</p>
         </div>
         <div class="kgrid k4 mode-book">
           <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">5,081</div><p class="sub">In-app 4,267 &middot; Forms 814</p></div>
@@ -1120,10 +1139,13 @@ window.JULY_PENDING = [["140357","Broadband tree","Marked in error",52,"partner"
   })();
   (function(){
     var app=document.getElementById('app');
-    try{ var _lz=localStorage.getItem('lens'); if(_lz==='recv') app.classList.add('recv'); if(_lz==='audit'){ app.classList.add('audit'); var _ro=document.getElementById('r-overview'); if(_ro) _ro.checked=true; } }catch(e){}
+    app.classList.add('recv');
+    try{ var _lz=localStorage.getItem('lens');
+         if(_lz==='audit'){ app.classList.add('audit'); app.classList.remove('recv'); var _ro=document.getElementById('r-overview'); if(_ro) _ro.checked=true; }
+    }catch(e){}
     document.querySelectorAll('#lens .lbtn').forEach(function(b){
       b.addEventListener('click',function(){
-        app.classList.toggle('recv', b.dataset.lens==='recv');
+        app.classList.toggle('recv', b.dataset.lens!=='audit');
         app.classList.toggle('audit', b.dataset.lens==='audit');
         if(b.dataset.lens==='audit'){ var _ro=document.getElementById('r-overview'); if(_ro) _ro.checked=true; }
         try{ localStorage.setItem('lens', b.dataset.lens); }catch(e){}
