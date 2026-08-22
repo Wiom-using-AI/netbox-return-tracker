@@ -658,7 +658,7 @@
 
         <div class="panel">
           <h3>Recovery by region</h3>
-          <p class="cap">Bharat has effectively stopped. Mumbai reads 0% because <b>the warehouse sheet contains no Mumbai receipts</b> &#8212; the inventory system shows Mumbai devices arriving, so this is a reporting gap, not a physical one.</p>
+          <p class="cap">Sources differ by region. <b>NCR and Bharat</b> are measured from the <b>Wiom_Device Return_End_2_End</b> sheet; <b>Mumbai</b> is measured from <b>Snowflake RETURN_EVENT</b>, because the sheet holds no Mumbai receipts at all. Both are held to the same 21 Aug cut-off. On a sheet-only basis the total would read 3,907 (36.9%); including Mumbai it is <b>4,424 (41.8%)</b>.</p>
           <div class="scroller"><table>
             <thead><tr><th>Region</th><th>Marked</th><th>Received</th><th class="grp-g">Rate</th><th>Outstanding</th></tr></thead>
             <tbody>
@@ -666,7 +666,7 @@
               <tr><td>Bharat</td><td>1,748</td><td>1</td><td><b class="r">0.1%</b></td><td>1,747</td></tr>
               <tr><td>Mumbai <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">Snowflake basis</span></td><td>719</td><td>517</td><td><b class="g">71.9%</b></td><td>202</td></tr>
               <tr><td>Unresolved region <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">see note</span></td><td>173</td><td>97</td><td>56.1%</td><td>76</td></tr>
-              <tr style="border-top:1.5px solid var(--line)"><td><b>Total</b></td><td><b>10,586</b></td><td><b>3,907</b></td><td><b>36.9%</b></td><td><b>6,679</b></td></tr>
+              <tr style="border-top:1.5px solid var(--line)"><td><b>Total</b></td><td><b>10,586</b></td><td><b>4,424</b></td><td><b>41.8%</b></td><td><b>6,162</b></td></tr>
             </tbody>
           </table></div>
         </div>
