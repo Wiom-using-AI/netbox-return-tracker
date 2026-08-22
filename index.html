@@ -607,12 +607,14 @@
           <div class="scroller"><table>
             <thead><tr><th>Region</th><th>Per warehouse sheet</th><th class="grp-r">Extra per Snowflake</th><th>Combined</th><th>Cohort</th><th class="grp-g">Rate incl. Snowflake</th></tr></thead>
             <tbody>
-              <tr><td>NCR</td><td>3,639</td><td><b class="r">+48</b></td><td>3,687</td><td>7,775</td><td><b class="g">47.4%</b> <span style="color:var(--muted)">vs 46.8% sheet-only</span></td></tr>
-              <tr><td>Bharat</td><td>268</td><td>0</td><td>268</td><td>2,092</td><td><b>12.8%</b></td></tr>
+              <tr><td>NCR</td><td>3,809</td><td><b class="r">+48</b></td><td>3,857</td><td>7,946</td><td><b class="g">48.5%</b> <span style="color:var(--muted)">vs 47.9% sheet-only</span></td></tr>
+              <tr><td>Bharat</td><td>1</td><td>0</td><td>1</td><td>1,748</td><td><b class="r">0.1%</b></td></tr>
               <tr><td>Mumbai <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">separate method</span></td><td>0</td><td>0</td><td>0</td><td>719</td><td>&#8212;</td></tr>
+              <tr><td>Unresolved region <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">see note</span></td><td>97</td><td>0</td><td>97</td><td>173</td><td>56.1%</td></tr>
               <tr style="border-top:1.5px solid var(--line)"><td><b>Total</b></td><td><b>3,907</b></td><td><b class="r">+48</b></td><td><b>3,955</b></td><td><b>10,586</b></td><td><b>37.4%</b> <span style="color:var(--muted)">vs 36.9% sheet-only</span></td></tr>
             </tbody>
           </table></div>
+          <p class="cap" style="margin:8px 0 0"><b>Note &#8212; 173 devices excluded from all region totals.</b> Region is taken from the in-app sheet&#39;s <b>city</b> and <b>zone</b>; where a device arrived only through a form, it is resolved by joining the form&#39;s <b>LCO ID</b> to <b>partner_id</b> in the in-app sheet. That resolves 815 form devices and Form&nbsp;2&#39;s city column covers a further 475, but <b>173 cannot be placed</b> &#8212; 125 form devices whose LCO ID matches no partner record, and 48 in-app rows with no city and no zone. 97 of the 173 are already received. They are held out of NCR, Mumbai and Bharat rather than defaulted into one, so the four lines sum to 10,586.</p>
           <p class="cap" style="margin:8px 0 0">Held to the same cut-off the two sources are close: the sheet records <b>3,907</b> and Snowflake <b>3,686</b>, differing by well under a percentage point of the cohort. The sheet is ahead on Bharat, Snowflake is ahead on NCR. <b>Returns recorded after 21 Aug are excluded from both</b> &#8212; Snowflake logged a further 521 on 22 Aug alone, which will land in the next window.</p>
         </div>
 
@@ -660,9 +662,10 @@
           <div class="scroller"><table>
             <thead><tr><th>Region</th><th>Marked</th><th>Received</th><th class="grp-g">Rate</th><th>Outstanding</th></tr></thead>
             <tbody>
-              <tr><td>NCR</td><td>7,775</td><td>3,639</td><td><b class="g">46.8%</b></td><td>4,136</td></tr>
-              <tr><td>Bharat</td><td>2,092</td><td>268</td><td><b class="r">12.8%</b></td><td>1,824</td></tr>
+              <tr><td>NCR</td><td>7,946</td><td>3,809</td><td><b class="g">47.9%</b></td><td>4,137</td></tr>
+              <tr><td>Bharat</td><td>1,748</td><td>1</td><td><b class="r">0.1%</b></td><td>1,747</td></tr>
               <tr><td>Mumbai <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">not in sheet</span></td><td>719</td><td>0</td><td>&#8212;</td><td>719</td></tr>
+              <tr><td>Unresolved region <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">see note</span></td><td>173</td><td>97</td><td>56.1%</td><td>76</td></tr>
               <tr style="border-top:1.5px solid var(--line)"><td><b>Total</b></td><td><b>10,586</b></td><td><b>3,907</b></td><td><b>36.9%</b></td><td><b>6,679</b></td></tr>
             </tbody>
           </table></div>
@@ -741,63 +744,74 @@
           <div class="pncview mode-audit" data-pncv="3"><div class="vh" style="margin-top:2px"><h2>Not-audited &#183; Booked <span class="illus">illustrative</span></h2><span class="sub">NCR &#183; scaled by the 90.4% / 9.6% audit split &#183; pending WH live sheet</span></div><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">488</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Booked</p><div class="num">166</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">93</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">73</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">322</div></div></div></div>
           <div class="pncview mode-audit" data-pncv="4"><div class="vh" style="margin-top:2px"><h2>Not-audited &#183; Received <span class="illus">illustrative</span></h2><span class="sub">NCR &#183; scaled by the 90.4% / 9.6% audit split &#183; pending WH live sheet</span></div><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">586</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">45</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">37</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">7</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not back</p><div class="num">541</div></div></div></div>
         <div class="kgrid k4 mode-recv">
-          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked 15&#8211;21 Aug</p><div class="num">7,775</div><p class="sub">in-app + forms &#183; unique devices</p></div>
-          <div class="kc" style="--c:var(--good)"><p class="lab">Received at Wiom</p><div class="num">3,639</div><p class="sub"><span class="g">46.8%</span> of marked</p></div>
-          <div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT (&#8804;1 day)</p><div class="num">1,421</div><p class="sub">18% of marked</p></div>
-          <div class="kc" style="--c:var(--bad)"><p class="lab">Outstanding</p><div class="num">4,136</div><p class="sub"><span class="r">53.2%</span> of marked</p></div>
+          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked 15&#8211;21 Aug</p><div class="num">7,946</div><p class="sub">in-app 6,873 &#183; forms 1,073</p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Received at Wiom</p><div class="num">3,809</div><p class="sub"><span class="g">47.9%</span> of marked</p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT (&#8804;1 day)</p><div class="num">1,581</div><p class="sub">20% of marked</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Outstanding</p><div class="num">4,137</div><p class="sub"><span class="r">52.1%</span> of marked</p></div>
         </div>
+
+        <div class="panel mode-recv">
+          <h3>Recovery by channel</h3>
+          <div class="scroller"><table>
+            <thead><tr><th>Channel</th><th>Marked</th><th>Received</th><th class="grp-g">Rate</th><th>Outstanding</th></tr></thead>
+            <tbody>
+              <tr><td>Forms 2 &amp; 3 &#183; partner-submitted</td><td>1,073</td><td>1,049</td><td><b class="g">97.8%</b></td><td>24</td></tr>
+              <tr><td>Form 1 &#183; in-app</td><td>6,873</td><td>2,760</td><td><b class="r">40.2%</b></td><td class="r"><b>4,113</b></td></tr>
+              <tr style="border-top:1.5px solid var(--line)"><td><b>Total</b></td><td><b>7,946</b></td><td><b>3,809</b></td><td><b>47.9%</b></td><td><b>4,137</b></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
         <div class="panel mode-recv">
           <h3>Received heatmap &#8212; marking date &#8594; warehouse receipt</h3>
-          <p class="cap">Rows = date the device was marked. Source: <b>Wiom_Device Return_End_2_End</b> (receipts current to 21 Aug 2026), counting only receipts on or after each device&#39;s own marked date. SLA is Porter 24 h, so <b>Within TAT</b> = received &#8804;1 day and <b>Outside TAT</b> = received in 2 days or more. <b>Within TAT + Outside TAT + Not received = Total marked.</b> 157 NCR devices appear in the sheet with a receipt <i>predating</i> their marking (earlier return cycles) and are excluded.</p>
+          <p class="cap">Rows = date the device was marked. Source: <b>Wiom_Device Return_End_2_End</b> (receipts to 21 Aug 2026), counting only receipts on or after each device&#39;s own marked date. SLA is Porter 24 h. <b>Within TAT + Outside TAT + Not received = Total marked.</b></p>
           <div class="scroller"><table class="hm">
             <thead><tr><th>Marked date</th><th>Total marked</th><th class="grp-g">1 day</th><th>2 day</th><th>3 day</th><th>4 day+</th><th class="grp-g">Within TAT</th><th class="grp-r">Outside TAT</th><th class="grp-r">Not received</th></tr></thead>
             <tbody>
               <tr><td><b>15 Aug</b></td><td>201</td><td class="z">0</td><td class="n1">17</td><td class="z">0</td><td class="r1">77</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">94</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">47%</span></td><td><b>107</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">53%</span></td></tr>
-              <tr><td><b>16 Aug</b></td><td>1,659</td><td class="g2">235</td><td class="n1">103</td><td class="n3">318</td><td class="r3">466</td><td><b class="g">235</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">14%</span></td><td><b class="r">887</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">53%</span></td><td><b>537</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">32%</span></td></tr>
-              <tr><td><b>17 Aug</b></td><td>1,410</td><td class="g2">184</td><td class="n3">385</td><td class="n3">219</td><td class="r1">95</td><td><b class="g">184</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">13%</span></td><td><b class="r">699</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">50%</span></td><td><b>527</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">37%</span></td></tr>
-              <tr><td><b>18 Aug</b></td><td>1,541</td><td class="g3">368</td><td class="n3">279</td><td class="n1">88</td><td class="z">0</td><td><b class="g">368</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">24%</span></td><td><b class="r">367</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">24%</span></td><td><b>806</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">52%</span></td></tr>
-              <tr><td><b>19 Aug</b></td><td>1,367</td><td class="g3">322</td><td class="n2">171</td><td class="z">0</td><td class="z">0</td><td><b class="g">322</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">24%</span></td><td><b class="r">171</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">13%</span></td><td><b>874</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">64%</span></td></tr>
-              <tr><td><b>20 Aug</b></td><td>944</td><td class="g3">311</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">311</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">33%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>633</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">67%</span></td></tr>
-              <tr><td><b>21 Aug</b></td><td>653</td><td class="g1">1</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">1</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>652</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td></tr>
+              <tr><td><b>16 Aug</b></td><td>1,672</td><td class="g2">238</td><td class="n1">112</td><td class="n3">319</td><td class="r3">466</td><td><b class="g">238</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">14%</span></td><td><b class="r">897</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">54%</span></td><td><b>537</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">32%</span></td></tr>
+              <tr><td><b>17 Aug</b></td><td>1,437</td><td class="g2">211</td><td class="n3">385</td><td class="n3">219</td><td class="r1">95</td><td><b class="g">211</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">15%</span></td><td><b class="r">699</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">49%</span></td><td><b>527</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">37%</span></td></tr>
+              <tr><td><b>18 Aug</b></td><td>1,575</td><td class="g3">401</td><td class="n3">279</td><td class="n1">88</td><td class="z">0</td><td><b class="g">401</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">25%</span></td><td><b class="r">367</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">23%</span></td><td><b>807</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">51%</span></td></tr>
+              <tr><td><b>19 Aug</b></td><td>1,446</td><td class="g3">401</td><td class="n2">171</td><td class="z">0</td><td class="z">0</td><td><b class="g">401</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">28%</span></td><td><b class="r">171</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">12%</span></td><td><b>874</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">60%</span></td></tr>
+              <tr><td><b>20 Aug</b></td><td>958</td><td class="g3">325</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">325</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">34%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>633</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">66%</span></td></tr>
+              <tr><td><b>21 Aug</b></td><td>657</td><td class="g1">5</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">5</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">1%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>652</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">99%</span></td></tr>
             </tbody>
-            <tfoot><tr><td><b>Total</b></td><td><b>7,775</b></td><td>1,421</td><td>955</td><td>625</td><td>638</td><td><b class="g">1,421</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">18%</span></td><td><b class="r">2,218</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">29%</span></td><td><b>4,136</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">53%</span></td></tr></tfoot>
+            <tfoot><tr><td><b>Total</b></td><td><b>7,946</b></td><td>1,581</td><td>964</td><td>626</td><td>638</td><td><b class="g">1,581</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">20%</span></td><td><b class="r">2,228</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">28%</span></td><td><b>4,137</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">52%</span></td></tr></tfoot>
           </table></div>
           <div class="hmleg">
             <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Within TAT (received &#8804;1 day)</span>
-            <span><i style="background:color-mix(in srgb,var(--bad) 40%,var(--panel))"></i> Beyond TAT (2 days+)</span>
-            <span>Darker = more devices</span>
+            <span><b>Within TAT 1,581 &#183; 20%</b> &#183; outside TAT 2,228 &#183; 28%</span>
           </div>
         </div>
+
         <div class="panel mode-recv">
           <h3>Warehouse throughput &#8212; devices received on each day</h3>
-          <p class="cap">The heatmap above is organised by <b>marked date</b>, so it answers &ldquo;how fast did each day&#39;s requests come back?&rdquo;. This one reads the other way: <b>columns are the date the device physically arrived</b>, which is what the warehouse actually processed each day. Rows are still the marked date, so every row total matches the heatmap above.</p>
+          <p class="cap">Columns are the date the device physically arrived. Row totals tie back to the heatmap above.</p>
           <div class="scroller"><table class="hm">
             <thead><tr><th>Marked date</th><th>Rcvd 15 Aug</th><th>Rcvd 16 Aug</th><th>Rcvd 17 Aug</th><th>Rcvd 18 Aug</th><th>Rcvd 19 Aug</th><th>Rcvd 20 Aug</th><th>Rcvd 21 Aug</th><th class="grp-g">Row total</th></tr></thead>
             <tbody>
               <tr><td><b>15 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="g1">17</td><td class="z">0</td><td class="g1">62</td><td class="g1">13</td><td class="g1">2</td><td><b>94</b></td></tr>
-              <tr><td><b>16 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="g2">235</td><td class="g1">103</td><td class="g3">318</td><td class="g3">286</td><td class="g2">180</td><td><b>1,122</b></td></tr>
-              <tr><td><b>17 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="g1">21</td><td class="g2">163</td><td class="g3">385</td><td class="g2">219</td><td class="g1">95</td><td><b>883</b></td></tr>
-              <tr><td><b>18 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g3">368</td><td class="g3">279</td><td class="g1">88</td><td><b>735</b></td></tr>
-              <tr><td><b>19 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">7</td><td class="g3">315</td><td class="g2">171</td><td><b>493</b></td></tr>
-              <tr><td><b>20 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">20</td><td class="g3">291</td><td><b>311</b></td></tr>
-              <tr><td><b>21 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">1</td><td><b>1</b></td></tr>
+              <tr><td><b>16 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="g2">238</td><td class="g1">112</td><td class="g3">319</td><td class="g3">286</td><td class="g2">180</td><td><b>1,135</b></td></tr>
+              <tr><td><b>17 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="g1">21</td><td class="g2">190</td><td class="g3">385</td><td class="g2">219</td><td class="g1">95</td><td><b>910</b></td></tr>
+              <tr><td><b>18 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">15</td><td class="g3">386</td><td class="g3">279</td><td class="g1">88</td><td><b>768</b></td></tr>
+              <tr><td><b>19 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">86</td><td class="g3">315</td><td class="g2">171</td><td><b>572</b></td></tr>
+              <tr><td><b>20 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">34</td><td class="g3">291</td><td><b>325</b></td></tr>
+              <tr><td><b>21 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">5</td><td><b>5</b></td></tr>
             </tbody>
-            <tfoot><tr><td><b>Arrived that day</b></td><td><b class="g">0</b></td><td><b class="g">0</b></td><td><b class="g">273</b></td><td><b class="g">266</b></td><td><b class="g">1,140</b></td><td><b class="g">1,132</b></td><td><b class="g">828</b></td><td><b>3,639</b></td></tr></tfoot>
+            <tfoot><tr><td><b>Arrived that day</b></td><td><b class="g">0</b></td><td><b class="g">0</b></td><td><b class="g">276</b></td><td><b class="g">317</b></td><td><b class="g">1,238</b></td><td><b class="g">1,146</b></td><td><b class="g">832</b></td><td><b>3,809</b></td></tr></tfoot>
           </table></div>
-          <div class="hmleg">
-            <span><b>NCR intake ramped from 273/day on 17 Aug to 1,140 on 19 Aug</b>, holding above 800 since.</span>
-            <span>Darker = more devices</span>
-          </div>
-          <p class="cap" style="margin:12px 0 0">On <b>21 Aug the warehouse booked in 828 NCR devices</b> &#8212; 291 of them marked only the day before, 171 marked on 19 Aug and 180 still coming from 16 Aug markings. The sheet&#39;s all-region figure for 21 Aug is 1,020; the balance is Bharat plus devices marked before 15 Aug, which sit outside this cohort.</p>
+          <div class="hmleg"><span><b>NCR intake ramped from 276/day on 17 Aug to 1,238 on 19 Aug</b>, holding above 800 since.</span></div>
         </div>
+
         <div class="panel mode-recv" style="border-left:3px solid var(--warn)">
           <h3>&#9888; 48 NCR devices returned by 21 Aug that the warehouse sheet has not recorded</h3>
-          <p class="cap" style="margin:0">The heatmap above counts <b>only</b> what the <b>Wiom_Device Return_End_2_End</b> sheet records. Snowflake&#39;s <b>RETURN_EVENT</b> shows a further <b>48 NCR devices</b> returned on or before <b>21 Aug</b> that the sheet has no entry for &#8212; all carry custody status <b>RETURNED</b>, all recorded as returned by the CSP, none flagged as an anomaly. They returned on 17 Aug (22), 19 Aug (5), 20 Aug (11) and 21 Aug (10). Largest: Gautam Broadband 18, Bhartiye Broadband Service 8, Sanjay Cable Net 7.<br><br>
-          <b>NCR received is 3,639 (46.8%) by the sheet, or 3,687 (47.4%) including those 48.</b> A 0.6-point difference &#8212; the two sources agree closely once both are held to the same 21 Aug cut-off.</p>
+          <p class="cap" style="margin:0">The heatmap counts <b>only</b> what the warehouse sheet records. Snowflake&#39;s <b>RETURN_EVENT</b> shows a further <b>48 NCR devices</b> returned on or before <b>21 Aug</b> with no entry in the sheet &#8212; all carry custody status <b>RETURNED</b>, all recorded as returned by the CSP, none flagged as an anomaly. Returns after 21 Aug are excluded from both sides.</p>
         </div>
+
         <div class="panel mode-recv">
-          <h3>Status of the 4,136 outstanding NCR devices</h3>
-          <p class="cap" style="margin:0">Only <b>24 devices</b> were declined by a partner and <b>80</b> were marked collected but have not yet arrived. The remainder are open requests awaiting follow-up. Willingness is not the NCR constraint &#8212; pickup execution against a 22&#215; volume increase is. Largest holders: SAP IT Solution 196 &#183; Shree Bankey Bihari Internet 180 &#183; AA Diamond Net Broadband 159 &#183; SA Communication 144 &#183; SAM LINK 98 &#183; JMD Computer Services 98.</p>
+          <h3>Status of the 4,137 outstanding NCR devices</h3>
+          <p class="cap" style="margin:0">Only <b>24 devices</b> were declined by a partner and <b>80</b> were marked collected but have not yet arrived; 4,013 are open requests awaiting follow-up. Largest holders: SAP IT Solution 196 &#183; Shree Bankey Bihari Internet 180 &#183; AA Diamond Net Broadband 159 &#183; SA Communication 144 &#183; SAM LINK 98 &#183; JMD Computer Services 98.</p>
+          <p class="cap" style="margin:12px 0 0;padding-top:10px;border-top:1px dashed var(--line)"><b>Note &#8212; 173 devices excluded from all region totals.</b> Region is taken from the in-app sheet&#39;s <b>city</b> and <b>zone</b>; where a device arrived only through a form, it is resolved by joining the form&#39;s <b>LCO ID</b> to <b>partner_id</b> in the in-app sheet. That resolves 815 form devices and Form&nbsp;2&#39;s city column covers a further 475, but <b>173 cannot be placed</b> &#8212; 125 form devices whose LCO ID matches no partner record, and 48 in-app rows with no city and no zone. 97 of the 173 are already received. They are held out of NCR, Mumbai and Bharat rather than defaulted into one, so the four lines sum to 10,586.</p>
         </div>
         <div class="kgrid k4 mode-book">
           <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">5,081</div><p class="sub">In-app 4,267 &middot; Forms 814</p></div>
@@ -925,89 +939,78 @@
           <div class="pncview mode-audit" data-pncv="3"><div class="vh" style="margin-top:2px"><h2>Not-audited &#183; Booked <span class="illus">illustrative</span></h2><span class="sub">Bharat &#183; scaled by the 90.4% / 9.6% audit split &#183; pending WH live sheet</span></div><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">142</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Booked</p><div class="num">0</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">0</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">0</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not booked</p><div class="num">142</div></div></div></div>
           <div class="pncview mode-audit" data-pncv="4"><div class="vh" style="margin-top:2px"><h2>Not-audited &#183; Received <span class="illus">illustrative</span></h2><span class="sub">Bharat &#183; scaled by the 90.4% / 9.6% audit split &#183; pending WH live sheet</span></div><div class="kgrid k4"><div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">182</div></div><div class="kc" style="--c:var(--good)"><p class="lab">Received</p><div class="num">28</div></div><div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT</p><div class="num">23</div></div><div class="kc" style="--c:var(--warn)"><p class="lab">Outside TAT</p><div class="num">4</div></div><div class="kc" style="--c:var(--bad)"><p class="lab">Not back</p><div class="num">153</div></div></div></div>
         <div class="kgrid k4 mode-recv">
-          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked 15&#8211;21 Aug</p><div class="num">2,092</div><p class="sub">in-app 1,796 &#183; forms 296</p></div>
-          <div class="kc" style="--c:var(--good)"><p class="lab">Received at Wiom</p><div class="num">268</div><p class="sub"><span class="r">12.8%</span> of marked</p></div>
-          <div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT (&#8804;3 days)</p><div class="num">267</div><p class="sub">13% of marked</p></div>
-          <div class="kc" style="--c:var(--bad)"><p class="lab">Outstanding</p><div class="num">1,824</div><p class="sub"><span class="r">87.2%</span> of marked</p></div>
+          <div class="kc" style="--c:var(--marked)"><p class="lab">Marked 15&#8211;21 Aug</p><div class="num">1,748</div><p class="sub">all in-app &#183; no form submissions</p></div>
+          <div class="kc" style="--c:var(--good)"><p class="lab">Received at Wiom</p><div class="num">1</div><p class="sub"><span class="r">0.1%</span> of marked</p></div>
+          <div class="kc" style="--c:var(--porter)"><p class="lab">Within TAT (&#8804;3 days)</p><div class="num">0</div><p class="sub">0% of marked</p></div>
+          <div class="kc" style="--c:var(--bad)"><p class="lab">Outstanding</p><div class="num">1,747</div><p class="sub"><span class="r">99.9%</span> of marked</p></div>
         </div>
 
         <div class="panel mode-recv" style="border-left:3px solid var(--bad)">
-          <h3>&#9888; The in-app lane has recovered 1 device out of 1,796</h3>
-          <p class="cap" style="margin:0">Bharat&#39;s entire recovery comes from the two partner forms. The in-app channel &#8212; 86% of everything marked here &#8212; has produced <b>one</b> device back.</p>
-          <div class="scroller"><table>
-            <thead><tr><th>Channel</th><th>Marked</th><th>Received</th><th class="grp-g">Rate</th><th>Outstanding</th></tr></thead>
-            <tbody>
-              <tr><td>Forms 2 &amp; 3 &#183; partner-submitted</td><td>296</td><td>267</td><td><b class="g">90.2%</b></td><td>29</td></tr>
-              <tr><td>Form 1 &#183; in-app</td><td>1,796</td><td><b class="r">1</b></td><td><b class="r">0.1%</b></td><td class="r"><b>1,795</b></td></tr>
-              <tr style="border-top:1.5px solid var(--line)"><td><b>Total</b></td><td><b>2,092</b></td><td><b>268</b></td><td><b>12.8%</b></td><td><b>1,824</b></td></tr>
-            </tbody>
-          </table></div>
-          <p class="cap" style="margin:10px 0 0">The 3PL pickup lane is not running against in-app requests. Where a partner fills a form the device comes back 9 times out of 10; where they mark it in the app it effectively never does.</p>
+          <h3>&#9888; Bharat has recovered 1 device out of 1,748</h3>
+          <p class="cap" style="margin:0">The 3PL pickup lane is not running. Every Bharat request in this window came through the in-app channel &#8212; there were <b>no Form 2 or Form 3 submissions from Bharat at all</b> &#8212; and exactly one device has come back, on 21 Aug against a 16 Aug marking.<br><br>
+          An earlier version of this tab showed Bharat at 12.8%. That was wrong: 296 form devices had been credited to Bharat because their region field was blank. Resolving them by <b>LCO ID</b> placed them in NCR and Mumbai, where they belonged.</p>
         </div>
 
         <div class="panel mode-recv">
           <h3>Received heatmap &#8212; marking date &#8594; warehouse receipt</h3>
-          <p class="cap">Rows = date the device was marked. Source: <b>Wiom_Device Return_End_2_End</b> (receipts to 21 Aug 2026), counting only receipts on or after each device&#39;s own marked date. SLA is <b>3PL 3 days</b>, so <b>Within TAT</b> = received within 3 days. <b>Within TAT + Outside TAT + Not received = Total marked.</b></p>
+          <p class="cap">Rows = date the device was marked. SLA is <b>3PL 3 days</b>. <b>Within TAT + Outside TAT + Not received = Total marked.</b></p>
           <div class="scroller"><table class="hm">
             <thead><tr><th>Marked date</th><th>Total marked</th><th class="grp-g">1 day</th><th>2 day</th><th>3 day</th><th>4 day+</th><th class="grp-g">Within TAT</th><th class="grp-r">Outside TAT</th><th class="grp-r">Not received</th></tr></thead>
             <tbody>
-              <tr><td><b>15 Aug</b></td><td>549</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>549</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td></tr>
-              <tr><td><b>16 Aug</b></td><td>422</td><td class="g1">3</td><td class="n3">9</td><td class="n3">1</td><td class="r3">1</td><td><b class="g">13</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">3%</span></td><td><b class="r">1</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>408</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">97%</span></td></tr>
-              <tr><td><b>17 Aug</b></td><td>203</td><td class="g1">27</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">27</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">13%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>176</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">87%</span></td></tr>
-              <tr><td><b>18 Aug</b></td><td>487</td><td class="g3">100</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">100</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">21%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>387</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">79%</span></td></tr>
-              <tr><td><b>19 Aug</b></td><td>220</td><td class="g3">79</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">79</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">36%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>141</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">64%</span></td></tr>
-              <tr><td><b>20 Aug</b></td><td>155</td><td class="g1">14</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">14</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">9%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>141</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">91%</span></td></tr>
-              <tr><td><b>21 Aug</b></td><td>56</td><td class="g2">34</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">34</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">61%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>22</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">39%</span></td></tr>
+              <tr><td><b>15 Aug</b></td><td>548</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>548</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td></tr>
+              <tr><td><b>16 Aug</b></td><td>409</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="r3">1</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">1</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>408</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td></tr>
+              <tr><td><b>17 Aug</b></td><td>176</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>176</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td></tr>
+              <tr><td><b>18 Aug</b></td><td>358</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>358</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td></tr>
+              <tr><td><b>19 Aug</b></td><td>141</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>141</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td></tr>
+              <tr><td><b>20 Aug</b></td><td>94</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>94</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td></tr>
+              <tr><td><b>21 Aug</b></td><td>22</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>22</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td></tr>
             </tbody>
-            <tfoot><tr><td><b>Total</b></td><td><b>2,092</b></td><td>257</td><td>9</td><td>1</td><td>1</td><td><b class="g">267</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">13%</span></td><td><b class="r">1</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>1,824</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">87%</span></td></tr></tfoot>
+            <tfoot><tr><td><b>Total</b></td><td><b>1,748</b></td><td>0</td><td>0</td><td>0</td><td>1</td><td><b class="g">0</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b class="r">1</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">0%</span></td><td><b>1,747</b><span style="display:block;font-size:10px;color:var(--muted);font-weight:600;margin-top:2px">100%</span></td></tr></tfoot>
           </table></div>
-          <div class="hmleg">
-            <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Within TAT (received &#8804;3 days)</span>
-            <span><b>15 Aug is the worst day: 549 marked, 0 received.</b></span>
-          </div>
+          <div class="hmleg"><span><b>Every day in the window is at or near 100% not received.</b></span></div>
         </div>
 
         <div class="panel mode-recv">
           <h3>Warehouse throughput &#8212; devices received on each day</h3>
-          <p class="cap">Columns are the date the device physically arrived, so this shows what the warehouse actually booked in from Bharat each day. Row totals tie back to the heatmap above.</p>
+          <p class="cap">Columns are the date the device physically arrived.</p>
           <div class="scroller"><table class="hm">
             <thead><tr><th>Marked date</th><th>Rcvd 15 Aug</th><th>Rcvd 16 Aug</th><th>Rcvd 17 Aug</th><th>Rcvd 18 Aug</th><th>Rcvd 19 Aug</th><th>Rcvd 20 Aug</th><th>Rcvd 21 Aug</th><th class="grp-g">Row total</th></tr></thead>
             <tbody>
               <tr><td><b>15 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b>0</b></td></tr>
-              <tr><td><b>16 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="g1">3</td><td class="g1">9</td><td class="g1">1</td><td class="z">0</td><td class="g1">1</td><td><b>14</b></td></tr>
-              <tr><td><b>17 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">27</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b>27</b></td></tr>
-              <tr><td><b>18 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">15</td><td class="g3">85</td><td class="z">0</td><td class="z">0</td><td><b>100</b></td></tr>
-              <tr><td><b>19 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g3">79</td><td class="z">0</td><td class="z">0</td><td><b>79</b></td></tr>
-              <tr><td><b>20 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">14</td><td class="z">0</td><td><b>14</b></td></tr>
-              <tr><td><b>21 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g2">34</td><td><b>34</b></td></tr>
+              <tr><td><b>16 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g3">1</td><td><b>1</b></td></tr>
+              <tr><td><b>17 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b>0</b></td></tr>
+              <tr><td><b>18 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b>0</b></td></tr>
+              <tr><td><b>19 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b>0</b></td></tr>
+              <tr><td><b>20 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b>0</b></td></tr>
+              <tr><td><b>21 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td><b>0</b></td></tr>
             </tbody>
-            <tfoot><tr><td><b>Arrived that day</b></td><td><b class="g">0</b></td><td><b class="g">0</b></td><td><b class="g">3</b></td><td><b class="g">51</b></td><td><b class="g">165</b></td><td><b class="g">14</b></td><td><b class="g">35</b></td><td><b>268</b></td></tr></tfoot>
+            <tfoot><tr><td><b>Arrived that day</b></td><td><b class="g">0</b></td><td><b class="g">0</b></td><td><b class="g">0</b></td><td><b class="g">0</b></td><td><b class="g">0</b></td><td><b class="g">0</b></td><td><b class="g">1</b></td><td><b>1</b></td></tr></tfoot>
           </table></div>
-          <div class="hmleg"><span><b>Bharat intake peaks at 165 on 19 Aug</b> and never exceeds it &#8212; against NCR&#39;s 1,140 the same day.</span></div>
+          <div class="hmleg"><span>Bharat intake for the whole week is <b>1 device</b>, against NCR&#39;s 3,809.</span></div>
         </div>
 
         <div class="panel mode-recv">
-          <h3>Status of the 1,824 outstanding Bharat devices</h3>
-          <p class="cap" style="margin:0"><b>Not one partner declined.</b> 1,787 (98.0%) are open requests awaiting follow-up, 29 came via Forms 2/3 with no status column, and 8 were marked collected but have not yet arrived. Bharat&#39;s problem is that nothing is being dispatched against these requests &#8212; not that partners are refusing.</p>
+          <h3>Status of the 1,747 outstanding Bharat devices</h3>
+          <p class="cap" style="margin:0"><b>Not one partner declined.</b> 1,739 (99.5%) are open requests awaiting follow-up and 8 were marked collected but have not arrived. Nothing is being dispatched against these requests.</p>
         </div>
 
         <div class="panel mode-recv">
           <h3>Partners holding the most devices</h3>
-          <p class="cap">Two partners hold <b>752 devices &#8212; 41% of the entire Bharat backlog</b>.</p>
+          <p class="cap">Two partners hold <b>752 devices &#8212; 43% of the Bharat backlog</b>.</p>
           <div class="scroller"><table>
             <thead><tr><th>CSP</th><th>Outstanding</th><th>Share of backlog</th></tr></thead>
             <tbody>
-              <tr><td><b>GOYLA CABLE NETWORK</b></td><td><b class="r">500</b></td><td>27.4%</td></tr>
-              <tr><td><b>CHOICE CABLE NETWORK &amp; INTERNET SERVICE</b></td><td><b class="r">252</b></td><td>13.8%</td></tr>
-              <tr><td>One Infra &amp; Technologies <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">+ ONE INFRA &amp; TECHNOLOGY 81</span></td><td>84</td><td>4.6%</td></tr>
-              <tr><td>Saleem Cable T V Network</td><td>85</td><td>4.7%</td></tr>
-              <tr><td>Usha Network</td><td>62</td><td>3.4%</td></tr>
-              <tr><td>DEEP STAR CABLE NETWORK</td><td>59</td><td>3.2%</td></tr>
-              <tr><td>Nirmala cable TV network</td><td>52</td><td>2.9%</td></tr>
-              <tr><td>BR Enterprises Prayagraj</td><td>51</td><td>2.8%</td></tr>
+              <tr><td><b>GOYLA CABLE NETWORK</b></td><td><b class="r">500</b></td><td>28.6%</td></tr>
+              <tr><td><b>CHOICE CABLE NETWORK &amp; INTERNET SERVICE</b></td><td><b class="r">252</b></td><td>14.4%</td></tr>
+              <tr><td>Saleem Cable T V Network</td><td>85</td><td>4.9%</td></tr>
+              <tr><td>One Infra &amp; Technologies <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">+ ONE INFRA &amp; TECHNOLOGY 81</span></td><td>84</td><td>4.8%</td></tr>
+              <tr><td>Usha Network</td><td>62</td><td>3.5%</td></tr>
+              <tr><td>DEEP STAR CABLE NETWORK</td><td>59</td><td>3.4%</td></tr>
+              <tr><td>Nirmala cable TV network</td><td>52</td><td>3.0%</td></tr>
             </tbody>
           </table></div>
-          <p class="cap" style="margin:10px 0 0"><b>&ldquo;One Infra &amp; Technologies&rdquo; and &ldquo;ONE INFRA &amp; TECHNOLOGY&rdquo; are the same partner entered twice</b> &#8212; 165 devices combined, which would make it the third largest holder. Worth fixing at source. A further 48 outstanding devices have no CSP name recorded at all.</p>
+          <p class="cap" style="margin:10px 0 0"><b>&ldquo;One Infra &amp; Technologies&rdquo; and &ldquo;ONE INFRA &amp; TECHNOLOGY&rdquo; are the same partner entered twice</b> &#8212; 165 devices combined, which would make it the third largest holder. Worth fixing at source.</p>
+          <p class="cap" style="margin:12px 0 0;padding-top:10px;border-top:1px dashed var(--line)"><b>Note &#8212; 173 devices excluded from all region totals.</b> Region is taken from the in-app sheet&#39;s <b>city</b> and <b>zone</b>; where a device arrived only through a form, it is resolved by joining the form&#39;s <b>LCO ID</b> to <b>partner_id</b> in the in-app sheet. That resolves 815 form devices and Form&nbsp;2&#39;s city column covers a further 475, but <b>173 cannot be placed</b> &#8212; 125 form devices whose LCO ID matches no partner record, and 48 in-app rows with no city and no zone. 97 of the 173 are already received. They are held out of NCR, Mumbai and Bharat rather than defaulted into one, so the four lines sum to 10,586.</p>
         </div>
         <div class="kgrid k4 mode-book">
           <div class="kc" style="--c:var(--marked)"><p class="lab">Marked for return</p><div class="num">1,484</div><p class="sub">Aug 15-18 &#183; in-app</p></div>
