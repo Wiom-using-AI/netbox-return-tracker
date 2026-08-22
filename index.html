@@ -768,6 +768,28 @@
             <span>Darker = more devices</span>
           </div>
         </div>
+        <div class="panel mode-recv">
+          <h3>Warehouse throughput &#8212; devices received on each day</h3>
+          <p class="cap">The heatmap above is organised by <b>marked date</b>, so it answers &ldquo;how fast did each day&#39;s requests come back?&rdquo;. This one reads the other way: <b>columns are the date the device physically arrived</b>, which is what the warehouse actually processed each day. Rows are still the marked date, so every row total matches the heatmap above.</p>
+          <div class="scroller"><table class="hm">
+            <thead><tr><th>Marked date</th><th>Rcvd 15 Aug</th><th>Rcvd 16 Aug</th><th>Rcvd 17 Aug</th><th>Rcvd 18 Aug</th><th>Rcvd 19 Aug</th><th>Rcvd 20 Aug</th><th>Rcvd 21 Aug</th><th class="grp-g">Row total</th></tr></thead>
+            <tbody>
+              <tr><td><b>15 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="g1">17</td><td class="z">0</td><td class="g1">62</td><td class="g1">13</td><td class="g1">2</td><td><b>94</b></td></tr>
+              <tr><td><b>16 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="g2">235</td><td class="g1">103</td><td class="g3">318</td><td class="g3">286</td><td class="g2">180</td><td><b>1,122</b></td></tr>
+              <tr><td><b>17 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="g1">21</td><td class="g2">163</td><td class="g3">385</td><td class="g2">219</td><td class="g1">95</td><td><b>883</b></td></tr>
+              <tr><td><b>18 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g3">368</td><td class="g3">279</td><td class="g1">88</td><td><b>735</b></td></tr>
+              <tr><td><b>19 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">7</td><td class="g3">315</td><td class="g2">171</td><td><b>493</b></td></tr>
+              <tr><td><b>20 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">20</td><td class="g3">291</td><td><b>311</b></td></tr>
+              <tr><td><b>21 Aug</b></td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="z">0</td><td class="g1">1</td><td><b>1</b></td></tr>
+            </tbody>
+            <tfoot><tr><td><b>Arrived that day</b></td><td><b class="g">0</b></td><td><b class="g">0</b></td><td><b class="g">273</b></td><td><b class="g">266</b></td><td><b class="g">1,140</b></td><td><b class="g">1,132</b></td><td><b class="g">828</b></td><td><b>3,639</b></td></tr></tfoot>
+          </table></div>
+          <div class="hmleg">
+            <span><b>NCR intake ramped from 273/day on 17 Aug to 1,140 on 19 Aug</b>, holding above 800 since.</span>
+            <span>Darker = more devices</span>
+          </div>
+          <p class="cap" style="margin:12px 0 0">On <b>21 Aug the warehouse booked in 828 NCR devices</b> &#8212; 291 of them marked only the day before, 171 marked on 19 Aug and 180 still coming from 16 Aug markings. The sheet&#39;s all-region figure for 21 Aug is 1,020; the balance is Bharat plus devices marked before 15 Aug, which sit outside this cohort.</p>
+        </div>
         <div class="panel mode-recv" style="border-left:3px solid var(--warn)">
           <h3>&#9888; 48 NCR devices returned by 21 Aug that the warehouse sheet has not recorded</h3>
           <p class="cap" style="margin:0">The heatmap above counts <b>only</b> what the <b>Wiom_Device Return_End_2_End</b> sheet records. Snowflake&#39;s <b>RETURN_EVENT</b> shows a further <b>48 NCR devices</b> returned on or before <b>21 Aug</b> that the sheet has no entry for &#8212; all carry custody status <b>RETURNED</b>, all recorded as returned by the CSP, none flagged as an anomaly. They returned on 17 Aug (22), 19 Aug (5), 20 Aug (11) and 21 Aug (10). Largest: Gautam Broadband 18, Bhartiye Broadband Service 8, Sanjay Cable Net 7.<br><br>
