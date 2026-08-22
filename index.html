@@ -602,18 +602,18 @@
         <div class="vh"><h2>&#128197; Aug 15&#8211;21 2026</h2><span class="sub">post markup-fee surge &#183; Forms 1 + 2 + 3 &#183; unique devices</span></div>
 
         <div class="panel" style="border-left:3px solid var(--bad)">
-          <h3>&#9888; 277 devices have returned per Snowflake with no entry in the warehouse sheet</h3>
-          <p class="cap">Every figure on this tab counts <b>only</b> what the <b>Wiom_Device Return_End_2_End</b> sheet records. Snowflake shows <b>277 further devices</b> (excluding Mumbai) as returned that the sheet has no record of &#8212; all 277 carry custody status <b>RETURNED</b> with a return event on or after their own marked date, and 593 of the wider gap are already sitting physically at Wiom.</p>
+          <h3>&#9888; 48 devices returned by 21 Aug with no entry in the warehouse sheet</h3>
+          <p class="cap">Every figure on this tab counts <b>only</b> what the <b>Wiom_Device Return_End_2_End</b> sheet records, and everything is held to a <b>21 Aug cut-off</b> on both sides &#8212; marked 15&#8211;21 Aug, returned on or before 21 Aug. On that basis Snowflake&#39;s <b>RETURN_EVENT</b> shows <b>48 further devices</b> returned that the sheet has no entry for. All 48 are NCR, all carry custody status <b>RETURNED</b>, and none is flagged as an anomaly.</p>
           <div class="scroller"><table>
             <thead><tr><th>Region</th><th>Per warehouse sheet</th><th class="grp-r">Extra per Snowflake</th><th>Combined</th><th>Cohort</th><th class="grp-g">Rate incl. Snowflake</th></tr></thead>
             <tbody>
-              <tr><td>NCR</td><td>3,639</td><td><b class="r">+249</b></td><td>3,888</td><td>7,775</td><td><b class="g">50.0%</b> <span style="color:var(--muted)">vs 46.8% sheet-only</span></td></tr>
-              <tr><td>Bharat</td><td>268</td><td><b class="r">+28</b></td><td>296</td><td>2,092</td><td><b>14.1%</b> <span style="color:var(--muted)">vs 12.8% sheet-only</span></td></tr>
-              <tr style="border-top:1.5px solid var(--line)"><td><b>NCR + Bharat</b></td><td><b>3,907</b></td><td><b class="r">+277</b></td><td><b>4,184</b></td><td><b>9,867</b></td><td><b>42.4%</b> <span style="color:var(--muted)">vs 39.6% sheet-only</span></td></tr>
-              <tr><td>Mumbai <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">separate method</span></td><td>0</td><td>+517</td><td>517</td><td>719</td><td>&#8212;</td></tr>
+              <tr><td>NCR</td><td>3,639</td><td><b class="r">+48</b></td><td>3,687</td><td>7,775</td><td><b class="g">47.4%</b> <span style="color:var(--muted)">vs 46.8% sheet-only</span></td></tr>
+              <tr><td>Bharat</td><td>268</td><td>0</td><td>268</td><td>2,092</td><td><b>12.8%</b></td></tr>
+              <tr><td>Mumbai <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">separate method</span></td><td>0</td><td>0</td><td>0</td><td>719</td><td>&#8212;</td></tr>
+              <tr style="border-top:1.5px solid var(--line)"><td><b>Total</b></td><td><b>3,907</b></td><td><b class="r">+48</b></td><td><b>3,955</b></td><td><b>10,586</b></td><td><b>37.4%</b> <span style="color:var(--muted)">vs 36.9% sheet-only</span></td></tr>
             </tbody>
           </table></div>
-          <p class="cap" style="margin:8px 0 0"><b>Mumbai is excluded from the 277</b> &#8212; the warehouse sheet holds no Mumbai receipts at all, so its 517 are a structural gap being handled separately, not sheet lag. Across NCR and Bharat the two sources are otherwise near-identical: 3,906 devices appear in both, and only <b>1</b> is in the sheet but not in Snowflake.</p>
+          <p class="cap" style="margin:8px 0 0">Held to the same cut-off the two sources are close: the sheet records <b>3,907</b> and Snowflake <b>3,686</b>, differing by well under a percentage point of the cohort. The sheet is ahead on Bharat, Snowflake is ahead on NCR. <b>Returns recorded after 21 Aug are excluded from both</b> &#8212; Snowflake logged a further 521 on 22 Aug alone, which will land in the next window.</p>
         </div>
 
         <div class="panel" style="border-left:3px solid var(--warn)">
@@ -769,9 +769,9 @@
           </div>
         </div>
         <div class="panel mode-recv" style="border-left:3px solid var(--warn)">
-          <h3>&#9888; 249 NCR devices have returned per Snowflake but are missing from the warehouse sheet</h3>
-          <p class="cap" style="margin:0">The heatmap above counts <b>only</b> what the <b>Wiom_Device Return_End_2_End</b> sheet records. Snowflake shows a further <b>249 NCR devices</b> as returned &#8212; every one carries custody status <b>RETURNED</b> and a return event dated on or after its own marked date, and most are already physically at Wiom. They are <b>not recorded in the warehouse sheet at all</b>.<br><br>
-          <b>NCR received is therefore 3,639 (46.8%) by the sheet, or 3,888 (50.0%) once those 249 are included.</b> The gap is concentrated in devices marked 17&#8211;20 Aug, so it reads as sheet lag rather than lost devices &#8212; but until the sheet is updated, the tracker understates NCR recovery by 3.2 points.</p>
+          <h3>&#9888; 48 NCR devices returned by 21 Aug that the warehouse sheet has not recorded</h3>
+          <p class="cap" style="margin:0">The heatmap above counts <b>only</b> what the <b>Wiom_Device Return_End_2_End</b> sheet records. Snowflake&#39;s <b>RETURN_EVENT</b> shows a further <b>48 NCR devices</b> returned on or before <b>21 Aug</b> that the sheet has no entry for &#8212; all carry custody status <b>RETURNED</b>, all recorded as returned by the CSP, none flagged as an anomaly. They returned on 17 Aug (22), 19 Aug (5), 20 Aug (11) and 21 Aug (10). Largest: Gautam Broadband 18, Bhartiye Broadband Service 8, Sanjay Cable Net 7.<br><br>
+          <b>NCR received is 3,639 (46.8%) by the sheet, or 3,687 (47.4%) including those 48.</b> A 0.6-point difference &#8212; the two sources agree closely once both are held to the same 21 Aug cut-off.</p>
         </div>
         <div class="panel mode-recv">
           <h3>Status of the 4,136 outstanding NCR devices</h3>
