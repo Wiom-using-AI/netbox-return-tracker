@@ -604,6 +604,21 @@
       <section class="view" id="v-aug15">
         <div class="vh"><h2>&#128197; Aug 15&#8211;21 2026</h2><span class="sub">post markup-fee surge &#183; Forms 1 + 2 + 3 &#183; unique devices</span></div>
 
+        <div class="panel" style="border-left:3px solid var(--bad)">
+          <h3>&#9888; 277 devices have returned per Snowflake with no entry in the warehouse sheet</h3>
+          <p class="cap">Every figure on this tab counts <b>only</b> what the <b>Wiom_Device Return_End_2_End</b> sheet records. Snowflake shows <b>277 further devices</b> (excluding Mumbai) as returned that the sheet has no record of &#8212; all 277 carry custody status <b>RETURNED</b> with a return event on or after their own marked date, and 593 of the wider gap are already sitting physically at Wiom.</p>
+          <div class="scroller"><table>
+            <thead><tr><th>Region</th><th>Per warehouse sheet</th><th class="grp-r">Extra per Snowflake</th><th>Combined</th><th>Cohort</th><th class="grp-g">Rate incl. Snowflake</th></tr></thead>
+            <tbody>
+              <tr><td>NCR</td><td>3,639</td><td><b class="r">+249</b></td><td>3,888</td><td>7,775</td><td><b class="g">50.0%</b> <span style="color:var(--muted)">vs 46.8% sheet-only</span></td></tr>
+              <tr><td>Bharat</td><td>268</td><td><b class="r">+28</b></td><td>296</td><td>2,092</td><td><b>14.1%</b> <span style="color:var(--muted)">vs 12.8% sheet-only</span></td></tr>
+              <tr style="border-top:1.5px solid var(--line)"><td><b>NCR + Bharat</b></td><td><b>3,907</b></td><td><b class="r">+277</b></td><td><b>4,184</b></td><td><b>9,867</b></td><td><b>42.4%</b> <span style="color:var(--muted)">vs 39.6% sheet-only</span></td></tr>
+              <tr><td>Mumbai <span class="pill" style="background:rgba(150,150,150,.16);color:var(--muted)">separate method</span></td><td>0</td><td>+517</td><td>517</td><td>719</td><td>&#8212;</td></tr>
+            </tbody>
+          </table></div>
+          <p class="cap" style="margin:8px 0 0"><b>Mumbai is excluded from the 277</b> &#8212; the warehouse sheet holds no Mumbai receipts at all, so its 517 are a structural gap being handled separately, not sheet lag. Across NCR and Bharat the two sources are otherwise near-identical: 3,906 devices appear in both, and only <b>1</b> is in the sheet but not in Snowflake.</p>
+        </div>
+
         <div class="panel" style="border-left:3px solid var(--warn)">
           <h3>How to read this window</h3>
           <p class="cap" style="margin:0">Requests here are only <b>1&#8211;7 days old</b>, so the recovery rate is a <b>floor</b> &#8212; devices are still arriving daily. Returns are counted from the <b>Wiom_Device Return_End_2_End</b> sheet only, on or after each device&#39;s own marked date. Two consequences: that sheet carries <b>no Mumbai receipts at all</b>, and <b>596 devices</b> already showing at Wiom in the inventory system are not yet recorded in it, so they still read as outstanding here.</p>
@@ -754,6 +769,11 @@
             <span><i style="background:color-mix(in srgb,var(--good) 40%,var(--panel))"></i> Received &#8212; darker is more devices</span>
             <span><b>Within TAT (&#8804;1 day): 1,421 &#183; 18%</b> &#183; outside TAT 2,218 &#183; 29%</span>
           </div>
+        </div>
+        <div class="panel mode-recv" style="border-left:3px solid var(--warn)">
+          <h3>&#9888; 249 NCR devices have returned per Snowflake but are missing from the warehouse sheet</h3>
+          <p class="cap" style="margin:0">The heatmap above counts <b>only</b> what the <b>Wiom_Device Return_End_2_End</b> sheet records. Snowflake shows a further <b>249 NCR devices</b> as returned &#8212; every one carries custody status <b>RETURNED</b> and a return event dated on or after its own marked date, and most are already physically at Wiom. They are <b>not recorded in the warehouse sheet at all</b>.<br><br>
+          <b>NCR received is therefore 3,639 (46.8%) by the sheet, or 3,888 (50.0%) once those 249 are included.</b> The gap is concentrated in devices marked 17&#8211;20 Aug, so it reads as sheet lag rather than lost devices &#8212; but until the sheet is updated, the tracker understates NCR recovery by 3.2 points.</p>
         </div>
         <div class="panel mode-recv">
           <h3>Status of the 4,136 outstanding NCR devices</h3>
